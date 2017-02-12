@@ -1,10 +1,10 @@
 {
   "name": "pretty-swag",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "A Document Generator for Swagger (OpenAPI) Specification",
   "main": "pretty-swag.js",
   "bin": {
-    "pretty-swag": "run.js"
+    "pretty-swag": "bin/run.js"
   },
   "preferGlobal": true,
   "scripts": {
