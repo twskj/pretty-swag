@@ -2,7 +2,6 @@
 
 
 TODO:
-
-//idea: extract simple schema (string int object array)
-//idea: collapse by default?
+- [idea] collapse by default?
+- handle ref loop?
 

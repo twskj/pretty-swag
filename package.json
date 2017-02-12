@@ -1,0 +1,34 @@
+{
+  "name": "pretty-swag",
+  "version": "0.0.1",
+  "description": "A Document Generator for Swagger (OpenAPI) Specification",
+  "main": "pretty-swag.js",
+  "bin": {
+    "pretty-swag": "run.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twskj/pretty-swag.git"
+  },
+  "keywords": [
+    "OpenAPI",
+    "Swagger",
+    "REST",
+    "RESTful",
+    "live",
+    "document"
+  ],
+  "author": "TJ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twskj/pretty-swag/issues"
+  },
+  "homepage": "https://github.com/twskj/pretty-swag#readme",
+  "dependencies": {
+    "js-yaml": "^3.8.1",
+    "livedoc": "^1.0.1"
+  }
+}
