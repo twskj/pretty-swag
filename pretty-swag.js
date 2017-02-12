@@ -119,12 +119,13 @@ function parse(src,dst,config,callback) {
                 }
             }
         }
-        var config = {
-            mode: "singleFile"
+        var conf = {
+            mode: config.format
+            ,indent: indent_num
+            ,footer: 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
         };
         livedoc.generateHTML(JSON.stringify(result, null, indent_num), config,function(err,data){
             fs.writeFile(dst,data,function(err){
-
                 if(err){
                     callback(err);
                     return;
@@ -132,7 +133,6 @@ function parse(src,dst,config,callback) {
                 callback(null);
                 return;
             });
-
         });
     });
 }

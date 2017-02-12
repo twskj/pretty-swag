@@ -15,20 +15,36 @@ for (var i = 0; i < process.argv.length; i++) {
     }
 }
 
+if(process.argv.indexOf("-h") || process.argv.indexOf("--help")){
+    printHelp();
+    process.exit(0);
+}
+
 if (!argv["-i"]) {
     console.log("missing input file");
-    Console.log("USAGE: pretty-swag -i {inputFile} [-o outputFile]");
+    printHelp();
     process.exit(1);
+}
+
+function printHelp(){
+    console.log();
+    console.log("USAGE: pretty-swag -i {inputFile} [-o (doc.html*|outputFile)] [-f (singleFile*|offline|embeded)]");
+    console.log("-i input");
+    console.log("-o output");
+    console.log("-f format");
+    console.log();
 }
 
 var inputFile = argv["-i"];
 var outputFile = argv["-o"] || "doc.html";
-var config = {};
+var format = argv-["-f"] || "singleFile";
+var config = {"format":format};
 
+console.log("Source: "+inputFile);
+console.log("Dest: "+ outputFile);
+console.log("Format: ", format);
 prettySwag.run(inputFile,outputFile,config,function(err,msg){
 
-    console.log("Parsing "+inputFile);
-    console.log("Writting to"+ outputFile);
     if(err){
         console.log("Error: "+err);
         process.exit(1);
