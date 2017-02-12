@@ -1,11 +1,12 @@
 {
   "name": "pretty-swag",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "A Document Generator for Swagger (OpenAPI) Specification",
   "main": "pretty-swag.js",
   "bin": {
     "pretty-swag": "run.js"
   },
+  "preferGlobal": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,6 +30,6 @@
   "homepage": "https://github.com/twskj/pretty-swag#readme",
   "dependencies": {
     "js-yaml": "^3.8.1",
-    "livedoc": "^1.0.1"
+    "livedoc": "^1.0.7"
   }
 }

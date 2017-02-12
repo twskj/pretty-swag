@@ -25,7 +25,7 @@ var inputFile = argv["-i"];
 var outputFile = argv["-o"] || "doc.html";
 var config = {};
 
-prettySwag.run(inputFile,outputFile,function(err,msg){
+prettySwag.run(inputFile,outputFile,config,function(err,msg){
 
     console.log("Parsing "+inputFile);
     console.log("Writting to"+ outputFile);

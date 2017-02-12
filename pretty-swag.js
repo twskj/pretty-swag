@@ -54,9 +54,9 @@ function resolveNested(schema,def) {
     }
 }
 
-function parse(input,output,config,callback) {
+function parse(src,dst,config,callback) {
 
-    fs.readFile(inputFile, 'utf8', function (err, data) {
+    fs.readFile(src, 'utf8', function (err, data) {
         if (err) {
             throw err;
         }
@@ -88,7 +88,7 @@ function parse(input,output,config,callback) {
             result.apis.push(api);
             api.path = path;
             for (var method_name in input.paths[path]) {
-                var method = initMethod();
+                var method = livedoc.initMethod();
                 api.methods.push(method);
                 var input_method = input.paths[path][method_name];
                 method.name = method_name;
@@ -119,8 +119,11 @@ function parse(input,output,config,callback) {
                 }
             }
         }
-        livedoc.generateHTML(JSON.stringify(result, null, indent_num), function(err,data){
-            fs.writeFile(inputFile,data,function(err){
+        var config = {
+            mode: "singleFile"
+        };
+        livedoc.generateHTML(JSON.stringify(result, null, indent_num), config,function(err,data){
+            fs.writeFile(dst,data,function(err){
 
                 if(err){
                     callback(err);
