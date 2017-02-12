@@ -121,10 +121,12 @@ function parse(src,dst,config,callback) {
         }
         var conf = {
             mode: config.format
-            ,indent: indent_num
             ,footer: 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
         };
-        livedoc.generateHTML(JSON.stringify(result, null, indent_num), config,function(err,data){
+        if(config.format === "offline"){
+            conf.outputFilename = dst;
+        }
+        livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf,function(err,data){
             fs.writeFile(dst,data,function(err){
                 if(err){
                     callback(err);

@@ -15,7 +15,7 @@ for (var i = 0; i < process.argv.length; i++) {
     }
 }
 
-if(process.argv.indexOf("-h") || process.argv.indexOf("--help")){
+if(process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1){
     printHelp();
     process.exit(0);
 }
@@ -37,7 +37,7 @@ function printHelp(){
 
 var inputFile = argv["-i"];
 var outputFile = argv["-o"] || "doc.html";
-var format = argv-["-f"] || "singleFile";
+var format = argv["-f"] || "singleFile";
 var config = {"format":format};
 
 console.log("Source: "+inputFile);
