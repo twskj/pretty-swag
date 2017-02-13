@@ -35,7 +35,7 @@ function resolveNested(schema,def) {
                 return "{" + keyval.join(",") + "}";
             }
             else {
-                return schema.type;
+                return '"'+schema.type+'"';
             }
         }
         else if ("$ref" in schema) {
@@ -104,8 +104,13 @@ function parse(src,dst,config,callback) {
                         param.name = parameter.name;
                         param.location = parameter.in;
                         param.desc = parameter.description;
-                        param.required = parameter.require;
-                        param.schema = computeSchema(parameter.type, input.definitions);
+                        param.required = parameter.required;
+                        if(parameter.schema){
+                            param.schema = computeSchema(parameter.schema, input.definitions);
+                        }
+                        else if(parameter.type){
+                            param.schema = computeSchema(parameter.type, input.definitions);
+                        }
                     }
                 }
 
@@ -115,7 +120,9 @@ function parse(src,dst,config,callback) {
                     var response = input_method.responses[code];
                     res.code = code;
                     res.desc = response.description;
-                    res.schema = computeSchema(response.schema, input.definitions);
+                    if(response.schema){
+                        res.schema = computeSchema(response.schema, input.definitions);
+                    }
                 }
             }
         }
