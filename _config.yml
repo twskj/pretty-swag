@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-theme: jekyll-theme-architect
-=======
 theme: jekyll-theme-cayman
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
->>>>>>> aaf8c8225877eb588113778a94b14b72b3753b74
