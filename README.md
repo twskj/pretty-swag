@@ -1,6 +1,6 @@
 # pretty-swag
 
-pretty-swag is a UI for Swagger Specification. It is inspired by Swagger Editor.
+pretty-swag is a UI for Swagger Specification. It is inspired by [Swagger Editor](http://swagger.io/swagger-editor/).
 
 ## Installation
 
@@ -11,7 +11,7 @@ npm install pretty-swag -g
 ## Example
 
 ```Shell
-pretty-swag -i swagger.json -o doc.html
+pretty-swag -i input.json -o output.html
 ```
 
 ## Command switch
@@ -25,9 +25,19 @@ pretty-swag -i swagger.json -o doc.html
  - Offline - Self Hosted files in a directory.
  - Embedded - A single html but without the material icons.
  
+## Features
+
+- Search by Tag
+
+- Collapsible Panel
+
+- Fold / Unfold Schema
+
+- Live Request/Response Feedback
  
 
 ## TODO:
 - [ ] handle ref loop?
+- [ ] support markdown on description?
 
 
