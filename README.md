@@ -35,5 +35,5 @@ pretty-swag -i input.json -o output.html
 
 - Fold / Unfold Schema
 
-- Live Request/Response Feedback
+- Live Request / Response Feedback
 
