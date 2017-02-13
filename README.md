@@ -36,10 +36,4 @@ Switch |  Name  | Description
 - Fold / Unfold Schema
 
 - Live Request/Response Feedback
- 
-
-## TODO:
-- [ ] handle ref loop?
-- [ ] support markdown on description?
-
 
