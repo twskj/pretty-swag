@@ -29,11 +29,15 @@ Switch  |  Name  | Optional | Description                                       
 
 ## Features
 
-- Search by Tag
+*Search by Tag*
+![Image shows search feature](/images/search.gif?raw=true)
 
-- Collapsible Panel
+*Collapsible Panel*
+![Image shows search feature](/images/collapsible.gif?raw=true)
 
-- Fold / Unfold Schema
+*Fold / Unfold Schema*
+![Image shows search feature](/images/foldable.gif?raw=true)
 
-- Live Request / Response Feedback
+**Live Request / Response Feedback**
+![Image shows search feature](/images/liveReqRes.gif?raw=true)
 
