@@ -10,7 +10,7 @@ An example of the [petstore spec](http://petstore.swagger.io/v2/swagger.json) ca
 npm install pretty-swag -g
 ```
 
-## Example
+## Usage
 
 ```Shell
 pretty-swag -i input.json
