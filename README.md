@@ -13,7 +13,15 @@ npm install pretty-swag -g
 ## Example
 
 ```Shell
+pretty-swag -i input.json
+```
+
+```Shell
 pretty-swag -i input.json -o output.html
+```
+
+```Shell
+pretty-swag -i input.json -o output.html -f offline
 ```
 
 ## Command switch
@@ -29,6 +37,7 @@ pretty-swag -i input.json -o output.html
  - SingleFile - A single html but need the internet connection to download libraries from CDN (Default).
  - Offline - Self Hosted files in a directory.
  - Embedded - A single html but without the material icons.
+
 
 ## Features
 
