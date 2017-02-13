@@ -30,14 +30,18 @@ Switch  |  Name  | Optional | Description                                       
 ## Features
 
 *Search by Tag*
-![Image shows search feature](/images/search.gif?raw=true)
+
+![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/search.gif?raw=true)
 
 *Collapsible Panel*
-![Image shows search feature](/images/collapsible.gif?raw=true)
+
+![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/collapsible.gif?raw=true)
 
 *Fold / Unfold Schema*
-![Image shows search feature](/images/foldable.gif?raw=true)
+
+![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/foldable.gif?raw=true)
 
 **Live Request / Response Feedback**
-![Image shows search feature](/images/liveReqRes.gif?raw=true)
+
+![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/liveReqRes.gif?raw=true)
 
