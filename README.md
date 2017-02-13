@@ -23,6 +23,7 @@ pretty-swag -i input.json -o output.html -f offline
 ```
 
 ## Command switch
+
 Switch   |  Name  | Optional | Description                                                                          |
 -------- | ------ | -------- | ------------------------------------------------------------------------------------ |
   -i     | Input  |       No | Location of a Swagger spec file(can be JSON or YAML)                                 |
