@@ -11,7 +11,15 @@ npm install pretty-swag -g
 ## Example
 
 ```Shell
+pretty-swag -i input.json
+```
+
+```Shell
 pretty-swag -i input.json -o output.html
+```
+
+```Shell
+pretty-swag -i input.json -o output.html -f offline
 ```
 
 ## Command switch
