@@ -1,6 +1,7 @@
 # pretty-swag
 
 pretty-swag is a UI for Swagger Specification. It is inspired by [Swagger Editor](http://swagger.io/swagger-editor/).
+An example of petstore page can be found [here](http://htmlpreview.github.com/?https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/examples/pet.html)
 
 ## Installation
 
