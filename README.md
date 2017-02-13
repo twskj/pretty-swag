@@ -15,11 +15,11 @@ pretty-swag -i input.json -o output.html
 ```
 
 ## Command switch
-Switch |  Name  | Description 
--------|--------|------------
--i     | Input  | Location of a Swagger spec file(can be JSON or YAML)
--o     | Output | location of generated document(s)
--f     | Format | Format of the output (singlefile|offline|embedded)
+Switch |  Name  | Optional | Description 
+-------|--------|----------|--------------------------------------------------------------------------
+-i     | Input  |       No | Location of a Swagger spec file(can be JSON or YAML)
+-o     | Output |      Yes | Location of generated document(s). Default to doc.html
+-f     | Format |      Yes | Format of the output (`singlefile`, `offline`, `embedded`). Default to `singlefile`
 
 ## Output format
 
