@@ -15,13 +15,15 @@ pretty-swag -i input.json -o output.html
 ```
 
 ## Command switch
-- -i **I**nput location of a Swagger spec file(can be JSON or YAML)
-- -o **O**utput location of generated document(s).
-- -f **F**ormat of the output (singlefile|offline|embedded)
+Switch |  Name  | Description 
+-------|--------|------------
+-i     | Input  | Location of a Swagger spec file(can be JSON or YAML)
+-o     | Output | location of generated document(s)
+-f     | Format | Format of the output (singlefile|offline|embedded)
 
 ## Output format
 
- - SingleFile(Default) - A single html but need the internet connection to download libraries from CDN.
+ - SingleFile - A single html but need the internet connection to download libraries from CDN (Default).
  - Offline - Self Hosted files in a directory.
  - Embedded - A single html but without the material icons.
  
