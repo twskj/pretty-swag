@@ -15,7 +15,7 @@ for (var i = 0; i < process.argv.length; i++) {
     }
 }
 
-if(process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1){
+if (process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1) {
     printHelp();
     process.exit(0);
 }
@@ -26,7 +26,7 @@ if (!argv["-i"]) {
     process.exit(1);
 }
 
-function printHelp(){
+function printHelp() {
     console.log();
     console.log("USAGE: pretty-swag -i {inputFile} [-o (doc.html*|outputFile)] [-f (singleFile*|offline|embeded)]");
     console.log("-i input");
@@ -38,15 +38,15 @@ function printHelp(){
 var inputFile = argv["-i"];
 var outputFile = argv["-o"] || "doc.html";
 var format = argv["-f"] || "singleFile";
-var config = {"format":format};
+var config = { "format": format };
 
-console.log("Source: "+inputFile);
-console.log("Dest: "+ outputFile);
+console.log("Source: " + inputFile);
+console.log("Dest: " + outputFile);
 console.log("Format: ", format);
-prettySwag.run(inputFile,outputFile,config,function(err,msg){
+prettySwag.run(inputFile, outputFile, config, function (err, msg) {
 
-    if(err){
-        console.log("Error: "+err);
+    if (err) {
+        console.log("Error: " + err);
         process.exit(1);
     }
 
