@@ -49,3 +49,6 @@ pretty-swag -i input.json -o output.html -f offline
 
 - Live Request / Response Feedback
 
+## Filtering
+
+- Use prefix `-` to exclude unwanted tags. For example `-store` will exclude api that contain `store` tag.
