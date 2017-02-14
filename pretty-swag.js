@@ -131,6 +131,7 @@ function parse(src,dst,config,callback) {
             ,footer: 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
             ,pathParamLeftToken: "{"
             ,pathParamRightToken: "}"
+            ,formDataToken: "formData"
         };
         if(config.format === "offline"){
             conf.outputFilename = dst;
