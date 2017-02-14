@@ -193,7 +193,7 @@
             </div>
         </div>
     </div>
-    <footer class="container grey-text text-lighten-4 thin">Generated Monday, Feb 13, 2017, 9:02 AM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
+    <footer class="container grey-text text-lighten-4 thin">Generated Monday, Feb 13, 2017, 6:15 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
@@ -431,7 +431,7 @@
                     var result = [];
                     var len = method.params.length;
                     for(var i=0;i<len;i++){
-                        if(method.params[i].location === "form"){
+                        if(method.params[i].location === "formData"){
                             result.push(encodeURIComponent(method.params[i].name)+"="+encodeURIComponent(method.params[i].value));
                         }
                     }
@@ -1681,15 +1681,5 @@
         var vm = new Vue(context);
         document.title = context.data.name;
     </script>
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-91877741-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
 </body>
 </html>
