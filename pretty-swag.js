@@ -78,7 +78,7 @@ function parse(src,dst,config,callback) {
 
         var result = livedoc.initContainer();
         result.name = input.info.title;
-        result.summary = config.markDown ? markdown.toHTML(input.info.description) : input.info.description;
+        result.summary = config.markdown ? markdown.toHTML(input.info.description) : input.info.description;
         result.version = input.info.version;
         result.host = input.host;
         result.basePath = input.basePath;
@@ -94,8 +94,8 @@ function parse(src,dst,config,callback) {
                 var input_method = input.paths[path][method_name];
                 method.name = method_name;
                 method.tags = input_method.tags;
-                method.summary = config.markDown ? markdown.toHTML(input_method.summary) : input_method.summary;
-                method.desc = config.markDown ? markdown.toHTML(input_method.description) : input_method.description;
+                method.summary = config.markdown ? markdown.toHTML(input_method.summary) : input_method.summary;
+                method.desc = config.markdown ? markdown.toHTML(input_method.description) : input_method.description;
 
                 if (input_method.parameters) {
                     for (var i = 0; i < input_method.parameters.length; i++) {
@@ -133,7 +133,7 @@ function parse(src,dst,config,callback) {
             ,pathParamLeftToken: "{"
             ,pathParamRightToken: "}"
             ,formDataToken: "formData"
-            ,allowHtml: config.markDown
+            ,allowHtml: config.markdown
         };
         if(config.format === "offline"){
             conf.outputFilename = dst;
