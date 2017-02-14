@@ -28,21 +28,27 @@ if (!argv["-i"]) {
 
 function printHelp() {
     console.log();
-    console.log("USAGE: pretty-swag -i {inputFile} [-o (doc.html*|outputFile)] [-f (singleFile*|offline|embeded)]");
+    console.log("USAGE: pretty-swag -i {inputFile} [-o (doc.html*|outputFile)] [-f (singleFile*|offline|embeded)] [-m (true|false)]");
     console.log("-i input");
     console.log("-o output");
     console.log("-f format");
+    console.log("-m markDown enable");
     console.log();
 }
 
 var inputFile = argv["-i"];
 var outputFile = argv["-o"] || "doc.html";
 var format = argv["-f"] || "singleFile";
-var config = { "format": format };
+var markdown = argv["-m"] === "true" || false;
+var config = {
+    "format": format
+    ,"markdown": markdown
+};
 
 console.log("Source: " + inputFile);
 console.log("Dest: " + outputFile);
 console.log("Format: ", format);
+console.log("MarkDown: ", markdown ? "Enable":"Disable");
 prettySwag.run(inputFile, outputFile, config, function (err, msg) {
 
     if (err) {
