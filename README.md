@@ -41,7 +41,7 @@ pretty-swag -i input.json -o output.html -f offline
 
 ## Features
 
-- Search by Tag
+- Search / Filter by Tag
 
 - Collapsible Panel
 
