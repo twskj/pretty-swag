@@ -93,7 +93,7 @@ function parse(src,dst,config,callback) {
                 api.methods.push(method);
                 var input_method = input.paths[path][method_name];
                 method.name = method_name;
-                method.tags = input_method.tags;
+                method.tags = input_method.tags || [];
                 method.summary = config.markdown ? markdown.toHTML(input_method.summary) : input_method.summary;
                 method.desc = config.markdown ? markdown.toHTML(input_method.description) : input_method.description;
 
