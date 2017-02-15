@@ -79,9 +79,9 @@ function parse(src,dst,config,callback) {
         var result = livedoc.initContainer();
         result.name = input.info.title;
         result.summary = config.markdown ? markdown.toHTML(input.info.description) : input.info.description;
-        result.version = input.info.version;
+        result.version = input.info.version || "";
         result.host = input.host || "";
-        result.basePath = input.basePath;
+        result.basePath = input.basePath || "";
 
         for (var path in input.paths) {
 

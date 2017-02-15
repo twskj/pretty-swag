@@ -1,6 +1,6 @@
 {
   "name": "pretty-swag",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "A Document Generator for Swagger (OpenAPI) Specification",
   "main": "pretty-swag.js",
   "bin": {
