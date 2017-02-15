@@ -88,7 +88,29 @@ function parse(src,dst,config,callback) {
             var api = livedoc.initApi();
             result.apis.push(api);
             api.path = path;
+            var global_params = [];
+            if( "parameters" in input.paths[path]){
+                var input_global_param = input.paths[path]["parameters"]; //array
+                for(var i=0;i<input_global_param.length;i++){
+                    var global_param = livedoc.initParam();
+                    global_params.push(global_param);
+                    global_param.name = input_global_param.name;
+                    global_param.location = input_global_param.in;
+                    global_param.desc = input_global_param.description;
+                    global_param.required = input_global_param.required;
+                    if(global_param.schema){
+                        global_param.schema = computeSchema(parameter.schema, input.definitions);
+                    }
+                    else if(global_param.type){
+                        global_param.schema = computeSchema(parameter.type, input.definitions);
+                    }
+                }
+            }
             for (var method_name in input.paths[path]) {
+
+                if(method_name === "parameters"){
+                    continue;
+                }
                 var method = livedoc.initMethod();
                 api.methods.push(method);
                 var input_method = input.paths[path][method_name];
@@ -97,8 +119,11 @@ function parse(src,dst,config,callback) {
                 method.summary = config.markdown ? markdown.toHTML(input_method.summary) : input_method.summary;
                 method.desc = config.markdown ? markdown.toHTML(input_method.description) : input_method.description;
 
+                if (global_params.length > 0){
+                    method.params = method.params.concat(global_params);
+                }
                 if (input_method.parameters) {
-                    for (var i = 0; i < input_method.parameters.length; i++) {
+                    for (i = 0; i < input_method.parameters.length; i++) {
                         var param = livedoc.initParam();
                         method.params.push(param);
                         var parameter = input_method.parameters[i];
@@ -156,4 +181,14 @@ map = {
 };
 module.exports = map;
 
+
+//TODO: add support to "parameters": [
+            //     {
+            //         "name": "id",
+            //         "description": "Identifier of the record to retrieve.",
+            //         "type": "string",
+            //         "in": "path",
+            //         "required": true
+            //     }
+            // ]
 
