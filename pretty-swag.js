@@ -80,7 +80,7 @@ function parse(src,dst,config,callback) {
         result.name = input.info.title;
         result.summary = config.markdown ? markdown.toHTML(input.info.description) : input.info.description;
         result.version = input.info.version;
-        result.host = input.host;
+        result.host = input.host || "";
         result.basePath = input.basePath;
 
         for (var path in input.paths) {
