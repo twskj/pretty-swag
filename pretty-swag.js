@@ -180,15 +180,3 @@ map = {
     "run":parse
 };
 module.exports = map;
-
-
-//TODO: add support to "parameters": [
-            //     {
-            //         "name": "id",
-            //         "description": "Identifier of the record to retrieve.",
-            //         "type": "string",
-            //         "in": "path",
-            //         "required": true
-            //     }
-            // ]
-
