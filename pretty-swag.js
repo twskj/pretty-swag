@@ -3,31 +3,32 @@ var fs = require('fs');
 var markdown = require( "markdown" ).markdown;
 
 var indent_num = 4;
-
-function computeSchema(schema,def) {
+function computeSchema(schema, def) {
     if (typeof schema === "string")
         return schema;
-    var tmp = JSON.parse(resolveNested(schema, def));
+    var tmp = resolveNested(schema, def);
+    tmp = JSON.parse(tmp);
     return JSON.stringify(tmp, null, indent_num);
 }
 
+//https://github.com/json-schema/json-schema/wiki/anyOf,-allOf,-oneOf,-not
 function resolveNested(schema,def) {
     try {
-        if ("type" in schema) {
+        if ("type" in schema || "properties" in schema) {
 
             if (schema.type === "array") {
                 //need to loop
                 return "[" + resolveNested(schema.items, def) + "]";
             }
-            else if (schema.type === "object") {
+            else if (schema.type === "object" || "properties" in schema ) {
                 var keyval = [];
                 for (var prop in schema.properties) {
 
                     if ("$ref" in schema.properties[prop]) {
-                        keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop],def));
+                        keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
                     }
-                    else if (schema.properties[prop].type === "array" || schema.properties[prop].type === "object") {
-                        keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop],def));
+                    else if (schema.properties[prop].type === "array" || schema.properties[prop].type === "object" || "properties" in schema.properties[prop]) {
+                        keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
                     }
                     else {
                         keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"');
@@ -36,14 +37,39 @@ function resolveNested(schema,def) {
                 return "{" + keyval.join(",") + "}";
             }
             else {
-                return '"'+schema.type+'"';
+                return '"' + schema.type + '"';
             }
         }
         else if ("$ref" in schema) {
             return resolveNested(def[schema["$ref"].substr(14)], def); //remove #/definitions
         }
+
+        //idea
+        /**
+        * keyword | Array Represent |                            plain object |
+        * ------- | --------------- | --------------------------------------- |
+        *  allOf  |      [[1,2,3]]  |                          merge property |
+        *  anyOf  |        [1,2,3]  |                                  merge? |
+        *  oneOf  |      [[1],[2]]  | [ ]array of multiple objects?  [x]merge |
+        **/
+        //NOTE usually these keywords uses in a list of validation conditions
+        //allOf = all
+        //anyOf = > 0
+        //oneOf = ==1
+        else if ("anyOf" in schema || "allOf" in schema || "oneOf" in schema){
+            var objs = [];
+            var arr = schema["anyOf"] || schema["allOf"] || schema["oneOf"] || [];
+            var tmp;
+            for (var i = 0; i < arr.length; i++) {
+                objs.push(JSON.parse(resolveNested(arr[i], def)));
+            }
+            return JSON.stringify(merge(objs));
+        }
+        else if ("not" in schema) {
+            //TODO return an object with one in direction call not? { "not": {...} }
+        }
         else {
-            JSON.stringify(schema, null, indent_num);
+            return JSON.stringify(schema, null, indent_num);
         }
 
     }
@@ -53,6 +79,24 @@ function resolveNested(schema,def) {
         }
         return JSON.stringify(schema, null, indent_num);
     }
+}
+
+function merge(objs) {
+    var result = {};
+    for (var i = 0; i < objs.length; i++) {
+        for (var prop in objs[i]) {
+            if (prop in result) {
+                if (Array.isArray(result[prop])) {
+                    result[prop] = [result[prop]];
+                }
+                result[prop].push(objs[i][prop]);
+            }
+            else {
+                result[prop] = objs[i][prop];
+            }
+        }
+    }
+    return result;
 }
 
 function parse(src,dst,config,callback) {
@@ -160,7 +204,7 @@ function parse(src,dst,config,callback) {
             ,formDataToken: "formData"
             ,allowHtml: config.markdown
         };
-        if(config.format === "offline"){
+        if (config.format === "offline") {
             conf.outputFilename = dst;
         }
         livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf,function(err,data){

@@ -54,6 +54,8 @@ pretty-swag -i input.json -o output.html -f offline -m true
 
 - Live Request / Response Feedback
 
+- Support `allOf`, `anyOf`, `oneOf` keywords
+
 ## Filtering
 
 - Use prefix `-` to exclude unwanted tags. For example `-store` will exclude api that contain `store` tag.
