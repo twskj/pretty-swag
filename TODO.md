@@ -1,3 +1,4 @@
 ## TODO:
 - [ ] handle ref loop?
-- [ ] support markdown on description?
+- [X] support markdown on description?
+- [ ] auto populate tag by path

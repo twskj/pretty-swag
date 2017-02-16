@@ -1,6 +1,20 @@
 var livedoc = require('livedoc');
 var fs = require('fs');
-var markdown = require( "markdown" ).markdown;
+//var markdown = require("markdown").markdown;
+
+var marked = require('marked');
+marked.setOptions({
+    renderer: new marked.Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: true,
+    smartLists: true,
+    smartypants: false
+});
+
+
 
 var indent_num = 4;
 function computeSchema(schema, def) {
@@ -122,7 +136,7 @@ function parse(src,dst,config,callback) {
 
         var result = livedoc.initContainer();
         result.name = input.info.title;
-        result.summary = config.markdown ? markdown.toHTML(input.info.description) : input.info.description;
+        result.summary = config.markdown ? marked(input.info.description || "") : input.info.description;
         result.version = input.info.version || "";
         result.host = input.host || "";
         result.basePath = input.basePath || "";
@@ -160,8 +174,10 @@ function parse(src,dst,config,callback) {
                 var input_method = input.paths[path][method_name];
                 method.name = method_name;
                 method.tags = input_method.tags || [];
-                method.summary = config.markdown ? markdown.toHTML(input_method.summary) : input_method.summary;
-                method.desc = config.markdown ? markdown.toHTML(input_method.description) : input_method.description;
+                input_method.summary = input_method.summary || "";
+                input_method.description = input_method.description || "";
+                method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
+                method.desc = config.markdown ? marked(input_method.description) : input_method.description;
 
                 if (global_params.length > 0){
                     method.params = method.params.concat(global_params);
