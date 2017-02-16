@@ -4,6 +4,8 @@ pretty-swag is a UI for [Swagger Specification V2](https://github.com/OAI/OpenAP
 
 An example of the generated html from [petstore spec](http://petstore.swagger.io/v2/swagger.json) can be found [here](http://htmlpreview.github.com/?https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/examples/pet.html)
 
+*Bugs filing and suggestions are always welcome.*
+
 ## Installation
 
 ```Shell
