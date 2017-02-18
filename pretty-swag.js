@@ -1,8 +1,8 @@
-var livedoc = require('livedoc');
 var fs = require('fs');
-//var markdown = require("markdown").markdown;
-
+var esprima = require('esprima');
+var livedoc = require('livedoc');
 var marked = require('marked');
+
 marked.setOptions({
     renderer: new marked.Renderer(),
     gfm: true,
@@ -14,24 +14,123 @@ marked.setOptions({
     smartypants: false
 });
 
-
-
 var indent_num = 4;
+
+function format(tokens, indent_num) {
+
+    var indents = ['', ' '.repeat(indent_num), ' '.repeat(indent_num * 2), ' '.repeat(indent_num * 3), ' '.repeat(indent_num * 4), ' '.repeat(indent_num * 5)];
+    result = "";
+
+    var level = 0;
+    var foundKey = false;
+    var indent;
+    var newline = "\n";
+    var tmpLines;
+    var foundColon = false;
+    var lineLen = 0;
+
+    for (var i = 2; i < tokens.length; i++) {
+        if (level === indents.length) {
+            indents.push(' '.repeat(indent_num * level));
+        }
+
+        if (tokens[i].value === "{" || tokens[i].value === "[") {
+            if (foundColon) {
+                result += tokens[i].value;
+                lineLen += tokens[i].value.length;
+            }
+            else {
+                indent = indents[level];
+                result += indent + tokens[i].value;
+            }
+
+            if (tokens[i + 1].type !== "BlockComment") {
+                result += newline;
+                lineLen = 0;
+            }
+            level += 1;
+            foundColon = false;
+        }
+        else if (tokens[i].value === "}" || tokens[i].value === "]") {
+            level -= 1;
+            indent = indents[level];
+            result += indent + tokens[i].value;
+
+            if (i + 1 < tokens.length && tokens[i + 1].value !== ",") {
+                result += newline;
+                lineLen = 0;
+            }
+
+        }
+        else if (tokens[i].type === "BlockComment") {
+            tmpLines = tokens[i].value.split("\n");
+            if (tmpLines.length == 1) {
+                result += "   /* " + tmpLines[0] + " */" + newline;
+            }
+            else {
+                indent = ' '.repeat(lineLen + indent_num+1);
+                result += indents[indent_num]+ "/* " + tmpLines[0] + newline;
+                for (var j = 1; j < tmpLines.length; j++) {
+                    result += indent + "* " + tmpLines[j] + newline;
+                }
+                result += indent + "*/" + newline;
+            }
+            lineLen = 0;
+        }
+        else if (tokens[i].value === ":") {
+            result += ": ";
+            foundColon = true;
+            lineLen += 2;
+        }
+        else if (tokens[i].value === ",") {
+            result += ",";
+            if (tokens[i + 1].type !== "BlockComment") {
+                result += newline;
+                lineLen = 0;
+            }
+            else {
+                lineLen += tokens[i].value;
+            }
+        }
+        else {
+            if (foundColon) {
+                result += tokens[i].value;
+
+                if (tokens[i + 1].type !== "BlockComment" && tokens[i + 1].value !== ",") {
+                    result += newline;
+                    lineLen = 0;
+                }
+                else {
+                    lineLen += tokens[i].value;
+                }
+            }
+            else {
+                indent = indents[level];
+                result += indent + tokens[i].value;
+                lineLen += indent.length + tokens[i].value.length;
+            }
+            foundColon = false;
+        }
+    }
+    return result;
+}
+
 function computeSchema(schema, def) {
     if (typeof schema === "string")
         return schema;
-    var tmp = resolveNested(schema, def);
-    tmp = JSON.parse(tmp);
-    return JSON.stringify(tmp, null, indent_num);
+    var src = "a="+resolveNested(schema, def);
+    var tokens = esprima.tokenize(src, { comment: true });
+    tmp = format(tokens, indent_num);
+    console.log(tmp);
+    return tmp;
 }
 
 //https://github.com/json-schema/json-schema/wiki/anyOf,-allOf,-oneOf,-not
-function resolveNested(schema,def) {
+function resolveNested(schema, def) {
+    var comment = "";
     try {
         if ("type" in schema || "properties" in schema) {
-
             if (schema.type === "array") {
-                //need to loop
                 return "[" + resolveNested(schema.items, def) + "]";
             }
             else if (schema.type === "object" || "properties" in schema ) {
@@ -48,14 +147,16 @@ function resolveNested(schema,def) {
                         keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"');
                     }
                 }
-                return "{" + keyval.join(",") + "}";
+                comment = schema.description ? comment = "/*" + schema.description + "*/" : "";
+                return "{" + comment + keyval.join(",") + "}";
             }
             else {
-                return '"' + schema.type + '"';
+                comment = schema.description ? comment = "/*" + schema.description + "*/" : "";
+                return '"' + schema.type + '"' + comment;
             }
         }
         else if ("$ref" in schema) {
-            return resolveNested(def[schema["$ref"].substr(14)], def); //remove #/definitions
+            return resolveNested(def[schema["$ref"].substr(14)], def); //removing #/definitions
         }
 
         //idea
