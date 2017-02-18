@@ -14,7 +14,7 @@ marked.setOptions({
     smartypants: false
 });
 
-var indent_num = 4;
+var indent_num = 2;
 
 function format(tokens, indent_num) {
 
@@ -65,10 +65,10 @@ function format(tokens, indent_num) {
         else if (tokens[i].type === "BlockComment") {
             tmpLines = tokens[i].value.split("\n");
             if (tmpLines.length == 1) {
-                result += "   /* " + tmpLines[0] + " */" + newline;
+                result += "     /* " + tmpLines[0] + " */" + newline;
             }
             else {
-                indent = ' '.repeat(lineLen + indent_num+1);
+                indent = ' '.repeat(lineLen + indent_num);
                 result += indents[indent_num]+ "/* " + tmpLines[0] + newline;
                 for (var j = 1; j < tmpLines.length; j++) {
                     result += indent + "* " + tmpLines[j] + newline;
@@ -121,7 +121,6 @@ function computeSchema(schema, def) {
     var src = "a="+resolveNested(schema, def);
     var tokens = esprima.tokenize(src, { comment: true });
     tmp = format(tokens, indent_num);
-    console.log(tmp);
     return tmp;
 }
 
@@ -176,9 +175,9 @@ function resolveNested(schema, def) {
             var arr = schema["anyOf"] || schema["allOf"] || schema["oneOf"] || [];
             var tmp;
             for (var i = 0; i < arr.length; i++) {
-                objs.push(JSON.parse(resolveNested(arr[i], def)));
+                objs.push(resolveNested(arr[i], def));
             }
-            return JSON.stringify(merge(objs));
+            return format(merge(objs), indent_num);
         }
         else if ("not" in schema) {
             //TODO return an object with one in direction call not? { "not": {...} }
@@ -247,21 +246,27 @@ function parse(src,dst,config,callback) {
             var api = livedoc.initApi();
             result.apis.push(api);
             api.path = path;
-            var global_params = [];
+            var path_params = [];
             if( "parameters" in input.paths[path]){
-                var input_global_param = input.paths[path]["parameters"]; //array
-                for(var i=0;i<input_global_param.length;i++){
-                    var global_param = livedoc.initParam();
-                    global_params.push(global_param);
-                    global_param.name = input_global_param.name;
-                    global_param.location = input_global_param.in;
-                    global_param.desc = input_global_param.description;
-                    global_param.required = input_global_param.required;
-                    if(global_param.schema){
-                        global_param.schema = computeSchema(parameter.schema, input.definitions);
+                var path_scope_params = input.paths[path]["parameters"]; //array
+                for (var i = 0; i < path_scope_params.length;i++){
+                    var path_param = livedoc.initParam();
+                    var input_path_param = path_scope_params[i];
+                    if ("$ref" in input_path_param) {
+                        input_path_param = input.parameters[input_path_param["$ref"].substr(13)]; //remove "#/parameters/" portion
                     }
-                    else if(global_param.type){
-                        global_param.schema = computeSchema(parameter.type, input.definitions);
+                    path_param.name = input_path_param.name;
+                    path_param.location = input_path_param.in;
+                    path_param.desc = input_path_param.description;
+                    path_param.required = input_path_param.required;
+                    if (input_path_param.schema) {
+                        path_param.schema = computeSchema(input_path_param.schema, input.definitions);
+                    }
+                    else if (input_path_param.type) {
+                        path_param.schema = computeSchema(input_path_param.type, input.definitions);
+                    }
+                    if (path_param.name && path_param.location) {
+                        path_params.push(path_param);
                     }
                 }
             }
@@ -280,8 +285,8 @@ function parse(src,dst,config,callback) {
                 method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
                 method.desc = config.markdown ? marked(input_method.description) : input_method.description;
 
-                if (global_params.length > 0){
-                    method.params = method.params.concat(global_params);
+                if (path_params.length > 0){
+                    method.params = method.params.concat(path_params);
                 }
                 if (input_method.parameters) {
                     for (i = 0; i < input_method.parameters.length; i++) {
