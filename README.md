@@ -43,7 +43,7 @@ pretty-swag -i input.json -o output.html -f offline -m true
 
  - SingleFile - A single html but need the internet connection to download libraries from CDN (Default).
  - Offline - Self Hosted files in a directory.
- - Embedded - A single html but without the material icons.
+ - Embedded - A single html but without Material icons.
 
 
 ## Features
