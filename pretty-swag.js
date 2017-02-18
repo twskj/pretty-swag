@@ -54,7 +54,7 @@ function format(tokens, indent_num) {
         else if (tokens[i].value === "}" || tokens[i].value === "]") {
             level -= 1;
             indent = indents[level];
-            result += "\n" + indent + tokens[i].value;
+            result += indent + tokens[i].value;
 
             if (i + 1 < tokens.length && tokens[i + 1].value !== ",") {
                 result += newline;
