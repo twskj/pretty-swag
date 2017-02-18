@@ -28,6 +28,7 @@ function format(tokens, indent_num) {
     var tmpLines;
     var foundColon = false;
     var lineLen = 0;
+    var braceStack = [];
 
     for (var i = 2; i < tokens.length; i++) {
         if (level === indents.length) {
@@ -50,17 +51,17 @@ function format(tokens, indent_num) {
             }
             level += 1;
             foundColon = false;
+            braceStack.push(tokens[i].value);
         }
         else if (tokens[i].value === "}" || tokens[i].value === "]") {
             level -= 1;
             indent = indents[level];
             result += indent + tokens[i].value;
-
             if (i + 1 < tokens.length && tokens[i + 1].value !== ",") {
                 result += newline;
                 lineLen = 0;
             }
-
+            braceStack.pop();
         }
         else if (tokens[i].type === "BlockComment") {
             tmpLines = tokens[i].value.split("\n");
@@ -68,12 +69,12 @@ function format(tokens, indent_num) {
                 result += "     /* " + tmpLines[0] + " */" + newline;
             }
             else {
-                indent = ' '.repeat(lineLen + indent_num);
-                result += indents[indent_num] + "/* " + tmpLines[0] + newline;
+                result += "     /* " + tmpLines[0] + newline;
+                indent = ' '.repeat(lineLen+2);
                 for (var j = 1; j < tmpLines.length; j++) {
-                    result += indent + "* " + tmpLines[j] + newline;
+                    result += indent + "      *" + tmpLines[j] + newline;
                 }
-                result += indent + "*/" + newline;
+                result += indent + "      */" + newline;
             }
             lineLen = 0;
         }
@@ -89,25 +90,22 @@ function format(tokens, indent_num) {
                 lineLen = 0;
             }
             else {
-                lineLen += tokens[i].value;
+                lineLen += 1;
             }
         }
         else {
-            if (foundColon) {
-                result += tokens[i].value;
 
-                if (tokens[i + 1].type === "BlockComment" || tokens[i + 1].value === ",") {
-                    lineLen += tokens[i].value.length;
-                }
-                else {
+            indent = foundColon ? '' : indents[level];
+            result += indent + tokens[i].value;
+            if (i < tokens.length - 1) {
+                if ((foundColon && tokens[i + 1].type !== "BlockComment" && tokens[i + 1].value !== ",")
+                    || (tokens[i + 1].value !== ',' && braceStack[braceStack.length - 1] === '[')) {
                     result += newline;
                     lineLen = 0;
                 }
-            }
-            else {
-                indent = indents[level];
-                result += indent + tokens[i].value;
-                lineLen += indent.length + tokens[i].value.length;
+                else {
+                    lineLen += tokens[i].value.length;
+                }
             }
             foundColon = false;
         }
@@ -115,9 +113,32 @@ function format(tokens, indent_num) {
     return result;
 }
 
-function computeSchema(schema, def) {
-    if (typeof schema === "string")
-        return schema;
+function computeSchema(schema, def, context) {
+    if (typeof schema === "string") {
+        if (schema === "array") {
+            if (context.items) {
+                if (context.items.enum) {
+                    if (context.items.type === "string") {
+                        return "[" + context.items.enum.map(function (x) {
+                            return '"' + x + '"';
+                        }).join(",") + "]";
+                    }
+                    else {
+                        return "[" + context.items.enum + "]";
+                    }
+                }
+                else {
+                    return "[" + context.items.type + "]";
+                }
+            }
+            else {
+                return "[]";
+            }
+        }
+        else {
+            return schema;
+        }
+    }
     var src = "a="+resolveNested(schema, def);
     var tokens = esprima.tokenize(src, { comment: true });
     tmp = format(tokens, indent_num);
@@ -263,7 +284,7 @@ function parse(src,dst,config,callback) {
                         path_param.schema = computeSchema(input_path_param.schema, input.definitions);
                     }
                     else if (input_path_param.type) {
-                        path_param.schema = computeSchema(input_path_param.type, input.definitions);
+                        path_param.schema = computeSchema(input_path_param.type, input.definitions, input_path_param);
                     }
                     if (path_param.name && path_param.location) {
                         path_params.push(path_param);
@@ -301,7 +322,7 @@ function parse(src,dst,config,callback) {
                             param.schema = computeSchema(parameter.schema, input.definitions);
                         }
                         else if(parameter.type){
-                            param.schema = computeSchema(parameter.type, input.definitions);
+                            param.schema = computeSchema(parameter.type, input.definitions, parameter);
                         }
                     }
                 }

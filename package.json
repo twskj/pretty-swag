@@ -30,7 +30,7 @@
   "homepage": "https://github.com/twskj/pretty-swag#readme",
   "dependencies": {
     "js-yaml": "^3.8.1",
-    "livedoc": "^0.1.13",
+    "livedoc": "^0.1.14",
     "marked": "^0.3.6"
   }
 }
