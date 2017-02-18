@@ -192,7 +192,7 @@
             </div>
         </div>
     </div>
-    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Feb 18, 2017, 12:25 AM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
+    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Feb 18, 2017, 2:04 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
@@ -394,14 +394,22 @@
                             if(state.indexOf(i) !== -1){
                                 fold = true;
                                 open_token = tmp[i].trim();
-                                if(this.is_it_an_object_value_open_w_optional_comment(open_token)){
+                                if(this.is_an_object_value_open_w_optional_comment(open_token)){
                                     var match = /([[{])/.exec(tmp[i]);
                                     open_token = match[1];
                                     var brace_loc = match.index;
                                     fold_lv = tmp[i].length - tmp[i].replace(/^\s+/,"").length;
                                     close_token = open_token === "{" ? "}" : "]";
                                     comment_idx = tmp[i].indexOf("/");
-                                    comment = comment_idx > -1 ? tmp[i].substr(comment_idx).trim() : '';
+                                    if(comment_idx > -1){
+                                        comment = tmp[i].substr(comment_idx).trim();
+                                        if(!comment.endsWith("*/")){
+                                            comment += " ... */";
+                                        }
+                                    }
+                                    else {
+                                        comment = '';
+                                    }
                                     tokens.push({"val":tmp[i].substr(0,brace_loc)+open_token+"..."+close_token+" "+comment+"\n","line":i});
                                 }
                                 else{
@@ -409,7 +417,15 @@
                                     open_token = open_token[0];
                                     close_token = open_token === "{" ? "}" : "]";
                                     comment_idx = tmp[i].indexOf("/");
-                                    comment = comment_idx > -1 ? tmp[i].substr(comment_idx).trim() : '';
+                                    if(comment_idx > -1){
+                                        comment = tmp[i].substr(comment_idx).trim();
+                                        if(!comment.endsWith("*/")){
+                                            comment += " ... */";
+                                        }
+                                    }
+                                    else {
+                                        comment = '';
+                                    }
                                     tokens.push({"val":tmp[i].substr(0,fold_lv)+open_token+"..."+close_token+" "+comment+"\n","line":i});
                                 }
                             }
@@ -436,17 +452,17 @@
                 ,isFoldable: function(token){
                     var txt = token.val.trim();
                     return txt==='{' || txt==='[' || txt==='{...}' || txt==='[...]'
-                        || this.is_it_an_open_brace_with_comment(txt)
-                        || this.is_it_an_object_value_open_w_optional_comment(txt)
-                        || this.is_it_an_array_folded_with_comment(txt)
-                        || this.is_it_an_object_folded_with_comment(txt)
-                        || this.is_it_an_object_value_folded_w_optional_comment(txt);
+                        || this.is_an_open_brace_with_comment(txt)
+                        || this.is_an_object_value_open_w_optional_comment(txt)
+                        || this.is_an_array_folded_with_comment(txt)
+                        || this.is_an_object_folded_with_comment(txt)
+                        || this.is_an_object_value_folded_w_optional_comment(txt);
                 }
-                , is_it_an_open_brace_with_comment: function(line){ return /[[{]\s*\/\*\s*[^\r\n]*\s*\*\//.exec(line);}
-                , is_it_an_object_value_open_w_optional_comment: function(line){ return /^"[\s\S]+"\s*:\s*[[{](\s*\/\*[^\r\n]*\s*\*\/)?/.exec(line);}
-                , is_it_an_array_folded_with_comment:  function(line){ return /\[\.\.\.\]\s*\/\*[^\r\n]*\s*\*\//.exec(line);}
-                , is_it_an_object_folded_with_comment: function(line){ return /\{\.\.\.\}\s*\/\*[^\r\n]*\s*\*\//.exec(line);}
-                , is_it_an_object_value_folded_w_optional_comment: function(line){ return /^"[\s\S]+"\s*:\s*(\[\.\.\.\])|(\{\.\.\.\})(\s*\/\*[^\r\n]*\s*\*\/)?/.exec(line);}
+                , is_an_open_brace_with_comment: function(line){ return /[[{]\s*\/\*\s*[^\r\n]*\s*\*\//.exec(line);}
+                , is_an_object_value_open_w_optional_comment: function(line){ return /^"[\s\S]+"\s*:\s*[[{](\s*\/\*[^\r\n]*\s*\*\/)?/.exec(line);}
+                , is_an_array_folded_with_comment:  function(line){ return /\[\.\.\.\]\s*\/\*[^\r\n]*\s*\*\//.exec(line);}
+                , is_an_object_folded_with_comment: function(line){ return /\{\.\.\.\}\s*\/\*[^\r\n]*\s*\*\//.exec(line);}
+                , is_an_object_value_folded_w_optional_comment: function(line){ return /^"[\s\S]+"\s*:\s*(\[\.\.\.\])|(\{\.\.\.\})(\s*\/\*[^\r\n]*\s*\*\/)?/.exec(line);}
 
                 ,getFormParam: function(method){
 
@@ -552,7 +568,7 @@
             }
             , data: {
   "name": "Swagger Petstore",
-  "summary": "<p>This is a sample server Petstore server.  You can find out more about Swagger at <a href=\"http://swagger.io\">http://swagger.io</a> or on <a href=\"http://swagger.io/irc/\">irc.freenode.net, #swagger</a>.  For this sample, you can use the api key <code>special-key</code> to test the authorization filters.</p>\n",
+  "summary": "<p>This is a sample server Petstore server.</p>\n<p><a href=\"http://swagger.io\">Learn about Swagger</a> or join the IRC channel <code>#swagger</code> on irc.freenode.net.</p>\n<p>For this sample, you can use the api key <code>special-key</code> to test the authorization filters</p>\n",
   "version": "1.0.0",
   "host": "petstore.swagger.io",
   "port": {
@@ -565,7 +581,7 @@
   "search": "",
   "apis": [
     {
-      "path": "/pet",
+      "path": "/pets",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -582,8 +598,8 @@
               "name": "body",
               "location": "body",
               "desc": "Pet object that needs to be added to the store",
-              "required": true,
-              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
+              "required": false,
+              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
               "schemaState": [],
               "value": ""
             }
@@ -627,8 +643,8 @@
               "name": "body",
               "location": "body",
               "desc": "Pet object that needs to be added to the store",
-              "required": true,
-              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
+              "required": false,
+              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
               "schemaState": [],
               "value": ""
             }
@@ -674,7 +690,7 @@
       ]
     },
     {
-      "path": "/pet/findByStatus",
+      "path": "/pets/findByStatus",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -685,14 +701,14 @@
             "pet"
           ],
           "summary": "<p>Finds Pets by status</p>\n",
-          "desc": "<p>Multiple status values can be provided with comma separated strings</p>\n",
+          "desc": "<p>Multiple status values can be provided with comma seperated strings</p>\n",
           "params": [
             {
               "name": "status",
               "location": "query",
               "desc": "Status values that need to be considered for filter",
-              "required": true,
-              "schema": "array",
+              "required": false,
+              "schema": "[string]",
               "schemaState": [],
               "value": ""
             }
@@ -701,7 +717,7 @@
             {
               "code": "200",
               "desc": "successful operation",
-              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"\n  }\n]",
+              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"\n    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"\n  }\n]",
               "schemaState": []
             },
             {
@@ -732,7 +748,7 @@
       ]
     },
     {
-      "path": "/pet/findByTags",
+      "path": "/pets/findByTags",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -743,14 +759,14 @@
             "pet"
           ],
           "summary": "<p>Finds Pets by tags</p>\n",
-          "desc": "<p>Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.</p>\n",
+          "desc": "<p>Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.</p>\n",
           "params": [
             {
               "name": "tags",
               "location": "query",
               "desc": "Tags to filter by",
-              "required": true,
-              "schema": "array",
+              "required": false,
+              "schema": "[string]",
               "schemaState": [],
               "value": ""
             }
@@ -759,7 +775,7 @@
             {
               "code": "200",
               "desc": "successful operation",
-              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"\n  }\n]",
+              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"\n    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"\n  }\n]",
               "schemaState": []
             },
             {
@@ -790,7 +806,7 @@
       ]
     },
     {
-      "path": "/pet/{petId}",
+      "path": "/pets/{petId}",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -801,12 +817,12 @@
             "pet"
           ],
           "summary": "<p>Find pet by ID</p>\n",
-          "desc": "<p>Returns a single pet</p>\n",
+          "desc": "<p>Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions</p>\n",
           "params": [
             {
               "name": "petId",
               "location": "path",
-              "desc": "ID of pet to return",
+              "desc": "ID of pet that needs to be fetched",
               "required": true,
               "schema": "integer",
               "schemaState": [],
@@ -817,7 +833,7 @@
             {
               "code": "200",
               "desc": "successful operation",
-              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
+              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
               "schemaState": []
             },
             {
@@ -865,7 +881,7 @@
               "location": "path",
               "desc": "ID of pet that needs to be updated",
               "required": true,
-              "schema": "integer",
+              "schema": "string",
               "schemaState": [],
               "value": ""
             },
@@ -873,7 +889,7 @@
               "name": "name",
               "location": "formData",
               "desc": "Updated name of the pet",
-              "required": false,
+              "required": true,
               "schema": "string",
               "schemaState": [],
               "value": ""
@@ -882,7 +898,7 @@
               "name": "status",
               "location": "formData",
               "desc": "Updated status of the pet",
-              "required": false,
+              "required": true,
               "schema": "string",
               "schemaState": [],
               "value": ""
@@ -926,7 +942,8 @@
             {
               "name": "api_key",
               "location": "header",
-              "required": false,
+              "desc": "",
+              "required": true,
               "schema": "string",
               "schemaState": [],
               "value": ""
@@ -944,13 +961,7 @@
           "responses": [
             {
               "code": "400",
-              "desc": "Invalid ID supplied",
-              "schema": "",
-              "schemaState": []
-            },
-            {
-              "code": "404",
-              "desc": "Pet not found",
+              "desc": "Invalid pet value",
               "schema": "",
               "schemaState": []
             }
@@ -976,119 +987,7 @@
       ]
     },
     {
-      "path": "/pet/{petId}/uploadImage",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "post",
-          "visible": true,
-          "tags": [
-            "pet"
-          ],
-          "summary": "<p>uploads an image</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "petId",
-              "location": "path",
-              "desc": "ID of pet to update",
-              "required": true,
-              "schema": "integer",
-              "schemaState": [],
-              "value": ""
-            },
-            {
-              "name": "additionalMetadata",
-              "location": "formData",
-              "desc": "Additional data to pass to server",
-              "required": false,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            },
-            {
-              "name": "file",
-              "location": "formData",
-              "desc": "file to upload",
-              "required": false,
-              "schema": "file",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "{\n  \"code\": \"integer\",\n  \"type\": \"string\",\n  \"message\": \"string\"\n}",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/store/inventory",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "get",
-          "visible": true,
-          "tags": [
-            "store"
-          ],
-          "summary": "<p>Returns pet inventories by status</p>\n",
-          "desc": "<p>Returns a map of status codes to quantities</p>\n",
-          "params": [],
-          "responses": [
-            {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "{\n}",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/store/order",
+      "path": "/stores/order",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1105,7 +1004,7 @@
               "name": "body",
               "location": "body",
               "desc": "order placed for purchasing the pet",
-              "required": true,
+              "required": false,
               "schema": "{\n  \"id\": \"integer\",\n  \"petId\": \"integer\",\n  \"quantity\": \"integer\",\n  \"shipDate\": \"string\",\n  \"status\": \"string\",\n  \"complete\": \"boolean\"\n}",
               "schemaState": [],
               "value": ""
@@ -1146,7 +1045,7 @@
       ]
     },
     {
-      "path": "/store/order/{orderId}",
+      "path": "/stores/order/{orderId}",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1157,14 +1056,14 @@
             "store"
           ],
           "summary": "<p>Find purchase order by ID</p>\n",
-          "desc": "<p>For valid response try integer IDs with value &gt;= 1 and &lt;= 10. Other values will generated exceptions</p>\n",
+          "desc": "<p>For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions</p>\n",
           "params": [
             {
               "name": "orderId",
               "location": "path",
               "desc": "ID of pet that needs to be fetched",
               "required": true,
-              "schema": "integer",
+              "schema": "string",
               "schemaState": [],
               "value": ""
             }
@@ -1214,14 +1113,14 @@
             "store"
           ],
           "summary": "<p>Delete purchase order by ID</p>\n",
-          "desc": "<p>For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors</p>\n",
+          "desc": "<p>For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors</p>\n",
           "params": [
             {
               "name": "orderId",
               "location": "path",
               "desc": "ID of the order that needs to be deleted",
               "required": true,
-              "schema": "integer",
+              "schema": "string",
               "schemaState": [],
               "value": ""
             }
@@ -1261,7 +1160,7 @@
       ]
     },
     {
-      "path": "/user",
+      "path": "/users",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1278,7 +1177,7 @@
               "name": "body",
               "location": "body",
               "desc": "Created user object",
-              "required": true,
+              "required": false,
               "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"\n}",
               "schemaState": [],
               "value": ""
@@ -1313,7 +1212,7 @@
       ]
     },
     {
-      "path": "/user/createWithArray",
+      "path": "/users/createWithArray",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1330,7 +1229,7 @@
               "name": "body",
               "location": "body",
               "desc": "List of user object",
-              "required": true,
+              "required": false,
               "schema": "[\n  {\n    \"id\": \"integer\",\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": \"integer\"\n  }\n]",
               "schemaState": [],
               "value": ""
@@ -1365,7 +1264,7 @@
       ]
     },
     {
-      "path": "/user/createWithList",
+      "path": "/users/createWithList",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1382,7 +1281,7 @@
               "name": "body",
               "location": "body",
               "desc": "List of user object",
-              "required": true,
+              "required": false,
               "schema": "[\n  {\n    \"id\": \"integer\",\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": \"integer\"\n  }\n]",
               "schemaState": [],
               "value": ""
@@ -1417,7 +1316,7 @@
       ]
     },
     {
-      "path": "/user/login",
+      "path": "/users/login",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1434,7 +1333,7 @@
               "name": "username",
               "location": "query",
               "desc": "The user name for login",
-              "required": true,
+              "required": false,
               "schema": "string",
               "schemaState": [],
               "value": ""
@@ -1443,7 +1342,7 @@
               "name": "password",
               "location": "query",
               "desc": "The password for login in clear text",
-              "required": true,
+              "required": false,
               "schema": "string",
               "schemaState": [],
               "value": ""
@@ -1484,7 +1383,7 @@
       ]
     },
     {
-      "path": "/user/logout",
+      "path": "/users/logout",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1526,7 +1425,7 @@
       ]
     },
     {
-      "path": "/user/{username}",
+      "path": "/users/{username}",
       "visible": true,
       "showMe": true,
       "methods": [
@@ -1542,7 +1441,7 @@
             {
               "name": "username",
               "location": "path",
-              "desc": "The name that needs to be fetched. Use user1 for testing. ",
+              "desc": "The name that needs to be fetched. Use user1 for testing.",
               "required": true,
               "schema": "string",
               "schemaState": [],
@@ -1599,7 +1498,7 @@
             {
               "name": "username",
               "location": "path",
-              "desc": "name that need to be updated",
+              "desc": "name that need to be deleted",
               "required": true,
               "schema": "string",
               "schemaState": [],
@@ -1609,7 +1508,7 @@
               "name": "body",
               "location": "body",
               "desc": "Updated user object",
-              "required": true,
+              "required": false,
               "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"\n}",
               "schemaState": [],
               "value": ""
