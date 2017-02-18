@@ -54,7 +54,7 @@ function format(tokens, indent_num) {
         else if (tokens[i].value === "}" || tokens[i].value === "]") {
             level -= 1;
             indent = indents[level];
-            result += indent + tokens[i].value;
+            result += "\n" + indent + tokens[i].value;
 
             if (i + 1 < tokens.length && tokens[i + 1].value !== ",") {
                 result += newline;
@@ -69,7 +69,7 @@ function format(tokens, indent_num) {
             }
             else {
                 indent = ' '.repeat(lineLen + indent_num);
-                result += indents[indent_num]+ "/* " + tmpLines[0] + newline;
+                result += indents[indent_num] + "/* " + tmpLines[0] + newline;
                 for (var j = 1; j < tmpLines.length; j++) {
                     result += indent + "* " + tmpLines[j] + newline;
                 }
@@ -96,12 +96,12 @@ function format(tokens, indent_num) {
             if (foundColon) {
                 result += tokens[i].value;
 
-                if (tokens[i + 1].type !== "BlockComment" && tokens[i + 1].value !== ",") {
-                    result += newline;
-                    lineLen = 0;
+                if (tokens[i + 1].type === "BlockComment" || tokens[i + 1].value === ",") {
+                    lineLen += tokens[i].value.length;
                 }
                 else {
-                    lineLen += tokens[i].value;
+                    result += newline;
+                    lineLen = 0;
                 }
             }
             else {
