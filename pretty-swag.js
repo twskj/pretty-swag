@@ -262,7 +262,27 @@ function parse(src,dst,config,callback) {
         result.host = input.host || "";
         result.basePath = input.basePath || "";
         if(config.theme){
-            result.bgColor = typeof config.theme === "string" ? {default:config.theme} : config.theme;
+            if(config.name === "colors"){
+                result.bgColor = {
+                    default: "blue"
+                    ,GET: "blue"
+                    ,HEAD: "cyan"
+                    ,POST: "blue-grey"
+                    ,PUT: "deep-purple"
+                    ,DELETE: "red"
+                    ,CONNECT: "purple"
+                    ,OPTIONS: "light-blue"
+                    ,TRACE: "teal"
+                    ,PATCH: "deep-purple"
+                };
+            }
+            else if(typeof config.theme === "string"){
+                result.bgColor = { default:config.theme };
+            }
+            else{
+                //custom
+                result.bgColor = config.theme;
+            }
         }
         result.fixedNav = config.fixedNav;
 

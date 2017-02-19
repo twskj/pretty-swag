@@ -70,6 +70,7 @@ if(configFile){
 config["format"] = format;
 config["markdown"] = markdown;
 config["theme"] = theme;
+config["fixedNav"] = fixedNav;
 
 
 console.log("Source: " + inputFile);
