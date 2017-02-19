@@ -262,7 +262,7 @@ function parse(src,dst,config,callback) {
         result.host = input.host || "";
         result.basePath = input.basePath || "";
         if(config.theme){
-            result.bgColor(typeof config.theme === "string" ? {default:config.theme} : config.theme);
+            result.bgColor = typeof config.theme === "string" ? {default:config.theme} : config.theme;
         }
 
         for (var path in input.paths) {
