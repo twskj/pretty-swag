@@ -264,7 +264,7 @@ function parse(src,dst,config,callback) {
         if(config.theme){
             result.bgColor = typeof config.theme === "string" ? {default:config.theme} : config.theme;
         }
-        result.fixedNav = config.navFixed;
+        result.fixedNav = config.fixedNav;
 
         for (var path in input.paths) {
 
