@@ -261,6 +261,9 @@ function parse(src,dst,config,callback) {
         result.version = input.info.version || "";
         result.host = input.host || "";
         result.basePath = input.basePath || "";
+        if(config.theme){
+            result.bgColor(typeof config.theme === "string" ? {default:config.theme} : config.theme);
+        }
 
         for (var path in input.paths) {
 
@@ -299,7 +302,7 @@ function parse(src,dst,config,callback) {
                 var method = livedoc.initMethod();
                 api.methods.push(method);
                 var input_method = input.paths[path][method_name];
-                method.name = method_name;
+                method.name = method_name.toUpperCase();
                 method.tags = input_method.tags || [];
                 input_method.summary = input_method.summary || "";
                 input_method.description = input_method.description || "";
