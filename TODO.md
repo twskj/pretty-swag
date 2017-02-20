@@ -2,5 +2,6 @@
 - [ ] handle ref loop?
 - [X] support markdown on description?
 - [X] Theming
-- [ ] auto populate tag by path
+- [X] Fixed Navigation bar
+- [X] Schema Description
 - [ ] auto populate tags (by path, method)
