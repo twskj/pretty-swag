@@ -262,7 +262,7 @@ function parse(src,dst,config,callback) {
         result.host = input.host || "";
         result.basePath = input.basePath || "";
         if(config.theme){
-            if(config.name === "colors"){
+            if(config.theme === "colors"){
                 result.bgColor = {
                     default: "blue"
                     ,GET: "blue"
