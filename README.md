@@ -45,40 +45,40 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 
 | Switch  | Name     | Optional | Description                                                                          |
 | ------- | -------- | -------- | ------------------------------------------------------------------------------------ |
-|   -i    | Input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                 |
-|   -o    | Output   |      Yes | Location of generated document(s). Default to doc.html                               |
-|   -f    | Format   |      Yes | Format of the output (`singlefile`, `offline`, `embedded`). Default to `singlefile`  |
-|   -m    | Markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`      |
-|   -th   | Theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`      |
-|   -c    | Config   |      Yes | Location of a configuration file                                                     |
-|   -nav  | FixedNav |      Yes | Include this to have navigation bar always on screen                                 |
+|   -i    | input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                 |
+|   -o    | output   |      Yes | Location of generated document(s). Default to doc.html                               |
+|   -f    | format   |      Yes | Format of the output (`singlefile`, `offline`, `embedded`). Default to `singlefile`  |
+|   -m    | markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`      |
+|   -th   | theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`      |
+|   -c    | config   |      Yes | Location of a configuration file                                                     |
+|   -nav  | fixedNav |      Yes | Include this to have navigation bar always on screen                                 |
 
 
 ## Configuration File
 
 Valid keys are:
- - Input
- - Output
- - Format
- - Markdown
- - Theme
- - FixedNav
+ - input
+ - output
+ - format
+ - markdown
+ - theme
+ - fixedNav
 
 **Example of Configuration file**
 ```javascript
 {
-  "Input": "/tmp/petstore.json",
-  "Output": "/tmp/petstore.html",
-  "Format": "singlefile",
-  "Markdown": true,
-  "Theme": {
-    "default": "orange",
-    "GET": "deep-purple",
+  "input": "/tmp/petstore.json",
+  "output": "/tmp/petstore.html",
+  "format": "singlefile",
+  "markdown": true,
+  "theme": {
+    "default": "blue",
+    "GET": "blue",
     "POST": "indigo",
     "DELETE": "red",
     "PUT": "amber"
   },
-  "FixedNav": true
+  "fixedNav": true
 }
 ```
 
