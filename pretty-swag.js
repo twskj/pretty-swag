@@ -326,15 +326,17 @@ function parse(src, dst, config, callback) {
                 method.name = method_name.toUpperCase();
                 method.tags = input_method.tags || [];
                 if (config.autoTags || true) {
+                    var tmp_tags = method.tags.map(function(x){ return x.toLowerCase() });
                     method.tags.push(method.name);
                     var segments = path.split("/");
                     for (var i = 0; i < segments.length;i++) {
                         var seg = segments[i].trim();
                         //don't add placeholder and plural when already have a singular in
-                        if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || seg in tags || (seg.endsWith("s") && seg.substr(0,seg.length-1) in tags) ) {
+                        if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || seg in tmp_tags || (seg.endsWith("s") && seg.substr(0,seg.length-1) in tmp_tags) ) {
                             continue;
                         }
                         method.tags.push(seg);
+                        tmp_tags.push(seg.toLowerCase());
                     }
                 }
                 input_method.summary = input_method.summary || "";
