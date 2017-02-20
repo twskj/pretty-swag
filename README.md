@@ -22,6 +22,10 @@ pretty-swag -i input.json
 ```
 
 ```Shell
+pretty-swag -c config.json
+```
+
+```Shell
 pretty-swag -i input.json -o output.html
 ```
 
@@ -33,6 +37,10 @@ pretty-swag -i input.json -o output.html -f offline
 pretty-swag -i input.json -o output.html -f offline -m true
 ```
 
+```Shell
+pretty-swag -i input.json -o output.html -f offline -m true -th default
+```
+
 ## Command switch
 
 | Switch  | Name     | Optional | Description                                                                          |
@@ -41,7 +49,7 @@ pretty-swag -i input.json -o output.html -f offline -m true
 |   -o    | Output   |      Yes | Location of generated document(s). Default to doc.html                               |
 |   -f    | Format   |      Yes | Format of the output (`singlefile`, `offline`, `embedded`). Default to `singlefile`  |
 |   -m    | Markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`      |
-|   -th   | Theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `colors`           |
+|   -th   | Theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`      |
 |   -c    | Config   |      Yes | Location of a configuration file                                                     |
 |   -nav  | FixedNav |      Yes | Include this to have navigation bar always on screen                                 |
 
