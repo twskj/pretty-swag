@@ -50,7 +50,7 @@ if (configFile) {
     var keys = Object.keys(json);
     config.theme = {};
     for (var i = 0; i < keys.length; i++) {
-        config.theme[keys[i]] = json[keys[i]];
+        config[keys[i]] = json[keys[i]];
     }
 }
 
