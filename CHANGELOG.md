@@ -1,8 +1,9 @@
 # Change Log
 
-### version 0.1.44 [Feb 20, 2017]
+### version 0.1.45 [Feb 20, 2017]
  - Re-format help screen
  - Introduce autoTags mode
+ - Sort tags
 
 
 -------------

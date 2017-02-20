@@ -339,6 +339,7 @@ function parse(src, dst, config, callback) {
                         tmp_tags.push(seg.toLowerCase());
                     }
                 }
+                method.tags.sort();
                 input_method.summary = input_method.summary || "";
                 input_method.description = input_method.description || "";
                 method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
