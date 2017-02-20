@@ -64,6 +64,7 @@ Valid keys are:
  - markdown
  - theme
  - fixedNav
+ - autoTags
 
 **Example of Configuration file**
 ```javascript
@@ -79,7 +80,8 @@ Valid keys are:
     "DELETE": "red",
     "PUT": "amber"
   },
-  "fixedNav": true
+  "fixedNav": true,
+  "autoTags": true
 }
 ```
 
