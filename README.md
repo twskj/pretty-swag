@@ -135,3 +135,6 @@ Valid keys are:
 ![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/liveReqRes.gif?raw=true)
 
 ---------------------------------------
+
+
+[![analytics](http://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https://twskj.github.io/pretty-swag&_u=MAC~&cid=1757014354.1393964045&tid=UA-91877741-1)]()
