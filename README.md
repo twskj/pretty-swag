@@ -67,18 +67,18 @@ Valid keys are:
 **Example of Configuration file**
 ```javascript
 {
-  "Input": "/tmp/petstore.json",
-  "Output": "/tmp/petstore.html",
-  "Format": "singlefile",
-  "Markdown": true,
-  "Theme": {
+  "input": "/tmp/petstore.json",
+  "output": "/tmp/petstore.html",
+  "format": "singlefile",
+  "markdown": true,
+  "theme": {
     "default": "orange",
     "GET": "deep-purple",
     "POST": "indigo",
     "DELETE": "red",
     "PUT": "amber"
   },
-  "FixedNav": true
+  "fixedNav": true
 }
 ```
 
