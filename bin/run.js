@@ -37,7 +37,7 @@ function printHelp() {
 
 var inputFile = argv["-i"];
 var outputFile = argv["-o"];
-var format = argv["-f"] || "singleFile";
+var format = argv["-f"];
 var markdown = "-m" in argv || false;
 var theme = argv["-th"];
 var configFile = argv["-c"];
@@ -72,6 +72,7 @@ console.log("Source: " + config.input);
 console.log("Dest: " + config.output);
 console.log("Format: ", config.format);
 console.log("MarkDown: ", config.markdown ? "Enable" : "Disable");
+console.log("Nav Bar: ", config.fixedNav ? "Fixed" : "Normal");
 if (typeof config.theme === "object") {
     console.log("Theme: " + JSON.stringify(config.theme, null, 2));
 }
