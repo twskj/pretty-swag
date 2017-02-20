@@ -330,10 +330,11 @@ function parse(src, dst, config, callback) {
                     var segments = path.split("/");
                     for (var i = 0; i < segments.length;i++) {
                         var seg = segments[i].trim();
-                        if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
+                        //don't add placeholder and plural when already have a singular in
+                        if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || seg in tags || (seg.endsWith("s") && seg.substr(0,seg.length-1) in tags) ) {
                             continue;
                         }
-                        method.tags.push(seg.toUpperCase());
+                        method.tags.push(seg);
                     }
                 }
                 input_method.summary = input_method.summary || "";
