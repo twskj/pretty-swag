@@ -70,7 +70,7 @@ function format(tokens, indent_num) {
             }
             else {
                 result += "     /* " + tmpLines[0] + newline;
-                indent = ' '.repeat(lineLen+2);
+                indent = ' '.repeat(lineLen + 2);
                 for (var j = 1; j < tmpLines.length; j++) {
                     result += indent + "      *" + tmpLines[j] + newline;
                 }
@@ -139,7 +139,7 @@ function computeSchema(schema, def, context) {
             return schema;
         }
     }
-    var src = "a="+resolveNested(schema, def);
+    var src = "a=" + resolveNested(schema, def);
     var tokens = esprima.tokenize(src, { comment: true });
     tmp = format(tokens, indent_num);
     return tmp;
@@ -153,7 +153,7 @@ function resolveNested(schema, def) {
             if (schema.type === "array") {
                 return "[" + resolveNested(schema.items, def) + "]";
             }
-            else if (schema.type === "object" || "properties" in schema ) {
+            else if (schema.type === "object" || "properties" in schema) {
                 var keyval = [];
                 for (var prop in schema.properties) {
 
@@ -191,7 +191,7 @@ function resolveNested(schema, def) {
         //allOf = all
         //anyOf = > 0
         //oneOf = ==1
-        else if ("anyOf" in schema || "allOf" in schema || "oneOf" in schema){
+        else if ("anyOf" in schema || "allOf" in schema || "oneOf" in schema) {
             var objs = [];
             var arr = schema["anyOf"] || schema["allOf"] || schema["oneOf"] || [];
             var tmp;
@@ -210,7 +210,7 @@ function resolveNested(schema, def) {
     }
     catch (err) {
         if (schema.type) {
-            return '"'+schema.type+'"';
+            return '"' + schema.type + '"';
         }
         return JSON.stringify(schema, null, indent_num);
     }
@@ -234,7 +234,7 @@ function merge(objs) {
     return result;
 }
 
-function parse(src,dst,config,callback) {
+function parse(src, dst, config, callback) {
 
     fs.readFile(src, 'utf8', function (err, data) {
         if (err) {
@@ -245,7 +245,7 @@ function parse(src,dst,config,callback) {
         try {
             input = JSON.parse(data);
         }
-        catch(json_err){
+        catch (json_err) {
             var yaml = require('js-yaml');
             try {
                 input = yaml.safeLoad(data);
@@ -261,25 +261,25 @@ function parse(src,dst,config,callback) {
         result.version = input.info.version || "";
         result.host = input.host || "";
         result.basePath = input.basePath || "";
-        if(config.theme){
-            if(config.theme === "default"){
+        if (config.theme) {
+            if (config.theme === "default") {
                 result.bgColor = {
                     default: "blue"
-                    ,GET: "blue"
-                    ,HEAD: "cyan"
-                    ,POST: "blue-grey"
-                    ,PUT: "deep-purple"
-                    ,DELETE: "red"
-                    ,CONNECT: "purple"
-                    ,OPTIONS: "light-blue"
-                    ,TRACE: "teal"
-                    ,PATCH: "deep-purple"
+                    , GET: "blue"
+                    , HEAD: "cyan"
+                    , POST: "blue-grey"
+                    , PUT: "deep-purple"
+                    , DELETE: "red"
+                    , CONNECT: "purple"
+                    , OPTIONS: "light-blue"
+                    , TRACE: "teal"
+                    , PATCH: "deep-purple"
                 };
             }
-            else if(typeof config.theme === "string"){
-                result.bgColor = { default:config.theme };
+            else if (typeof config.theme === "string") {
+                result.bgColor = { default: config.theme };
             }
-            else{
+            else {
                 //custom
                 result.bgColor = config.theme;
             }
@@ -292,9 +292,9 @@ function parse(src,dst,config,callback) {
             result.apis.push(api);
             api.path = path;
             var path_params = [];
-            if( "parameters" in input.paths[path]){
+            if ("parameters" in input.paths[path]) {
                 var path_scope_params = input.paths[path]["parameters"]; //array
-                for (var i = 0; i < path_scope_params.length;i++){
+                for (var i = 0; i < path_scope_params.length; i++) {
                     var path_param = livedoc.initParam();
                     var input_path_param = path_scope_params[i];
                     if ("$ref" in input_path_param) {
@@ -317,7 +317,7 @@ function parse(src,dst,config,callback) {
             }
             for (var method_name in input.paths[path]) {
 
-                if(method_name === "parameters"){
+                if (method_name === "parameters") {
                     continue;
                 }
                 var method = livedoc.initMethod();
@@ -325,12 +325,23 @@ function parse(src,dst,config,callback) {
                 var input_method = input.paths[path][method_name];
                 method.name = method_name.toUpperCase();
                 method.tags = input_method.tags || [];
+                if (config.autoTags || true) {
+                    method.tags.push(method.name);
+                    var segments = path.split("/");
+                    for (var i = 0; i < segments.length;i++) {
+                        var seg = segments[i].trim();
+                        if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
+                            continue;
+                        }
+                        method.tags.push(seg.toUpperCase());
+                    }
+                }
                 input_method.summary = input_method.summary || "";
                 input_method.description = input_method.description || "";
                 method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
                 method.desc = config.markdown ? marked(input_method.description) : input_method.description;
 
-                if (path_params.length > 0){
+                if (path_params.length > 0) {
                     method.params = method.params.concat(path_params);
                 }
                 if (input_method.parameters) {
@@ -342,10 +353,10 @@ function parse(src,dst,config,callback) {
                         param.location = parameter.in;
                         param.desc = parameter.description;
                         param.required = parameter.required;
-                        if(parameter.schema){
+                        if (parameter.schema) {
                             param.schema = computeSchema(parameter.schema, input.definitions);
                         }
-                        else if(parameter.type){
+                        else if (parameter.type) {
                             param.schema = computeSchema(parameter.type, input.definitions, parameter);
                         }
                     }
@@ -357,7 +368,7 @@ function parse(src,dst,config,callback) {
                     var response = input_method.responses[code];
                     res.code = code;
                     res.desc = response.description;
-                    if(response.schema){
+                    if (response.schema) {
                         res.schema = computeSchema(response.schema, input.definitions);
                     }
                 }
@@ -365,18 +376,18 @@ function parse(src,dst,config,callback) {
         }
         var conf = {
             mode: config.format
-            ,footer: 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
-            ,pathParamLeftToken: "{"
-            ,pathParamRightToken: "}"
-            ,formDataToken: "formData"
-            ,allowHtml: config.markdown
+            , footer: 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
+            , pathParamLeftToken: "{"
+            , pathParamRightToken: "}"
+            , formDataToken: "formData"
+            , allowHtml: config.markdown
         };
         if (config.format === "offline") {
             conf.outputFilename = dst;
         }
-        livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf,function(err,data){
-            fs.writeFile(dst,data,function(err){
-                if(err){
+        livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
+            fs.writeFile(dst, data, function (err) {
+                if (err) {
                     callback(err);
                     return;
                 }
@@ -388,6 +399,6 @@ function parse(src,dst,config,callback) {
 }
 
 map = {
-    "run":parse
+    "run": parse
 };
 module.exports = map;

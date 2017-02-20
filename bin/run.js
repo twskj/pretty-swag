@@ -24,14 +24,16 @@ if (process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1) {
 
 function printHelp() {
     console.log();
-    console.log("USAGE: pretty-swag -i {inputFile} [-o (doc.html*|outputFile)] [-f (singleFile*|offline|embeded)] [-m (true|false)] [-th (blue|red|indigo)] [-c {config file}] [-nav]");
-    console.log("-i input");
-    console.log("-o output");
-    console.log("-f format");
-    console.log("-m markDown enable");
-    console.log("-th theme color");
-    console.log("-c config file");
-    console.log("-nav fixed top navigation bar");
+    console.log("USAGE: pretty-swag -i <inputFile> [Options]");
+    console.log("Options:");
+    console.log("-i <input> Location of the input file.");
+    console.log("-o <output> Location of the output file. Default to doc.html");
+    console.log('-f (singleFile|offline|embedded) Mode of the output result');
+    console.log("-th <theme> Theme. Default to `blue` for multi-color theme use `-th default`");
+    console.log("-c <config file> Location of the configuration file");
+    console.log("-m Use this flag to enable MarkDown");
+    console.log("-nav Use this flag to fixed the top navigation bar");
+    console.log("-autotags Use this flag to automatically generate tags by path and method");
     console.log();
 }
 
@@ -42,6 +44,7 @@ var markdown = "-m" in argv || false;
 var theme = argv["-th"];
 var configFile = argv["-c"];
 var fixedNav = "-nav" in argv;
+var autoTags = "-autotags" in argv;
 
 var config = {};
 if (configFile) {
@@ -67,6 +70,7 @@ config.markdown = markdown || config.markdown || false;
 config.theme = theme || config.theme || "blue";
 config.fixedNav = fixedNav || config.fixedNav || false;
 config.output = outputFile || config["output"] || "doc.html";
+config.autoTags = autoTags || config["autoTags"] || false;
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);

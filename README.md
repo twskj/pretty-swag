@@ -51,7 +51,8 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 |   -m    | markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`      |
 |   -th   | theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`      |
 |   -c    | config   |      Yes | Location of a configuration file                                                     |
-|   -nav  | fixedNav |      Yes | Include this to have navigation bar always on screen                                 |
+|   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                              |
+|-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name             |
 
 
 ## Configuration File
