@@ -26,7 +26,7 @@
             <div class="section">
                 <h1 class="grey-text text-darken-3">{{name}}</h1>
                 <div class="indent">
-                    <p class="grey-text text-darken-1">{{summary}}</p>
+                    <p class="grey-text text-darken-1" v-html="summary"></p>
                     <div><span class="bold">Version</span> <span class="grey-text text-darken-1">{{version}}</span></div>
                     <div>
                         <span class="bold">Available Tags: </span>{{getAllTags}}
@@ -52,9 +52,9 @@
                                             </div>
                                             <div class="indent r-indent">
                                                 <h5 :class="[getThemeColor('default')+'-text']" v-if="method.summary">Summary</h5>
-                                                <p class="indent" v-if="method.summary">{{method.summary}}</p>
+                                                <p class="indent" v-if="method.summary" v-html="method.summary"></p>
                                                 <h5 :class="[getThemeColor('default')+'-text']" v-if="method.desc">Description</h5>
-                                                <p class="indent" v-if="method.desc">{{method.desc}}</p>
+                                                <p class="indent" v-if="method.desc" v-html="method.desc"></p>
                                                 <h5 :class="[getThemeColor('default')+'-text']" v-if="method.params.length > 0">Parameters</h5>
                                                 <table class="bordered" v-if="method.params.length > 0">
                                                     <thead>
@@ -194,7 +194,7 @@
             </div>
         </div>
     </div>
-    <footer class="container grey-text text-lighten-4 thin">Generated Monday, Feb 20, 2017, 5:16 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
+    <footer class="container grey-text text-lighten-4 thin">Generated Monday, Feb 20, 2017, 5:56 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
@@ -586,7 +586,7 @@
             }
             , data: {
   "name": "Swagger Petstore",
-  "summary": "This is a sample server Petstore server.\n\n[Learn about Swagger](http://swagger.io) or join the IRC channel `#swagger` on irc.freenode.net.\n\nFor this sample, you can use the api key `special-key` to test the authorization filters\n",
+  "summary": "<p>This is a sample server Petstore server.</p>\n<p><a href=\"http://swagger.io\">Learn about Swagger</a> or join the IRC channel <code>#swagger</code> on irc.freenode.net.</p>\n<p>For this sample, you can use the api key <code>special-key</code> to test the authorization filters</p>\n",
   "version": "1.0.0",
   "host": "petstore.swagger.io",
   "port": {
@@ -600,7 +600,7 @@
   "bgColor": {
     "default": "blue"
   },
-  "fixedNav": true,
+  "fixedNav": false,
   "apis": [
     {
       "path": "/pets",
@@ -614,7 +614,7 @@
             "POST",
             "pet"
           ],
-          "summary": "Add a new pet to the store",
+          "summary": "<p>Add a new pet to the store</p>\n",
           "desc": "",
           "params": [
             {
@@ -660,7 +660,7 @@
             "PUT",
             "pet"
           ],
-          "summary": "Update an existing pet",
+          "summary": "<p>Update an existing pet</p>\n",
           "desc": "",
           "params": [
             {
@@ -726,8 +726,8 @@
             "findByStatus",
             "pet"
           ],
-          "summary": "Finds Pets by status",
-          "desc": "Multiple status values can be provided with comma seperated strings",
+          "summary": "<p>Finds Pets by status</p>\n",
+          "desc": "<p>Multiple status values can be provided with comma seperated strings</p>\n",
           "params": [
             {
               "name": "status",
@@ -786,8 +786,8 @@
             "findByTags",
             "pet"
           ],
-          "summary": "Finds Pets by tags",
-          "desc": "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+          "summary": "<p>Finds Pets by tags</p>\n",
+          "desc": "<p>Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.</p>\n",
           "params": [
             {
               "name": "tags",
@@ -845,8 +845,8 @@
             "GET",
             "pet"
           ],
-          "summary": "Find pet by ID",
-          "desc": "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions",
+          "summary": "<p>Find pet by ID</p>\n",
+          "desc": "<p>Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions</p>\n",
           "params": [
             {
               "name": "petId",
@@ -903,7 +903,7 @@
             "POST",
             "pet"
           ],
-          "summary": "Updates a pet in the store with form data",
+          "summary": "<p>Updates a pet in the store with form data</p>\n",
           "desc": "",
           "params": [
             {
@@ -967,7 +967,7 @@
             "DELETE",
             "pet"
           ],
-          "summary": "Deletes a pet",
+          "summary": "<p>Deletes a pet</p>\n",
           "desc": "",
           "params": [
             {
@@ -1030,7 +1030,7 @@
             "order",
             "store"
           ],
-          "summary": "Place an order for a pet",
+          "summary": "<p>Place an order for a pet</p>\n",
           "desc": "",
           "params": [
             {
@@ -1090,8 +1090,8 @@
             "order",
             "store"
           ],
-          "summary": "Find purchase order by ID",
-          "desc": "For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions",
+          "summary": "<p>Find purchase order by ID</p>\n",
+          "desc": "<p>For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions</p>\n",
           "params": [
             {
               "name": "orderId",
@@ -1149,8 +1149,8 @@
             "order",
             "store"
           ],
-          "summary": "Delete purchase order by ID",
-          "desc": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
+          "summary": "<p>Delete purchase order by ID</p>\n",
+          "desc": "<p>For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors</p>\n",
           "params": [
             {
               "name": "orderId",
@@ -1208,8 +1208,8 @@
             "POST",
             "user"
           ],
-          "summary": "Create user",
-          "desc": "This can only be done by the logged in user.",
+          "summary": "<p>Create user</p>\n",
+          "desc": "<p>This can only be done by the logged in user.</p>\n",
           "params": [
             {
               "name": "body",
@@ -1262,7 +1262,7 @@
             "createWithArray",
             "user"
           ],
-          "summary": "Creates list of users with given input array",
+          "summary": "<p>Creates list of users with given input array</p>\n",
           "desc": "",
           "params": [
             {
@@ -1316,7 +1316,7 @@
             "createWithList",
             "user"
           ],
-          "summary": "Creates list of users with given input array",
+          "summary": "<p>Creates list of users with given input array</p>\n",
           "desc": "",
           "params": [
             {
@@ -1370,7 +1370,7 @@
             "login",
             "user"
           ],
-          "summary": "Logs user into the system",
+          "summary": "<p>Logs user into the system</p>\n",
           "desc": "",
           "params": [
             {
@@ -1439,7 +1439,7 @@
             "logout",
             "user"
           ],
-          "summary": "Logs out current logged in user session",
+          "summary": "<p>Logs out current logged in user session</p>\n",
           "desc": "",
           "params": [],
           "responses": [
@@ -1482,7 +1482,7 @@
             "GET",
             "user"
           ],
-          "summary": "Get user by user name",
+          "summary": "<p>Get user by user name</p>\n",
           "desc": "",
           "params": [
             {
@@ -1540,8 +1540,8 @@
             "PUT",
             "user"
           ],
-          "summary": "Updated user",
-          "desc": "This can only be done by the logged in user.",
+          "summary": "<p>Updated user</p>\n",
+          "desc": "<p>This can only be done by the logged in user.</p>\n",
           "params": [
             {
               "name": "username",
@@ -1601,8 +1601,8 @@
             "DELETE",
             "user"
           ],
-          "summary": "Delete user",
-          "desc": "This can only be done by the logged in user.",
+          "summary": "<p>Delete user</p>\n",
+          "desc": "<p>This can only be done by the logged in user.</p>\n",
           "params": [
             {
               "name": "username",
