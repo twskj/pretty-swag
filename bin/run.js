@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var prettySwag = require('../pretty-swag');
+var fs = require('fs');
 
 var lastkey = "";
 var argv = {};
@@ -44,44 +45,45 @@ var inputFile = argv["-i"];
 var outputFile = argv["-o"] || "doc.html";
 var format = argv["-f"] || "singleFile";
 var markdown = argv["-m"] === "true" || false;
-var theme = argv["-th"] || "blue";
+var theme = argv["-th"];
 var configFile = argv["-c"];
 var fixedNav = "-fixedNav" in argv;
 
-if(theme.startsWith("{")){
-    try{
+if (theme && theme.startsWith("{")) {
+    try {
         theme = JSON.parse(theme);
     }
-    catch(err){
+    catch (err) {
         theme = "blue";
-        console.log("cannot parse theme. Use default ("+theme+")");
+        console.log("cannot parse theme. Use default (" + theme + ")");
     }
 }
-var config = { };
-if(configFile){
-    var json = fs.readFileSync(configFile,'utf8');
+var config = {};
+if (configFile) {
+    var json = fs.readFileSync(configFile, 'utf8');
     json = JSON.parse(json);
     var keys = Object.keys(json);
-    for(var i=0;i<keys.length;i++){
-        config[keys[i]] = json[key];
+    config.theme = {};
+    for (var i = 0; i < keys.length; i++) {
+        config.theme[keys[i]] = json[keys[i]];
     }
 }
 
 config["format"] = format;
 config["markdown"] = markdown;
-config["theme"] = theme;
+config["theme"] = theme || config.theme || "blue";
 config["fixedNav"] = fixedNav;
 
 
 console.log("Source: " + inputFile);
 console.log("Dest: " + outputFile);
 console.log("Format: ", format);
-console.log("MarkDown: ", markdown ? "Enable":"Disable");
-if (typeof config.theme === "object"){
-    console.log("Theme: "+ JSON.stringify(theme,null,2));
+console.log("MarkDown: ", markdown ? "Enable" : "Disable");
+if (typeof config.theme === "object") {
+    console.log("Theme: " + JSON.stringify(config.theme, null, 2));
 }
-else{
-    console.log("Theme: "+theme);
+else {
+    console.log("Theme: " + config.theme);
 }
 prettySwag.run(inputFile, outputFile, config, function (err, msg) {
 
