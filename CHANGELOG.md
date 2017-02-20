@@ -5,4 +5,4 @@
  - Introduce Configuration file
  - Introduce Color theme configuration feature
  - Introduce Navbar fixed | normal feature
- - Make method name Uppercased
+ - Make method name uppercased
