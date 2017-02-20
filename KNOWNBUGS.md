@@ -1,1 +1,1 @@
-- [ ] merging for allOf oneOf is broken
+- [ ] merging for allOf oneOf is currently broken
