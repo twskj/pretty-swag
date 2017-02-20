@@ -72,8 +72,8 @@ Valid keys are:
   "format": "singlefile",
   "markdown": true,
   "theme": {
-    "default": "orange",
-    "GET": "deep-purple",
+    "default": "blue",
+    "GET": "blue",
     "POST": "indigo",
     "DELETE": "red",
     "PUT": "amber"
