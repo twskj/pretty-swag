@@ -35,12 +35,69 @@ pretty-swag -i input.json -o output.html -f offline -m true
 
 ## Command switch
 
-| Switch | Name     | Optional | Description                                                                          |
-| ------ | -------- | -------- | ------------------------------------------------------------------------------------ |
-|   -i   | Input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                 |
-|   -o   | Output   |      Yes | Location of generated document(s). Default to doc.html                               |
-|   -f   | Format   |      Yes | Format of the output (`singlefile`, `offline`, `embedded`). Default to `singlefile`  |
-|   -m   | Markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`      |
+| Switch  | Name     | Optional | Description                                                                          |
+| ------- | -------- | -------- | ------------------------------------------------------------------------------------ |
+|   -i    | Input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                 |
+|   -o    | Output   |      Yes | Location of generated document(s). Default to doc.html                               |
+|   -f    | Format   |      Yes | Format of the output (`singlefile`, `offline`, `embedded`). Default to `singlefile`  |
+|   -m    | Markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`      |
+|   -th   | Theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `colors`           |
+|   -c    | Config   |      Yes | Location of a configuration file                                                     |
+|   -nav  | FixedNav |      Yes | Include this to have navigation bar always on screen                                 |
+
+
+## Configuration File
+
+Valid keys are:
+ - Input
+ - Output
+ - Format
+ - Markdown
+ - Theme
+ - FixedNav
+
+**Example of Configuration file**
+```javascript
+{
+  "Input": "/tmp/petstore.json",
+  "Output": "/tmp/petstore.html",
+  "Format": "singlefile",
+  "Markdown": true,
+  "Theme": {
+    "default": "orange",
+    "GET": "deep-purple",
+    "POST": "indigo",
+    "DELETE": "red",
+    "PUT": "amber"
+  },
+  "FixedNav": true
+}
+```
+
+## Available Colors
+
+- red
+- pink
+- purple
+- deep-purple
+- indigo
+- blue
+- light-blue
+- cyan
+- teal
+- green
+- light-green
+- lime
+- yellow
+- amber
+- orange
+- deep-orange
+- brown
+- grey
+- blue-grey
+- black
+- white
+
 
 ## Output format
 
