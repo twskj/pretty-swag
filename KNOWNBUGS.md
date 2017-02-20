@@ -1,0 +1,1 @@
+- [ ] merging for allOf oneOf is broken
