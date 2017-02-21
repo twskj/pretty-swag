@@ -6,3 +6,4 @@
 - [X] Schema Description
 - [X] auto populate tags (by path, method)
 - [ ] A tool to add header to all methods. -> maybe put it in side bar?
+- [ ] Add missing section from the spec
