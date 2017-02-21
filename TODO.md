@@ -1,9 +1,11 @@
 ## TODO:
-- [ ] handle ref loop? [idea: cyclic detection ---> link to the model once detected --> write related model in model section] 
+- [ ] handle ref loop? [idea: cyclic detection ---> link to the model once detected --> write related model in model section]
 - [X] support markdown in description?
 - [X] Theming
 - [X] Fixed Navigation bar
 - [X] Schema Description
 - [X] auto populate tags (by path, method)
 - [ ] A tool to add header to all methods. -> maybe put it in sidebar?
-- [ ] Add missing sections from the spec i.e. author, security, ...
+- [ ] Add missing sections from the spec i.e. author, security, and so on
+- [ ] @Schema, when Ctrl + Click on  brace, expand/collapse all keys (for that level)
+- [ ] Implement --version
