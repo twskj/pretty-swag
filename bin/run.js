@@ -40,7 +40,7 @@ function printHelp() {
 var inputFile = argv["-i"];
 var outputFile = argv["-o"];
 var format = argv["-f"];
-var markdown = "-m" in argv || false;
+var markdown = "-m" in argv;
 var theme = argv["-th"];
 var configFile = argv["-c"];
 var fixedNav = "-nav" in argv;
