@@ -248,10 +248,10 @@ function getRootWord(word){
         return word.substr(0,word.length-3)+'f';
     }
     else if(tmp_word.endsWith('es')){
-        return word.substr(word.length-2);
+        return word.substr(0,word.length-2);
     }
     else if(tmp_word.endsWith('s')){
-        return word.substr(word.length-1);
+        return word.substr(0,word.length-1);
     }
     else{
         return word;
