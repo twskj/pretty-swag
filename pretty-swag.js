@@ -334,7 +334,7 @@ function parse(src, dst, config, callback) {
                         var seg = segments[i].trim();
                         var norm_seg = seg.toLowerCase();
                         //don't add placeholder and plural when already have a singular in
-                        var singular = pluralize.singular('norm_seg');
+                        var singular = pluralize.singular(norm_seg);
                         if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
                             continue;
                         }
