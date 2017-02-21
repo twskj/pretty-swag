@@ -2,6 +2,7 @@ var fs = require('fs');
 var esprima = require('esprima');
 var livedoc = require('livedoc');
 var marked = require('marked');
+var pluralize = require('pluralize')
 
 marked.setOptions({
     renderer: new marked.Renderer(),
@@ -234,30 +235,6 @@ function merge(objs) {
     return result;
 }
 
-function getRootWord(word){
-
-    var tmp_word = word.toLowerCase();
-    if(tmp_word.endsWith('ies')){
-        return word.substr(0,word.length-3)+'y';
-    }
-    if(tmp_word.endsWith('ves')){
-        var exception = ['knives','lives', 'wives'];
-        if(exception.indexOf(tmp_word) > -1){
-            return word.substr(0,word.length-3)+'fe';
-        }
-        return word.substr(0,word.length-3)+'f';
-    }
-    else if(tmp_word.endsWith('es')){
-        return word.substr(0,word.length-2);
-    }
-    else if(tmp_word.endsWith('s')){
-        return word.substr(0,word.length-1);
-    }
-    else{
-        return word;
-    }
-}
-
 function parse(src, dst, config, callback) {
 
     fs.readFile(src, 'utf8', function (err, data) {
@@ -357,7 +334,7 @@ function parse(src, dst, config, callback) {
                         var seg = segments[i].trim();
                         var norm_seg = seg.toLowerCase();
                         //don't add placeholder and plural when already have a singular in
-                        var singular = getRootWord(norm_seg);
+                        var singular = pluralize.singular('norm_seg');
                         if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
                             continue;
                         }
