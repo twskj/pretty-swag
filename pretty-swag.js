@@ -238,10 +238,14 @@ function getRootWord(word){
 
     var tmp_word = word.toLowerCase();
     if(tmp_word.endsWith('ies')){
-        return word.substr(word.length-3)+'y';
+        return word.substr(0,word.length-3)+'y';
     }
     if(tmp_word.endsWith('ves')){
-        return word.substr(word.length-3)+'f';
+        var exception = ['knives','lives', 'wives'];
+        if(exception.indexOf(tmp_word) > -1){
+            return word.substr(0,word.length-3)+'fe';
+        }
+        return word.substr(0,word.length-3)+'f';
     }
     else if(tmp_word.endsWith('es')){
         return word.substr(word.length-2);
