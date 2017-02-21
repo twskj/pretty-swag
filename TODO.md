@@ -1,5 +1,5 @@
 ## TODO:
-- [ ] handle ref loop?
+- [ ] handle ref loop? [idea: cyclic detection ---> link to the model once detected --> write related model in model section] 
 - [X] support markdown in description?
 - [X] Theming
 - [X] Fixed Navigation bar
