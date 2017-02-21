@@ -234,6 +234,26 @@ function merge(objs) {
     return result;
 }
 
+function getRootWord(word){
+
+    var tmp_word = word.toLowerCase();
+    if(tmp_word.endsWith('ies')){
+        return word.substr(word.length-3)+'y';
+    }
+    if(tmp_word.endsWith('ves')){
+        return word.substr(word.length-3)+'f';
+    }
+    else if(tmp_word.endsWith('es')){
+        return word.substr(word.length-2);
+    }
+    else if(tmp_word.endsWith('s')){
+        return word.substr(word.length-1);
+    }
+    else{
+        return word;
+    }
+}
+
 function parse(src, dst, config, callback) {
 
     fs.readFile(src, 'utf8', function (err, data) {
@@ -331,8 +351,10 @@ function parse(src, dst, config, callback) {
                     var segments = path.split("/");
                     for (var i = 0; i < segments.length;i++) {
                         var seg = segments[i].trim();
+                        var norm_seg = seg.toLowerCase();
                         //don't add placeholder and plural when already have a singular in
-                        if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || tmp_tags.indexOf(seg) > 0 || seg.endsWith("s") && tmp_tags.indexOf(seg.substr(0,seg.length-1)) > -1) {
+                        var singular = getRootWord(norm_seg);
+                        if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
                             continue;
                         }
                         method.tags.push(seg);
