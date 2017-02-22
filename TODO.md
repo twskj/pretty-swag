@@ -9,3 +9,5 @@
 - [ ] Add missing sections from the spec i.e. author, security, and so on
 - [ ] @Schema, when Ctrl + Click on  brace, expand/collapse all keys (for that level)
 - [ ] Implement --version
+- [ ] Optional to scroll spy?
+- [ ] missing a comma on a row that has comment

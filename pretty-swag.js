@@ -146,6 +146,24 @@ function computeSchema(schema, def, context) {
     return tmp;
 }
 
+function joinObjectVals(keyval) {
+    if (!keyval || keyval.length == 0) {
+        return "";
+    }
+    var result = "";
+    for (var i = 0; i < keyval.length; i++) {
+        if (keyval[i].endsWith("*/")) {
+            result += keyval[i];
+        }
+        else {
+            result += keyval[i]+",";
+        }
+    }
+    if (result.endsWith(",")) {
+        return result.substr(0, result.length - 1);
+    }
+    return result;
+}
 //https://github.com/json-schema/json-schema/wiki/anyOf,-allOf,-oneOf,-not
 function resolveNested(schema, def) {
     var comment = "";
@@ -165,11 +183,12 @@ function resolveNested(schema, def) {
                         keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
                     }
                     else {
-                        keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"');
+                        comment = schema.properties[prop].description ? "/*" + schema.properties[prop].description + "*/" : "";
+                        keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"' + comment);
                     }
                 }
                 comment = schema.description ? comment = "/*" + schema.description + "*/" : "";
-                return "{" + comment + keyval.join(",") + "}";
+                return "{" + comment + joinObjectVals(keyval) + "}";
             }
             else {
                 comment = schema.description ? comment = "/*" + schema.description + "*/" : "";
@@ -327,10 +346,10 @@ function parse(src, dst, config, callback) {
                 method.name = method_name.toUpperCase();
                 method.tags = input_method.tags || [];
                 if (config.autoTags || true) {
-                    var tmp_tags = method.tags.map(function(x){ return x.toLowerCase().trim() });
+                    var tmp_tags = method.tags.map(function (x) { return x.toLowerCase().trim() });
                     method.tags.push(method.name);
                     var segments = path.split("/");
-                    for (var i = 0; i < segments.length;i++) {
+                    for (var i = 0; i < segments.length; i++) {
                         var seg = segments[i].trim();
                         var norm_seg = seg.toLowerCase();
                         //don't add placeholder and plural when already have a singular in
