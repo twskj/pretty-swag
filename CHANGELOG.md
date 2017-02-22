@@ -1,7 +1,11 @@
 # Change Log
 
+### version 0.1.51 [Feb 22, 2017]
+ - Support object property description
+
+
 ### version 0.1.51 [Feb 20, 2017]
- 
+
  - Re-format help screen
  - Introduce autoTags mode
  - Sort tags
