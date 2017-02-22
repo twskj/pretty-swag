@@ -1,6 +1,6 @@
 # Change Log
 
-### version 0.1.51 [Feb 22, 2017]
+### version 0.1.53 [Feb 22, 2017]
  - Support object property description
 
 
