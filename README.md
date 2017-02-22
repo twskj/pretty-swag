@@ -7,7 +7,7 @@ An example of the generated html from [petstore spec](http://petstore.swagger.io
 *Bugs filing and suggestions are always welcome.*
 
 ## Changelog
-Can be found [here](CHANGELOG.md)
+See [CHANGELOG](CHANGELOG.md)
 
 ## Installation
 
@@ -126,8 +126,6 @@ Valid keys are:
 - Fold / Unfold Schema
 
 - Live Request / Response Feedback
-
-- Support `allOf`, `anyOf`, `oneOf` keywords
 
 ## Filtering
 
