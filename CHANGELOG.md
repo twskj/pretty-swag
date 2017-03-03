@@ -1,6 +1,6 @@
 # Change Log
 
-### version 0.1.54 [Mar 3, 2017]
+### version 0.1.55 [Mar 3, 2017]
  - Redo `singleFile` mode to embedded fonts & icons
  - Changed old `singleFile` mode to `cdn`
  - Changed `embedded` to `lite`
