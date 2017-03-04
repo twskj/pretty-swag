@@ -30,7 +30,7 @@ pretty-swag -i input.json -o output.html
 ```
 
 ```Shell
-pretty-swag -i input.json -o output.html -f offline
+pretty-swag -i input.json -o output.html -f lite
 ```
 
 ```Shell
@@ -43,16 +43,16 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 
 ## Command switch
 
-| Switch  | Name     | Optional | Description                                                                          |
-| ------- | -------- | -------- | ------------------------------------------------------------------------------------ |
-|   -i    | input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                 |
-|   -o    | output   |      Yes | Location of generated document(s). Default to doc.html                               |
-|   -f    | format   |      Yes | Format of the output (`singlefile`, `offline`, `embedded`). Default to `singlefile`  |
-|   -m    | markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`      |
-|   -th   | theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`      |
-|   -c    | config   |      Yes | Location of a configuration file                                                     |
-|   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                              |
-|-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name             |
+| Switch  | Name     | Optional | Description                                                                                |
+| ------- | -------- | -------- | ------------------------------------------------------------------------------------------ |
+|   -i    | input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                       |
+|   -o    | output   |      Yes | Location of generated document(s). Default to doc.html                                     |
+|   -f    | format   |      Yes | Format of the output (`singlefile`, `offline`, `lite`, `noicon`). Default to `singlefile`  |
+|   -m    | markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
+|   -th   | theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
+|   -c    | config   |      Yes | Location of a configuration file                                                           |
+|   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                                    |
+|-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
 
 
 ## Configuration File
@@ -130,3 +130,13 @@ Valid keys are:
 ## Filtering
 
 - Use prefix `-` to exclude unwanted tags. For example `-store` will exclude api that contain `store` tag.
+
+## Console
+
+- Press `Ctrl + ~` to bring up a console
+- Press `tab` to auto complete
+
+## Available Commands
+
+  - add header -g <key> <value>
+  - remove header -g <key> <value>

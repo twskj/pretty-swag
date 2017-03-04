@@ -28,7 +28,7 @@ function printHelp() {
     console.log("Options:");
     console.log("-i <input> Location of the input file.");
     console.log("-o <output> Location of the output file. Default to doc.html");
-    console.log('-f (singleFile|cdn|offline|lite) Mode of the output result');
+    console.log('-f (singleFile|lite|offline|noIcon) Mode of the output result');
     console.log("-th <theme> Theme. Default to `blue` for multi-color theme use `-th default`");
     console.log("-c <config file> Location of the configuration file");
     console.log("-m Use this flag to enable MarkDown");
