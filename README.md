@@ -112,10 +112,11 @@ Valid keys are:
 
 ## Output format
 
- - SingleFile - A single html but need the internet connection to download libraries from CDN (Default).
- - Offline - Self Hosted files in a directory.
- - Embedded - A single html but without Material icons.
-
+ - SingleFile - A single html embedded all fonts and icon in one file. (Default).
+ - Offline - A html file and a resource folder for css and js.
+ - Lite - A single html but need the internet connection to obtain required resources.
+ - NoIcon - Does not use Roboto font, and no icons
+ 
 
 ## Features
 
