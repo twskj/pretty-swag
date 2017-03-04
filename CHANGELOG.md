@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.60 [Mar 4, 2017]
+ - Fixed Header added by console not reactive
+
 ### version 0.1.59 [Mar 3, 2017]
  - Match radio button color and text input color to the main color
 
