@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.59 [Mar 3, 2017]
+ - Match radio button color and text input color to the main color
+
 ### version 0.1.58 [Mar 3, 2017]
  - Introduce Console interface
  - Introduce Adding global header
@@ -20,8 +23,6 @@
  - Introduce autoTags mode
  - Sort tags
 
-
--------------
 #### version 0.1.40 [Feb 19, 2017]
 
  - Introduce Configuration file
