@@ -411,6 +411,17 @@ function parse(src, dst, config, callback) {
         if (config.format === "offline") {
             conf.outputFilename = dst;
         }
+        try{
+            if(typeof result.bgColor === "object"){
+                conf.mainColor = result.bgColor.default
+            }
+            else{
+                conf.mainColor = result.bgColor;
+            }
+        }
+        catch(err){
+            conf.mainColor = 'blue';
+        }
         livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
             fs.writeFile(dst, data, function (err) {
                 if (err) {
