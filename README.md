@@ -133,10 +133,10 @@ Valid keys are:
 
 ## Console
 
-- Press `Ctrl + ~` to bring up a console
+- Press `` Ctrl + `  `` to bring up a console
 - Press `tab` to auto complete
 
 ## Available Commands
 
-  - add header -g <key> <value>
-  - remove header -g <key> <value>
+  - add header -g \<key\> \<value\>
+  - remove header -g \<key\> \<value\>
