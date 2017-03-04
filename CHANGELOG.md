@@ -1,11 +1,11 @@
 # Change Log
 
-### version 0.1.57 [Mar 3, 2017]
+### version 0.1.58 [Mar 3, 2017]
  - Introduce Console interface
  - Introduce Adding global header
  - Introduce Removing global header
 
-### version 0.1.56 [Mar 2, 2017]
+### version 0.1.56 [Mar 3, 2017]
  - Redo `singleFile` mode to embedded fonts & icons
  - Changed old `singleFile` mode to `lite`
  - Changed `embedded` to `noicon`
