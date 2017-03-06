@@ -53,7 +53,9 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 |   -c    | config   |      Yes | Location of a configuration file                                                           |
 |   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                                    |
 |-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
-|-noFooter| noFooter |      Yes | Include this flag to remove footer                                                         |
+|-noFooter| noFooter |      Yes | Include this flag to remove generated date                                                 |
+|-noCredit| noCredit |      Yes | Include this flag to remove credit                                                         |
+
 
 
 
@@ -67,7 +69,8 @@ Valid keys are:
  - theme
  - fixedNav
  - autoTags
- - noFooter
+ - noDate
+ - noCredit
 
 **Example of Configuration file**
 ```javascript

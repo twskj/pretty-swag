@@ -407,9 +407,17 @@ function parse(src, dst, config, callback) {
             , formDataToken: "formData"
             , allowHtml: config.markdown
         };
-        if (!config.noFooter){
-            conf.footer = 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>';
+        var footer = "";
+        if (!config.noDate){
+            footer = ' __GENERATED_DATE__';
         }
+        if (!config.noCredit){
+            footer = footer + ' by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
+        }
+        if(footer){
+            footer = "Generated" + footer;
+        }
+        conf.footer = footer;
         if (config.format === "offline") {
             conf.outputFilename = dst;
         }
