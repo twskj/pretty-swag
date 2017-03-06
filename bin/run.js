@@ -46,7 +46,8 @@ var theme = argv["-th"];
 var configFile = argv["-c"];
 var fixedNav = "-nav" in argv;
 var autoTags = "-autotags" in argv;
-var noFooter = "-noFooter" in argv;
+var noDate = "-noDate" in argv;
+var noCredit = "-noCredit" in argv;
 
 var config = {};
 if (configFile) {
@@ -73,7 +74,8 @@ config.theme = theme || config.theme || "blue";
 config.fixedNav = fixedNav || config.fixedNav || false;
 config.output = outputFile || config["output"] || "doc.html";
 config.autoTags = autoTags || config["autoTags"] || false;
-config.noFooter = noFooter || config["noFooter"] || false;
+config.noDate = noDate || config["noDate"] || false;
+config.noCredit = noCredit || config["noCredit"] || false;
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);
