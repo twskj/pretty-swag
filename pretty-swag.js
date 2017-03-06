@@ -402,12 +402,14 @@ function parse(src, dst, config, callback) {
         }
         var conf = {
             mode: config.format
-            , footer: 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
             , pathParamLeftToken: "{"
             , pathParamRightToken: "}"
             , formDataToken: "formData"
             , allowHtml: config.markdown
         };
+        if (!config.noFooter){
+            conf.footer = 'Generated __GENERATED_DATE__ by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>';
+        }
         if (config.format === "offline") {
             conf.outputFilename = dst;
         }

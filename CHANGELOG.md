@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.64 [Mar 6, 2017]
+ - Make footer optional
+
 ### version 0.1.63 [Mar 5, 2017]
  - Fixed https default port show port number :443
  - Fixed Text Input color doesn't change accordingly

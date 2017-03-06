@@ -34,6 +34,7 @@ function printHelp() {
     console.log("-m Use this flag to enable MarkDown");
     console.log("-nav Use this flag to fixed the top navigation bar");
     console.log("-autotags Use this flag to automatically generate tags by path and method");
+    console.log("-noFooter Use this flag to remove footer");
     console.log();
 }
 
@@ -45,6 +46,7 @@ var theme = argv["-th"];
 var configFile = argv["-c"];
 var fixedNav = "-nav" in argv;
 var autoTags = "-autotags" in argv;
+var noFooter = "-noFooter" in argv;
 
 var config = {};
 if (configFile) {
@@ -71,6 +73,7 @@ config.theme = theme || config.theme || "blue";
 config.fixedNav = fixedNav || config.fixedNav || false;
 config.output = outputFile || config["output"] || "doc.html";
 config.autoTags = autoTags || config["autoTags"] || false;
+config.noFooter = noFooter || config["noFooter"] || false;
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);

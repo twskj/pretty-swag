@@ -53,6 +53,8 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 |   -c    | config   |      Yes | Location of a configuration file                                                           |
 |   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                                    |
 |-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
+|-noFooter| noFooter |      Yes | Include this flag to remove footer                                                         |
+
 
 
 ## Configuration File
@@ -65,6 +67,7 @@ Valid keys are:
  - theme
  - fixedNav
  - autoTags
+ - noFooter
 
 **Example of Configuration file**
 ```javascript
@@ -116,7 +119,7 @@ Valid keys are:
  - Offline - A html file and a resource folder for css and js.
  - Lite - A single html but need the internet connection to obtain required resources.
  - NoIcon - Does not use Roboto font, and no icons
- 
+
 
 ## Features
 
