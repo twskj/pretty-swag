@@ -408,16 +408,18 @@ function parse(src, dst, config, callback) {
             , allowHtml: config.markdown
         };
         var footer = "";
-        if (!config.noDate){
+        if (!config.noDate) {
             footer = ' __GENERATED_DATE__';
         }
-        if (!config.noCredit){
+        if (!config.noCredit) {
             footer = footer + ' by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
         }
-        if(footer){
-            footer = "Generated" + footer;
+        if (footer) {
+            conf.footer = "Generated" + footer;
         }
-        conf.footer = footer;
+        else {
+            conf.noFooter = true;
+        }
         if (config.format === "offline") {
             conf.outputFilename = dst;
         }
