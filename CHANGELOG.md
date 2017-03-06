@@ -2,6 +2,7 @@
 
 ### version 0.1.63 [Mar 5, 2017]
  - Fixed https default port show port number :443
+ - Fixed Text Input color doesn't change accordingly
 
 
 ### version 0.1.60 [Mar 4, 2017]
