@@ -5,9 +5,9 @@
 - [X] Fixed Navigation bar
 - [X] Schema Description
 - [X] auto populate tags (by path, method)
-- [ ] A tool to add header to all methods. -> maybe put it in sidebar?
+- [X] A tool to add header to all methods.
 - [ ] Add missing sections from the spec i.e. author, security, and so on
 - [ ] @Schema, when Ctrl + Click on  brace, expand/collapse all keys (for that level)
-- [ ] Implement --version
-- [ ] Optional to scroll spy?
+- [ ] Implement --version for console
 - [ ] missing a comma on a row that has comment
+- [ ] Ctrl + click on tag to exclude ?
