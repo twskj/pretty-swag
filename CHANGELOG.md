@@ -1,6 +1,6 @@
 # Change Log
 
-### version 0.1.64 [Mar 6, 2017]
+### version 0.1.68 [Mar 6, 2017]
  - Make footer optional
 
 ### version 0.1.63 [Mar 5, 2017]
