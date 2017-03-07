@@ -152,5 +152,3 @@ Valid keys are:
 | ----------------------------------- | ---------------------------------------------- |
 | add header -g \<key\> \<value\>     | Adding the header to all paths/methods         |
 | remove header -g \<key\> \<value\>  | Remove a given header from all paths/methods   |
-
-  - Removing header to all paths/methods -- remove header -g \<key\> \<value\>
