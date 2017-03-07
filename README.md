@@ -148,5 +148,9 @@ Valid keys are:
 
 ## Available Console Commands
 
-  - add header -g \<key\> \<value\>
-  - remove header -g \<key\> \<value\>
+| Command                             | Description                                    |
+| ----------------------------------- | ---------------------------------------------- |
+| add header -g \<key\> \<value\>     | Adding the header to all paths/methods         |
+| remove header -g \<key\> \<value\>  | Remove a given header from all paths/methods   |
+
+  - Removing header to all paths/methods -- remove header -g \<key\> \<value\>
