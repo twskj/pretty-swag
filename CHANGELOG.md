@@ -1,7 +1,8 @@
 # Change Log
 
-### version 0.1.69 [Mar 6, 2017]
+### version 0.1.70 [Mar 6, 2017]
  - Make footer optional
+ - Make request headers list smaller and horizontal align
 
 ### version 0.1.63 [Mar 5, 2017]
  - Fixed https default port show port number :443
