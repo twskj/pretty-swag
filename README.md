@@ -53,7 +53,7 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 |   -c    | config   |      Yes | Location of a configuration file                                                           |
 |   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                                    |
 |-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
-|-noFooter| noFooter |      Yes | Include this flag to remove generated date                                                 |
+|-noDate  | noDate   |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit| noCredit |      Yes | Include this flag to remove credit                                                         |
 
 
@@ -143,7 +143,7 @@ Valid keys are:
 - Press `` Ctrl + `  `` to bring up a console
 - Press `tab` to auto complete
 
-## Available Commands
+## Available Console Commands
 
   - add header -g \<key\> \<value\>
   - remove header -g \<key\> \<value\>
