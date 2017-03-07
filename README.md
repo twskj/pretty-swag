@@ -9,6 +9,9 @@ An example of the generated html from [petstore spec](http://petstore.swagger.io
 ## Changelog
 See [CHANGELOG](CHANGELOG.md)
 
+## Requirement
+[Node js](https://nodejs.org/en/)
+
 ## Installation
 
 ```Shell
