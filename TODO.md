@@ -1,5 +1,5 @@
 ## TODO:
-- [ ] handle ref loop? [idea: cyclic detection ---> link to the model once detected --> write related model in model section]
+- [ ] handle ref loop? [idea: cyclic detection ---> create a model section once detected(all nodes in cycle?) --> link to the model instead of expanding it]
 - [X] support markdown in description?
 - [X] Theming
 - [X] Fixed Navigation bar
