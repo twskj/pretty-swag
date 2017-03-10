@@ -9,6 +9,9 @@ An example of the generated html from [petstore spec](http://petstore.swagger.io
 ## Changelog
 See [CHANGELOG](CHANGELOG.md)
 
+## Requirement
+[Node js](https://nodejs.org/en/)
+
 ## Installation
 
 ```Shell
@@ -145,5 +148,7 @@ Valid keys are:
 
 ## Available Console Commands
 
-  - add header -g \<key\> \<value\>
-  - remove header -g \<key\> \<value\>
+| Command                             | Description                                    |
+| ----------------------------------- | ---------------------------------------------- |
+| add header -g \<key\> \<value\>     | Adding the header to all paths/methods         |
+| remove header -g \<key\> \<value\>  | Remove a given header from all paths/methods   |
