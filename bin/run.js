@@ -2,6 +2,7 @@
 
 var prettySwag = require('../pretty-swag');
 var fs = require('fs');
+const Path = require('path')
 
 var lastkey = "";
 var argv = {};
@@ -17,13 +18,34 @@ for (var i = 0; i < process.argv.length; i++) {
     }
 }
 
-if (process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1) {
+if (process.argv.indexOf("-v") > -1 || process.argv.indexOf("--version") > -1 || process.argv.indexOf("-version") > -1) {
+    printVersion();
+    process.exit(0);
+}
+
+else if (process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1) {
     printHelp();
     process.exit(0);
 }
 
+function printVersion(){
+
+    try{
+        var content = fs.readFileSync(Path.join(__dirname,'..', 'package.json'),'utf8');
+        var obj = JSON.parse(content);
+        if(obj.version){
+            console.log('pretty-swag version "'+obj.version+'"');
+        }
+    }
+    catch(err){
+        console.log("cannot read version data");
+    }
+}
+
+
 function printHelp() {
     console.log();
+    printVersion();
     console.log("USAGE: pretty-swag -i <inputFile> [Options]");
     console.log("Options:");
     console.log("-i <input> Location of the input file.");
@@ -35,6 +57,7 @@ function printHelp() {
     console.log("-nav Use this flag to fixed the top navigation bar");
     console.log("-autotags Use this flag to automatically generate tags by path and method");
     console.log("-noFooter Use this flag to remove footer");
+    console.log("-v --version to show version number");
     console.log();
 }
 

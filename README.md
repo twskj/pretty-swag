@@ -58,7 +58,7 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 |-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
 |-noDate  | noDate   |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit| noCredit |      Yes | Include this flag to remove credit                                                         |
-
+|   -v    | version  |      Yes | To show pertty-swag current version                                                        |
 
 
 
