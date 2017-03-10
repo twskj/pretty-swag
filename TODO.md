@@ -8,6 +8,6 @@
 - [X] A tool to add header to all methods.
 - [ ] Add missing sections from the spec i.e. author, security, and so on
 - [ ] @Schema, when Ctrl + Click on  brace, expand/collapse all keys (for that level)
-- [ ] Implement --version for console
+- [X] Implement --version for console
 - [ ] missing a comma on a row that has comment
 - [ ] Ctrl + click on tag to exclude ?
