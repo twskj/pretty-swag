@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.71 [Mar 10, 2017]
+ - Resolve external $ref
+
 ### version 0.1.70 [Mar 6, 2017]
  - Make footer optional
  - Make request headers list smaller and horizontal align
