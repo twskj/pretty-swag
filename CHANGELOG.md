@@ -1,4 +1,6 @@
 # Change Log
+### version 0.1.72 [Mar 10, 2017]
+ - change POST default color to teal
 
 ### version 0.1.71 [Mar 10, 2017]
  - Resolve external $ref
