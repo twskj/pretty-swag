@@ -256,23 +256,11 @@ function merge(objs) {
 
 function parse(src, dst, config, callback) {
 
-    fs.readFile(src, 'utf8', function (err, data) {
+    var $RefParser = require('json-schema-ref-parser');
+    $RefParser.bundle(src, function (err, input) {
+
         if (err) {
             throw err;
-        }
-
-        var input;
-        try {
-            input = JSON.parse(data);
-        }
-        catch (json_err) {
-            var yaml = require('js-yaml');
-            try {
-                input = yaml.safeLoad(data);
-            } catch (yaml_err) {
-                console.log(yaml_err);
-                process.exit(1);
-            }
         }
 
         var result = livedoc.initContainer();
