@@ -275,12 +275,12 @@ function parse(src, dst, config, callback) {
                     default: "blue"
                     , GET: "blue"
                     , HEAD: "cyan"
-                    , POST: "blue-grey"
+                    , POST: "teal"
                     , PUT: "deep-purple"
                     , DELETE: "red"
                     , CONNECT: "purple"
                     , OPTIONS: "light-blue"
-                    , TRACE: "teal"
+                    , TRACE: "blue-grey"
                     , PATCH: "deep-purple"
                 };
             }
