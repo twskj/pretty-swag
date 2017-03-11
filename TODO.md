@@ -13,3 +13,4 @@
 - [ ] Ctrl + click on tag to exclude ?
 - [ ] change #merge to Object.assign() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 - [ ] Make available tags clickable too
+- [ ] Radio button color should follow method's color
