@@ -1,7 +1,7 @@
 # Change Log
 
 ### version 0.1.74 [Mar 10, 2017]
- - add -v , --version flag to show current version
+ - pre-fill param with default value
 
 ### version 0.1.73 [Mar 10, 2017]
  - add -v , --version flag to show current version
