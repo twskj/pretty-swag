@@ -146,6 +146,22 @@ function computeSchema(schema, def, context) {
     return tmp;
 }
 
+/**
+sort capital letter first
+**/
+function sortTags(tagA, tagB) {
+
+    if ((tagA[0] === tagA[0].toUpperCase()) && (tagB[0] !== tagB[0].toUpperCase())) {
+        return 1;
+    }
+    else if ((tagA[0] !== tagA[0].toUpperCase()) && (tagB[0] === tagB[0].toUpperCase())) {
+        return -1;
+    }
+    else {
+        return tagA < tagB;
+    }
+}
+
 function joinObjectVals(keyval) {
     if (!keyval || keyval.length == 0) {
         return "";
@@ -156,7 +172,7 @@ function joinObjectVals(keyval) {
             result += keyval[i];
         }
         else {
-            result += keyval[i]+",";
+            result += keyval[i] + ",";
         }
     }
     if (result.endsWith(",")) {
@@ -337,6 +353,7 @@ function parse(src, dst, config, callback) {
                     var tmp_tags = method.tags.map(function (x) { return x.toLowerCase().trim() });
                     method.tags.push(method.name);
                     var segments = path.split("/");
+                segmentLoop:
                     for (var i = 0; i < segments.length; i++) {
                         var seg = segments[i].trim();
                         if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
@@ -348,11 +365,20 @@ function parse(src, dst, config, callback) {
                         if (tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
                             continue;
                         }
+
+                        for (var j = 0; j < method.tags.length; j++) {
+                            var longerTag = method.tags[j].toLowerCase();
+
+                            if (longerTag.startsWith(singular) || longerTag.startsWith(norm_seg)) {
+                                continue segmentLoop;
+                            }
+
+                        }
                         method.tags.push(singular);
                         tmp_tags.push(norm_seg);
                     }
                 }
-                method.tags.sort();
+                method.tags.sort(sortTags);
                 input_method.summary = input_method.summary || "";
                 input_method.description = input_method.description || "";
                 method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
@@ -415,15 +441,15 @@ function parse(src, dst, config, callback) {
         if (config.format === "offline") {
             conf.outputFilename = dst;
         }
-        try{
-            if(typeof result.bgColor === "object"){
+        try {
+            if (typeof result.bgColor === "object") {
                 conf.mainColor = result.bgColor.default
             }
-            else{
+            else {
                 conf.mainColor = result.bgColor;
             }
         }
-        catch(err){
+        catch (err) {
             conf.mainColor = 'blue';
         }
         livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
