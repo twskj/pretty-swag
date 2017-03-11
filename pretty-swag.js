@@ -212,7 +212,7 @@ function resolveNested(schema, def) {
             }
         }
         else if ("$ref" in schema) {
-            return resolveNested(def[schema["$ref"].substr(14)], def); //removing #/definitions
+            return resolveNested(def[decodeURIComponent(schema["$ref"].substr(14))], def); //removing #/definitions
         }
 
         //idea
