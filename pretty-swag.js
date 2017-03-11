@@ -367,6 +367,7 @@ function parse(src, dst, config, callback) {
                         param.location = parameter.in;
                         param.desc = parameter.description;
                         param.required = parameter.required;
+                        param.value = parameter.default || "";
                         if (parameter.schema) {
                             param.schema = computeSchema(parameter.schema, input.definitions);
                         }
