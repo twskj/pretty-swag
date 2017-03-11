@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.78 [Mar 11, 2017]
+ - changed internal parsing algorithm
+
 ### version 0.1.76 [Mar 11, 2017]
  - Fixed generating singular nouns when using auto-tag mode
  - Tags are now starting (left most) with capital letter tag

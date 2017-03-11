@@ -192,10 +192,7 @@ function resolveNested(schema, def) {
                 var keyval = [];
                 for (var prop in schema.properties) {
 
-                    if ("$ref" in schema.properties[prop]) {
-                        keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
-                    }
-                    else if (schema.properties[prop].type === "array" || schema.properties[prop].type === "object" || "properties" in schema.properties[prop]) {
+                    if (schema.properties[prop].type === "array" || schema.properties[prop].type === "object" || "properties" in schema.properties[prop]) {
                         keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
                     }
                     else {
@@ -210,9 +207,6 @@ function resolveNested(schema, def) {
                 comment = schema.description ? comment = "/*" + schema.description + "*/" : "";
                 return '"' + schema.type + '"' + comment;
             }
-        }
-        else if ("$ref" in schema) {
-            return resolveNested(def[decodeURIComponent(schema["$ref"].substr(14))], def); //removing #/definitions
         }
 
         //idea
@@ -236,9 +230,9 @@ function resolveNested(schema, def) {
             }
             return format(merge(objs), indent_num);
         }
-        else if ("not" in schema) {
-            //TODO return an object with one in direction call not? { "not": {...} }
-        }
+        // else if ("not" in schema) {
+        //     //TODO return an object with one in direction call not? { "not": {...} }
+        // }
         else {
             return JSON.stringify(schema, null, indent_num);
         }
@@ -273,7 +267,7 @@ function merge(objs) {
 function parse(src, dst, config, callback) {
 
     var $RefParser = require('json-schema-ref-parser');
-    $RefParser.bundle(src, function (err, input) {
+    $RefParser.dereference(src, function (err, input) {
 
         if (err) {
             throw err;
