@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.79 [Mar 11, 2017]
+ - Handle space issue in tags
+
 ### version 0.1.78 [Mar 11, 2017]
  - changed internal parsing algorithm
 

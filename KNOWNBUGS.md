@@ -1,2 +1,1 @@
 - [ ] merging for allOf oneOf is currently broken
-- [ ] $ref loop is likely to cause infinite loop

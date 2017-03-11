@@ -162,6 +162,19 @@ function sortTags(tagA, tagB) {
     }
 }
 
+function replace(target, newVal, src) {
+
+    for (var i = 0; i < src.length; i++) {
+        if (src[i].indexOf(target) == -1) {
+            continue;
+        }
+
+        src[i] = src[i].split(target).join(newVal);
+    }
+
+    return src;
+}
+
 function joinObjectVals(keyval) {
     if (!keyval || keyval.length == 0) {
         return "";
@@ -372,6 +385,7 @@ function parse(src, dst, config, callback) {
                         tmp_tags.push(norm_seg);
                     }
                 }
+                method.tags = replace(' ', '-', method.tags);
                 method.tags.sort(sortTags);
                 input_method.summary = input_method.summary || "";
                 input_method.description = input_method.description || "";
