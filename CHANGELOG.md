@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.75 [Mar 11, 2017]
+ - Fixed generating singular nouns when using auto-tag mode
+
 ### version 0.1.74 [Mar 10, 2017]
  - pre-fill param with default value
 
