@@ -339,14 +339,17 @@ function parse(src, dst, config, callback) {
                     var segments = path.split("/");
                     for (var i = 0; i < segments.length; i++) {
                         var seg = segments[i].trim();
+                        if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
+                            continue;
+                        }
                         var norm_seg = seg.toLowerCase();
                         //don't add placeholder and plural when already have a singular in
                         var singular = pluralize.singular(norm_seg);
-                        if (!seg || (seg.startsWith("{") && seg.endsWith("}")) || tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
+                        if (tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
                             continue;
                         }
-                        method.tags.push(seg);
-                        tmp_tags.push(seg.toLowerCase());
+                        method.tags.push(singular);
+                        tmp_tags.push(norm_seg);
                     }
                 }
                 method.tags.sort();
