@@ -9,6 +9,9 @@ An example of the generated html from [petstore spec](http://petstore.swagger.io
 ## Changelog
 See [CHANGELOG](CHANGELOG.md)
 
+## Requirement
+[Node js](https://nodejs.org/en/)
+
 ## Installation
 
 ```Shell
@@ -53,6 +56,10 @@ pretty-swag -i input.json -o output.html -f offline -m true -th default
 |   -c    | config   |      Yes | Location of a configuration file                                                           |
 |   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                                    |
 |-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
+|-noDate  | noDate   |      Yes | Include this flag to remove generated date                                                 |
+|-noCredit| noCredit |      Yes | Include this flag to remove credit                                                         |
+|   -v    | version  |      Yes | To show pertty-swag current version                                                        |
+
 
 
 ## Configuration File
@@ -65,6 +72,8 @@ Valid keys are:
  - theme
  - fixedNav
  - autoTags
+ - noDate
+ - noCredit
 
 **Example of Configuration file**
 ```javascript
@@ -116,7 +125,7 @@ Valid keys are:
  - Offline - A html file and a resource folder for css and js.
  - Lite - A single html but need the internet connection to obtain required resources.
  - NoIcon - Does not use Roboto font, and no icons
- 
+
 
 ## Features
 
@@ -137,10 +146,13 @@ Valid keys are:
 - Press `` Ctrl + `  `` to bring up a console
 - Press `tab` to auto complete
 
-## Available Commands
+## Available Console Commands
 
-  - add header -g \<key\> \<value\>
-  - remove header -g \<key\> \<value\>
+| Command                             | Description                                    |
+| ----------------------------------- | ---------------------------------------------- |
+| add header -g \<key\> \<value\>     | Adding the header to all paths/methods         |
+| remove header -g \<key\> \<value\>  | Remove a given header from all paths/methods   |
+
 
 
 ## Features
