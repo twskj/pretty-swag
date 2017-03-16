@@ -461,7 +461,7 @@ function parse(src, dst, config, callback) {
             conf.mainColor = 'blue';
         }
         livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
-            fs.writeFile(dst, data, function (err) {
+            fs.writeFile(dst, data, 'utf8',function (err) {
                 if (err) {
                     callback(err);
                     return;
