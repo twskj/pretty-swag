@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.79 [Mar 16, 2017]
+ - Add unicode character support
+
 ### version 0.1.79 [Mar 11, 2017]
  - Handle space issue in tags
 
