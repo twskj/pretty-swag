@@ -44,6 +44,42 @@ pretty-swag -i input.json -o output.html -f offline -m true
 pretty-swag -i input.json -o output.html -f offline -m true -th default
 ```
 
+## API Usage
+
+**Syntax** `prettySwag.run(input,output,config,callback);`
+
+### API Example
+```javascript
+const prettySwag = require('pretty-swag');
+
+config = {};
+config.format = "singleFile";
+config.markdown = true;
+config.fixedNav = true;
+config.autoTags = true;
+config.noDate = false;
+config.noCredit = false;
+config.theme = {
+    "default": "blue",
+    "GET": "blue",
+    "POST": "indigo",
+    "DELETE": "red",
+    "PUT": "amber"
+};
+
+input = "input.json";
+output = "doc.html";
+
+prettySwag.run(input,output,config,function(err){
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log("success");
+    }
+});
+```
+
 ## Command switch
 
 | Switch  | Name     | Optional | Description                                                                                |
