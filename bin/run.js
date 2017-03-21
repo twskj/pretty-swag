@@ -57,6 +57,7 @@ function printHelp() {
     console.log("-nav Use this flag to fixed the top navigation bar");
     console.log("-autotags Use this flag to automatically generate tags by path and method");
     console.log("-noFooter Use this flag to remove footer");
+    console.log("-hideNav Use this flag to remove navigation bar");
     console.log("-v --version to show version number");
     console.log();
 }
@@ -71,6 +72,7 @@ var fixedNav = "-nav" in argv;
 var autoTags = "-autotags" in argv;
 var noDate = "-noDate" in argv;
 var noCredit = "-noCredit" in argv;
+var hideNav = "-hideNav" in argv;
 
 var config = {};
 if (configFile) {
@@ -99,6 +101,7 @@ config.output = outputFile || config["output"] || "doc.html";
 config.autoTags = autoTags || config["autoTags"] || false;
 config.noDate = noDate || config["noDate"] || false;
 config.noCredit = noCredit || config["noCredit"] || false;
+config.hideNav = hideNav || config["hideNav"] || false;
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);

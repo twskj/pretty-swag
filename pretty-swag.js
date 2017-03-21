@@ -292,6 +292,7 @@ function parse(src, dst, config, callback) {
         result.version = input.info.version || "";
         result.host = input.host || "";
         result.basePath = input.basePath || "";
+        result.showNav = !config.hideNav;
         if (config.theme) {
             if (config.theme === "default") {
                 result.bgColor = {
