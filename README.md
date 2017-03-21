@@ -94,6 +94,7 @@ prettySwag.run(input,output,config,function(err){
 |-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
 |-noDate  | noDate   |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit| noCredit |      Yes | Include this flag to remove credit                                                         |
+|-hideNav | noCredit |      Yes | Include this flag to remove navigation bar                                                 |
 |   -v    | version  |      Yes | To show pertty-swag current version                                                        |
 
 
@@ -107,6 +108,7 @@ Valid keys are:
  - markdown
  - theme
  - fixedNav
+ - hideNav
  - autoTags
  - noDate
  - noCredit
