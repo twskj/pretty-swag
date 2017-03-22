@@ -65,7 +65,7 @@ function printHelp() {
 var inputFile = argv["-i"];
 var outputFile = argv["-o"];
 var format = argv["-f"];
-var markdown = "-m" in argv;
+var markdown = argv["-m"];
 var theme = argv["-th"];
 var configFile = argv["-c"];
 var fixedNav = "-nav" in argv;
@@ -94,7 +94,16 @@ if (!config.input) {
 }
 
 config.format = format || config.format || "singleFile";
-config.markdown = markdown || config.markdown || false;
+
+if(markdown == undefined){
+    config.markdown = config.markdown || false;
+}
+else if(markdown === ""){
+    config.markdown = true
+}
+else{
+    config.markdown = markdown === "true";
+}
 config.theme = theme || config.theme || "blue";
 config.fixedNav = fixedNav || config.fixedNav || false;
 config.output = outputFile || config["output"] || "doc.html";

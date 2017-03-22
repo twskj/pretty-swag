@@ -1,6 +1,9 @@
 # Change Log
 
-### version 0.1.80 [Mar 21, 2017]
+### version 0.1.82 [Mar 22, 2017]
+ - Fix markdown console switch
+
+### version 0.1.81 [Mar 21, 2017]
  - Add hide navigation bar
 
 ### version 0.1.80 [Mar 16, 2017]
