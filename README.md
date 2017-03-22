@@ -57,8 +57,6 @@ config.format = "singleFile";
 config.markdown = true;
 config.fixedNav = true;
 config.autoTags = true;
-config.noDate = false;
-config.noCredit = false;
 config.theme = {
     "default": "blue",
     "GET": "blue",
