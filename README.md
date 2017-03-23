@@ -44,21 +44,56 @@ pretty-swag -i input.json -o output.html -f offline -m true
 pretty-swag -i input.json -o output.html -f offline -m true -th default
 ```
 
+## API Usage
+
+**Syntax** `prettySwag.run(input,output,config,callback);`
+
+### API Example
+```javascript
+const prettySwag = require('pretty-swag');
+
+config = {};
+config.format = "singleFile";
+config.markdown = true;
+config.fixedNav = true;
+config.autoTags = true;
+config.theme = {
+    "default": "blue",
+    "GET": "blue",
+    "POST": "indigo",
+    "DELETE": "red",
+    "PUT": "amber"
+};
+
+input = "input.json";
+output = "doc.html";
+
+prettySwag.run(input,output,config,function(err){
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log("success");
+    }
+});
+```
+
 ## Command switch
 
-| Switch  | Name     | Optional | Description                                                                                |
-| ------- | -------- | -------- | ------------------------------------------------------------------------------------------ |
-|   -i    | input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                       |
-|   -o    | output   |      Yes | Location of generated document(s). Default to doc.html                                     |
-|   -f    | format   |      Yes | Format of the output (`singlefile`, `offline`, `lite`, `noicon`). Default to `singlefile`  |
-|   -m    | markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
-|   -th   | theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
-|   -c    | config   |      Yes | Location of a configuration file                                                           |
-|   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                                    |
-|-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
-|-noDate  | noDate   |      Yes | Include this flag to remove generated date                                                 |
-|-noCredit| noCredit |      Yes | Include this flag to remove credit                                                         |
-|   -v    | version  |      Yes | To show pertty-swag current version                                                        |
+| Switch   | Name        | Optional | Description                                                                                |
+| -------  | ----------- | -------- | ------------------------------------------------------------------------------------------ |
+|   -i     | input       |       No | Location of a Swagger spec file(can be JSON or YAML)                                       |
+|   -o     | output      |      Yes | Location of generated document(s). Default to doc.html                                     |
+|   -f     | format      |      Yes | Format of the output (`singlefile`, `offline`, `lite`, `noicon`). Default to `singlefile`  |
+|   -m     | markdown    |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
+|   -th    | theme       |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
+|   -c     | config      |      Yes | Location of a configuration file                                                           |
+|   -nav   | fixedNav    |      Yes | Include this flag to fixed the navigation bar on screen                                    |
+|-autoTags | autoTags    |      Yes | Include this flag to turn on/off automatically generate tags by path and method name       |
+|-noDate   | noDate      |      Yes | Include this flag to remove generated date                                                 |
+|-noCredit | noCredit    |      Yes | Include this flag to remove credit                                                         |
+|-hideNav  | hideNav     |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|   -v     | version     |      Yes | To show pertty-swag current version                                                        |
 
 
 
@@ -71,6 +106,7 @@ Valid keys are:
  - markdown
  - theme
  - fixedNav
+ - hideNav
  - autoTags
  - noDate
  - noCredit
@@ -136,6 +172,8 @@ Valid keys are:
 - Fold / Unfold Schema
 
 - Live Request / Response Feedback
+
+- Syntax Highlight code block
 
 ## Filtering
 
