@@ -80,20 +80,20 @@ prettySwag.run(input,output,config,function(err){
 
 ## Command switch
 
-| Switch  | Name     | Optional | Description                                                                                |
-| ------- | -------- | -------- | ------------------------------------------------------------------------------------------ |
-|   -i    | input    |       No | Location of a Swagger spec file(can be JSON or YAML)                                       |
-|   -o    | output   |      Yes | Location of generated document(s). Default to doc.html                                     |
-|   -f    | format   |      Yes | Format of the output (`singlefile`, `offline`, `lite`, `noicon`). Default to `singlefile`  |
-|   -m    | markdown |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
-|   -th   | theme    |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
-|   -c    | config   |      Yes | Location of a configuration file                                                           |
-|   -nav  | fixedNav |      Yes | Include this flag to fixed the navigation bar on screen                                    |
-|-autoTags| autoTags |      Yes | Include this flag to automatically generate tags by path and method name                   |
-|-noDate  | noDate   |      Yes | Include this flag to remove generated date                                                 |
-|-noCredit| noCredit |      Yes | Include this flag to remove credit                                                         |
-|-hideNav | noCredit |      Yes | Include this flag to remove navigation bar                                                 |
-|   -v    | version  |      Yes | To show pertty-swag current version                                                        |
+| Switch   | Name        | Optional | Description                                                                                |
+| -------  | ----------- | -------- | ------------------------------------------------------------------------------------------ |
+|   -i     | input       |       No | Location of a Swagger spec file(can be JSON or YAML)                                       |
+|   -o     | output      |      Yes | Location of generated document(s). Default to doc.html                                     |
+|   -f     | format      |      Yes | Format of the output (`singlefile`, `offline`, `lite`, `noicon`). Default to `singlefile`  |
+|   -m     | markdown    |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
+|   -th    | theme       |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
+|   -c     | config      |      Yes | Location of a configuration file                                                           |
+|   -nav   | fixedNav    |      Yes | Include this flag to fixed the navigation bar on screen                                    |
+|-autoTags | autoTags    |      Yes | Include this flag to automatically generate tags by path and method name                   |
+|-noDate   | noDate      |      Yes | Include this flag to remove generated date                                                 |
+|-noCredit | noCredit    |      Yes | Include this flag to remove credit                                                         |
+|-hideNav  | hideNav     |      Yes | Include this flag to remove navigation bar default to false                                |
+|   -v     | version     |      Yes | To show pertty-swag current version                                                        |
 
 
 

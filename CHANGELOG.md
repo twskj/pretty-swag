@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.82 [Mar 23, 2017]
+ - Introduce Syntax Highlighter
+
 ### version 0.1.82 [Mar 22, 2017]
  - Fix markdown console switch
  - Fix bug when no main description

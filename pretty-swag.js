@@ -4,17 +4,6 @@ var livedoc = require('livedoc');
 var marked = require('marked');
 var pluralize = require('pluralize')
 
-marked.setOptions({
-    renderer: new marked.Renderer(),
-    gfm: true,
-    tables: true,
-    breaks: false,
-    pedantic: false,
-    sanitize: true,
-    smartLists: true,
-    smartypants: false
-});
-
 var indent_num = 2;
 
 function format(tokens, indent_num) {
@@ -286,6 +275,32 @@ function parse(src, dst, config, callback) {
             throw err;
         }
 
+        var marked_opt = {
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: true,
+            smartLists: true,
+            smartypants: false
+        };
+
+        var hasCodeSection = false;
+        if(!config.NoHighlight){
+            marked_opt.renderer.code = function(code, language) {
+
+                hasCodeSection = true;
+                if(language){
+                    return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlight(language,code,true).value+'</code></pre>';
+                }
+                else{
+                    return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlightAuto(code).value+'</code></pre>';
+                }
+            };
+        }
+        marked.setOptions(marked_opt);
+
         var result = livedoc.initContainer();
         result.name = input.info.title;
         result.summary = config.markdown ? marked(input.info.description || "") : input.info.description || "";
@@ -361,7 +376,7 @@ function parse(src, dst, config, callback) {
                     var tmp_tags = method.tags.map(function (x) { return x.toLowerCase().trim() });
                     method.tags.push(method.name);
                     var segments = path.split("/");
-                segmentLoop:
+                    segmentLoop:
                     for (var i = 0; i < segments.length; i++) {
                         var seg = segments[i].trim();
                         if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
@@ -433,6 +448,8 @@ function parse(src, dst, config, callback) {
             , pathParamRightToken: "}"
             , formDataToken: "formData"
             , allowHtml: config.markdown
+            , syntaxHighlight: hasCodeSection
+
         };
         var footer = "";
         if (!config.noDate) {
@@ -462,7 +479,7 @@ function parse(src, dst, config, callback) {
             conf.mainColor = 'blue';
         }
         livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
-            fs.writeFile(dst, data, 'utf8',function (err) {
+            fs.writeFile(dst, data, 'utf8', function (err) {
                 if (err) {
                     callback(err);
                     return;
