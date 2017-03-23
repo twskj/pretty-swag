@@ -3,6 +3,7 @@
 ### version 0.1.82 [Mar 22, 2017]
  - Fix markdown console switch
  - Fix bug when no main description
+ - Change Bold font weight
 
 ### version 0.1.81 [Mar 21, 2017]
  - Add hide navigation bar
