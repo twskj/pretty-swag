@@ -372,7 +372,10 @@ function parse(src, dst, config, callback) {
                 var input_method = input.paths[path][method_name];
                 method.name = method_name.toUpperCase();
                 method.tags = input_method.tags || [];
-                if (config.autoTags || true) {
+                if(config.autoTags == undefined){
+                    config.autoTags = true;
+                }
+                if (config.autoTags) {
                     var tmp_tags = method.tags.map(function (x) { return x.toLowerCase().trim() });
                     method.tags.push(method.name);
                     var segments = path.split("/");

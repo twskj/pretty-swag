@@ -55,7 +55,7 @@ function printHelp() {
     console.log("-c <config file> Location of the configuration file");
     console.log("-m Use this flag to enable MarkDown");
     console.log("-nav Use this flag to fixed the top navigation bar");
-    console.log("-autotags Use this flag to automatically generate tags by path and method");
+    console.log("-autotags (true|false) Use this flag to  turn on / off automatically generate tags by path and method");
     console.log("-noFooter Use this flag to remove footer");
     console.log("-hideNav Use this flag to remove navigation bar");
     console.log("-v --version to show version number");
@@ -65,11 +65,11 @@ function printHelp() {
 var inputFile = argv["-i"];
 var outputFile = argv["-o"];
 var format = argv["-f"];
-var markdown = argv["-m"];
+var markdown = "-m" in argv;
 var theme = argv["-th"];
 var configFile = argv["-c"];
 var fixedNav = "-nav" in argv;
-var autoTags = "-autotags" in argv;
+var autoTags = "-autotags" in argv && argv["-autotags"].toLowerCase() !== "false";
 var noDate = "-noDate" in argv;
 var noCredit = "-noCredit" in argv;
 var hideNav = "-hideNav" in argv;
@@ -95,15 +95,13 @@ if (!config.input) {
 
 config.format = format || config.format || "singleFile";
 
-if(markdown == undefined){
-    config.markdown = config.markdown || false;
-}
-else if(markdown === ""){
-    config.markdown = true
+if(markdown){
+    config.markdown = argv["-m"].toLowerCase() !== "false";
 }
 else{
-    config.markdown = markdown === "true";
+    config.markdown = config.markdown || false;
 }
+
 config.theme = theme || config.theme || "blue";
 config.fixedNav = fixedNav || config.fixedNav || false;
 config.output = outputFile || config["output"] || "doc.html";
