@@ -3,6 +3,7 @@
 ### version 0.1.82 [Mar 23, 2017]
  - Introduce Syntax Highlighter
  - Fix always generates autotags bug
+ - Suppress Available Tags when no tags available
 
 ### version 0.1.82 [Mar 22, 2017]
  - Fix markdown console switch
