@@ -288,7 +288,7 @@ function parse(src, dst, config, callback) {
 
         var result = livedoc.initContainer();
         result.name = input.info.title;
-        result.summary = config.markdown ? marked(input.info.description || "") : input.info.description;
+        result.summary = config.markdown ? marked(input.info.description || "") : input.info.description || "";
         result.version = input.info.version || "";
         result.host = input.host || "";
         result.basePath = input.basePath || "";
