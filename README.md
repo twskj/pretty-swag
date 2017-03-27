@@ -88,12 +88,12 @@ prettySwag.run(input,output,config,function(err){
 |   -m     | markdown    |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
 |   -th    | theme       |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
 |   -c     | config      |      Yes | Location of a configuration file                                                           |
-|   -nav   | fixedNav    |      Yes | Include this flag to fixed the navigation bar on screen                                    |
+|-fixedNav | fixedNav    |      Yes | Include this flag to fixed the navigation bar on screen                                    |
 |-autoTags | autoTags    |      Yes | Include this flag to turn on/off automatically generate tags by path and method name       |
 |-noDate   | noDate      |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit | noCredit    |      Yes | Include this flag to remove credit                                                         |
 |-noNav    | noNav       |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
-|-noReq    | noNav       |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|-noReq    | noRequest   |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
 |   -v     | version     |      Yes | To show pertty-swag current version                                                        |
 
 
@@ -111,6 +111,7 @@ Valid keys are:
  - autoTags
  - noDate
  - noCredit
+ - noRequest
 
 **Example of Configuration file**
 ```javascript
