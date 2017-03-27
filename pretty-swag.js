@@ -287,18 +287,15 @@ function parse(src, dst, config, callback) {
         };
 
         var hasCodeSection = false;
-        if(!config.NoHighlight){
-            marked_opt.renderer.code = function(code, language) {
-
-                hasCodeSection = true;
-                if(language){
-                    return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlight(language,code,true).value+'</code></pre>';
-                }
-                else{
-                    return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlightAuto(code).value+'</code></pre>';
-                }
-            };
-        }
+        marked_opt.renderer.code = function(code, language) {
+            hasCodeSection = true;
+            if(language){
+                return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlight(language,code,true).value+'</code></pre>';
+            }
+            else{
+                return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlightAuto(code).value+'</code></pre>';
+            }
+        };
         marked.setOptions(marked_opt);
 
         var result = livedoc.initContainer();
@@ -307,7 +304,7 @@ function parse(src, dst, config, callback) {
         result.version = input.info.version || "";
         result.host = input.host || "";
         result.basePath = input.basePath || "";
-        result.showNav = !config.hideNav;
+        result.appConfig.showNav = !config.hideNav;
         if (config.theme) {
             if (config.theme === "default") {
                 result.bgColor = {
@@ -324,14 +321,15 @@ function parse(src, dst, config, callback) {
                 };
             }
             else if (typeof config.theme === "string") {
-                result.bgColor = { default: config.theme };
+                result.appConfig.bgColor = { default: config.theme };
             }
             else {
                 //custom
-                result.bgColor = config.theme;
+                result.appConfig.bgColor = config.theme;
             }
         }
-        result.fixedNav = config.fixedNav;
+        result.appConfig.fixedNav = config.fixedNav;
+        result.appConfig.showDevPlayground = !config.noRequest;
 
         for (var path in input.paths) {
 
@@ -452,8 +450,8 @@ function parse(src, dst, config, callback) {
             , formDataToken: "formData"
             , allowHtml: config.markdown
             , syntaxHighlight: hasCodeSection
-
         };
+
         var footer = "";
         if (!config.noDate) {
             footer = ' __GENERATED_DATE__';
@@ -481,6 +479,7 @@ function parse(src, dst, config, callback) {
         catch (err) {
             conf.mainColor = 'blue';
         }
+
         livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
             fs.writeFile(dst, data, 'utf8', function (err) {
                 if (err) {

@@ -43,6 +43,14 @@ function printVersion(){
 }
 
 
+function firstNonUndefineVal(){
+    for (i = 0; i < arguments.length; i++) {
+        if (arguments[i] !== undefined) {
+            return arguments[i];
+        }
+    }
+}
+
 function printHelp() {
     console.log();
     printVersion();
@@ -54,10 +62,11 @@ function printHelp() {
     console.log("-th <theme> Theme. Default to `blue` for multi-color theme use `-th default`");
     console.log("-c <config file> Location of the configuration file");
     console.log("-m Use this flag to enable MarkDown");
-    console.log("-nav Use this flag to fixed the top navigation bar");
+    console.log("-fixedNav Use this flag to fixed the top navigation bar");
     console.log("-autotags (true|false) Use this flag to  turn on / off automatically generate tags by path and method");
     console.log("-noFooter Use this flag to remove footer");
-    console.log("-hideNav Use this flag to remove navigation bar");
+    console.log("-noNav Use this flag to remove navigation bar");
+    console.log("-noReq Use this flag to suppress request section");
     console.log("-v --version to show version number");
     console.log();
 }
@@ -65,14 +74,15 @@ function printHelp() {
 var inputFile = argv["-i"];
 var outputFile = argv["-o"];
 var format = argv["-f"];
-var markdown = "-m" in argv;
+var markdown = "-m" in argv ? true : undefined;
 var theme = argv["-th"];
 var configFile = argv["-c"];
-var fixedNav = "-nav" in argv;
-var autoTags = "-autotags" in argv && argv["-autotags"].toLowerCase() !== "false";
-var noDate = "-noDate" in argv;
-var noCredit = "-noCredit" in argv;
-var hideNav = "-hideNav" in argv;
+var fixedNav = "-fixedNav" in argv ? true : undefined;
+var autoTags = "-autotags" in argv ? argv["-autotags"].toLowerCase() !== "false" : undefined;
+var noDate = "-noDate" in argv ? true : undefined;
+var noCredit = "-noCredit" in argv ? true : undefined;
+var noNav = "-noNav" in argv ? true : "-hideNav" in argv ? true : undefined;
+var noRequest = "-noReq" in argv ? true : undefined;
 
 var config = {};
 if (configFile) {
@@ -103,23 +113,36 @@ else{
 }
 
 config.theme = theme || config.theme || "blue";
-config.fixedNav = fixedNav || config.fixedNav || false;
+config.fixedNav = firstNonUndefineVal(fixedNav || config.fixedNav || false);
 config.output = outputFile || config["output"] || "doc.html";
-config.autoTags = autoTags || config["autoTags"] || false;
-config.noDate = noDate || config["noDate"] || false;
-config.noCredit = noCredit || config["noCredit"] || false;
-config.hideNav = hideNav || config["hideNav"] || false;
+config.autoTags = firstNonUndefineVal(autoTags || config["autoTags"] || true);
+config.noDate = firstNonUndefineVal(noDate || config["noDate"] || false);
+config.noCredit = firstNonUndefineVal(noCredit || config["noCredit"] || false);
+config.noNav = firstNonUndefineVal(noNav || config["noNav"] || config["hideNav"] || false);
+config.noRequest = firstNonUndefineVal(noRequest || config["noRequest"] || false);
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);
 console.log("Format: ", config.format);
 console.log("MarkDown: ", config.markdown ? "Enable" : "Disable");
-console.log("Nav Bar: ", config.fixedNav ? "Fixed" : "Normal");
+console.log("Nav Bar: ", config.noNav ? "Hide" : config.fixedNav ? "Fixed" : "Normal");
 if (typeof config.theme === "object") {
     console.log("Theme: " + JSON.stringify(config.theme, null, 2));
 }
 else {
     console.log("Theme: " + config.theme);
+}
+if(noDate){
+    console.log("No Date");
+}
+if(noCredit){
+    console.log("No Credit");
+}
+if(noNav){
+    console.log("No Navigation");
+}
+if(noRequest){
+    console.log("No Request Panel");
 }
 prettySwag.run(config.input, config.output, config, function (err, msg) {
 

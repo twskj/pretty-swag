@@ -92,7 +92,8 @@ prettySwag.run(input,output,config,function(err){
 |-autoTags | autoTags    |      Yes | Include this flag to turn on/off automatically generate tags by path and method name       |
 |-noDate   | noDate      |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit | noCredit    |      Yes | Include this flag to remove credit                                                         |
-|-hideNav  | hideNav     |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|-noNav    | noNav       |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|-noReq    | noNav       |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
 |   -v     | version     |      Yes | To show pertty-swag current version                                                        |
 
 
