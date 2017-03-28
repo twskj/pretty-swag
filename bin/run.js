@@ -138,9 +138,6 @@ if(noDate){
 if(noCredit){
     console.log("No Credit");
 }
-if(noNav){
-    console.log("No Navigation");
-}
 if(noRequest){
     console.log("No Request Panel");
 }

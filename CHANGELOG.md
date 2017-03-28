@@ -1,4 +1,8 @@
 # Change Log
+
+### version 0.1.89 [Mar 27, 2017]
+ - fix noNav issue
+
 ### version 0.1.88 [Mar 27, 2017]
  - Introduce -noReq flag to suppress request panel
  - rename -hideNav to -noNav

@@ -304,7 +304,7 @@ function parse(src, dst, config, callback) {
         result.version = input.info.version || "";
         result.host = input.host || "";
         result.basePath = input.basePath || "";
-        result.appConfig.showNav = !config.hideNav;
+        result.appConfig.showNav = !config.noNav;
         if (config.theme) {
             if (config.theme === "default") {
                 result.bgColor = {
