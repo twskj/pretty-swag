@@ -113,19 +113,21 @@ else{
 }
 
 config.theme = theme || config.theme || "blue";
-config.fixedNav = firstNonUndefineVal(fixedNav || config.fixedNav || false);
+config.fixedNav = firstNonUndefineVal(fixedNav,config.fixedNav,false);
 config.output = outputFile || config["output"] || "doc.html";
-config.autoTags = firstNonUndefineVal(autoTags || config["autoTags"] || true);
-config.noDate = firstNonUndefineVal(noDate || config["noDate"] || false);
-config.noCredit = firstNonUndefineVal(noCredit || config["noCredit"] || false);
-config.noNav = firstNonUndefineVal(noNav || config["noNav"] || config["hideNav"] || false);
-config.noRequest = firstNonUndefineVal(noRequest || config["noRequest"] || false);
+config.autoTags = firstNonUndefineVal(autoTags,config["autoTags"],true);
+config.noDate = firstNonUndefineVal(noDate,config["noDate"],false);
+config.noCredit = firstNonUndefineVal(noCredit,config["noCredit"],false);
+config.noNav = firstNonUndefineVal(noNav,config["noNav"],config["hideNav"],false);
+config.noRequest = firstNonUndefineVal(noRequest,config["noRequest"],false);
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);
 console.log("Format: ", config.format);
 console.log("MarkDown: ", config.markdown ? "Enable" : "Disable");
 console.log("Nav Bar: ", config.noNav ? "Hide" : config.fixedNav ? "Fixed" : "Normal");
+console.log("Auto tags: ", config.autoTags ? "Enable" : "Disable");
+
 if (typeof config.theme === "object") {
     console.log("Theme: " + JSON.stringify(config.theme, null, 2));
 }
