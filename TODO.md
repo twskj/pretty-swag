@@ -15,4 +15,4 @@
 - [ ] change #merge to Object.assign() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 - [ ] Make available tags clickable too
 - [ ] Radio button color should follow method's color
-- [ ] Schema Table could have its content overflow. should it be limited to fixed and scroll? or maybe a larger content box? --> it will eventually have a longer content
+- [X] Schema Table could have its content overflow. should it be limited to fixed and scroll? or maybe a larger content box? --> it will eventually have a longer content
