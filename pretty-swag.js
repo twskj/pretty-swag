@@ -62,7 +62,7 @@ function format(tokens, indent_num) {
                 result += "     /* " + tmpLines[0] + newline;
                 indent = ' '.repeat(lineLen + 2);
                 for (var j = 1; j < tmpLines.length; j++) {
-                    result += indent + "      *" + tmpLines[j] + newline;
+                    result += indent + "      * " + tmpLines[j] + newline;
                 }
                 result += indent + "      */" + newline;
             }
