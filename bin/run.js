@@ -67,6 +67,7 @@ function printHelp() {
     console.log("-noFooter Use this flag to remove footer");
     console.log("-noNav Use this flag to remove navigation bar");
     console.log("-noReq Use this flag to suppress request section");
+    console.log("-indent Use this flag to adjust schema indentation. default to 3");
     console.log("-v --version to show version number");
     console.log();
 }
@@ -83,6 +84,7 @@ var noDate = "-noDate" in argv ? true : undefined;
 var noCredit = "-noCredit" in argv ? true : undefined;
 var noNav = "-noNav" in argv ? true : "-hideNav" in argv ? true : undefined;
 var noRequest = "-noReq" in argv ? true : undefined;
+var indent_num = parseInt(argv["-indent"]) || 3;
 
 var config = {};
 if (configFile) {
@@ -120,6 +122,7 @@ config.noDate = firstNonUndefineVal(noDate,config["noDate"],false);
 config.noCredit = firstNonUndefineVal(noCredit,config["noCredit"],false);
 config.noNav = firstNonUndefineVal(noNav,config["noNav"],config["hideNav"],false);
 config.noRequest = firstNonUndefineVal(noRequest,config["noRequest"],false);
+config.indent_num = indent_num || config["indent"];
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);

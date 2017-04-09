@@ -94,6 +94,7 @@ prettySwag.run(input,output,config,function(err){
 |-noCredit | noCredit    |      Yes | Include this flag to remove credit                                                         |
 |-noNav    | noNav       |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
 |-noReq    | noRequest   |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|-indent   | indent      |      Yes | Include this flag to specify space per indentation. Default to 3                           |
 |   -v     | version     |      Yes | To show pertty-swag current version                                                        |
 
 

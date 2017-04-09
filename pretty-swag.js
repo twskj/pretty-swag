@@ -301,6 +301,7 @@ function parse(src, dst, config, callback) {
             }
         };
         marked.setOptions(marked_opt);
+        indent_num = config.indent_num || indent_num;
 
         var result = livedoc.initContainer();
         result.name = input.info.title;
