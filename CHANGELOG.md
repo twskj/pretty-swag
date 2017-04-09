@@ -1,5 +1,10 @@
 # Change Log
 
+### version 0.1.93 [Apr 09, 2017]
+ - change default indent_num to 3
+ - fix missing comma in schema when comment present
+ - fix block comment indentation
+
 ### version 0.1.92 [Apr 09, 2017]
  - add markdown to parameter's description and response's description
 
