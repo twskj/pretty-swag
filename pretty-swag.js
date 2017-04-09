@@ -4,7 +4,7 @@ var livedoc = require('livedoc');
 var marked = require('marked');
 var pluralize = require('pluralize')
 
-var indent_num = 2;
+var indent_num = 3;
 
 function format(tokens, indent_num) {
 
@@ -54,13 +54,17 @@ function format(tokens, indent_num) {
             braceStack.pop();
         }
         else if (tokens[i].type === "BlockComment") {
+            if (i + 1 < tokens.length - 1 && tokens[i + 1].type === "String" && tokens[i - 1].type !== "Punctuator") {
+                result += ",";
+                lineLen += 1;
+            }
             tmpLines = tokens[i].value.split("\n");
             if (tmpLines.length == 1) {
                 result += "     /* " + tmpLines[0] + " */" + newline;
             }
             else {
                 result += "     /* " + tmpLines[0] + newline;
-                indent = ' '.repeat(lineLen + (level*indent_num));
+                indent = ' '.repeat(lineLen + ((level - (tokens[i - 1] ? (tokens[i - 1].type === "Punctuator" ? 1 : 0):0)) * indent_num));
                 for (var j = 1; j < tmpLines.length; j++) {
                     result += indent + "      * " + tmpLines[j] + newline;
                 }
@@ -287,13 +291,13 @@ function parse(src, dst, config, callback) {
         };
 
         var hasCodeSection = false;
-        marked_opt.renderer.code = function(code, language) {
+        marked_opt.renderer.code = function (code, language) {
             hasCodeSection = true;
-            if(language){
-                return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlight(language,code,true).value+'</code></pre>';
+            if (language) {
+                return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlight(language, code, true).value + '</code></pre>';
             }
-            else{
-                return '<pre class="hljs"><code class="'+language+'">'+require('highlight.js').highlightAuto(code).value+'</code></pre>';
+            else {
+                return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlightAuto(code).value + '</code></pre>';
             }
         };
         marked.setOptions(marked_opt);
@@ -370,7 +374,7 @@ function parse(src, dst, config, callback) {
                 var input_method = input.paths[path][method_name];
                 method.name = method_name.toUpperCase();
                 method.tags = input_method.tags || [];
-                if(config.autoTags == undefined){
+                if (config.autoTags == undefined) {
                     config.autoTags = true;
                 }
                 if (config.autoTags) {
