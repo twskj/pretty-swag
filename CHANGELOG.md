@@ -1,5 +1,11 @@
 # Change Log
 
+### version 0.1.92 [Apr 09, 2017]
+ - add markdown to parameter's description and response's description
+
+### version 0.1.91 [Apr 08, 2017]
+ - fix multi-line comment format
+
 ### version 0.1.90 [Apr 06, 2017]
  - fix overflow on parameter schema
 

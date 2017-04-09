@@ -419,7 +419,7 @@ function parse(src, dst, config, callback) {
                         var parameter = input_method.parameters[i];
                         param.name = parameter.name;
                         param.location = parameter.in;
-                        param.desc = parameter.description;
+                        param.desc = parameter.description ? (config.markdown ? marked(parameter.description) : parameter.description) : "";
                         param.required = parameter.required;
                         param.value = parameter.default || "";
                         if (parameter.schema) {
@@ -436,7 +436,7 @@ function parse(src, dst, config, callback) {
                     method.responses.push(res);
                     var response = input_method.responses[code];
                     res.code = code;
-                    res.desc = response.description;
+                    res.desc = response.description ? (config.markdown ? marked(response.description) : response.description) : "";
                     if (response.schema) {
                         res.schema = computeSchema(response.schema, input.definitions);
                     }
