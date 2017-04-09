@@ -64,7 +64,7 @@ function format(tokens, indent_num) {
             }
             else {
                 result += "     /* " + tmpLines[0] + newline;
-                indent = ' '.repeat(lineLen + ((level - (tokens[i - 1] ? (tokens[i - 1].type === "Punctuator" ? 1 : 0):0)) * indent_num));
+                indent = ' '.repeat(lineLen + ((level - (tokens[i - 1] ? (tokens[i - 1].type === "Punctuator" ? 1 : 0) : 0)) * indent_num));
                 for (var j = 1; j < tmpLines.length; j++) {
                     result += indent + "      * " + tmpLines[j] + newline;
                 }
@@ -136,7 +136,7 @@ function computeSchema(schema, def, context) {
     var src = "a=" + resolveNested(schema, def);
     var tokens = esprima.tokenize(src, { comment: true });
     tmp = format(tokens, indent_num);
-    return tmp;
+    return unEscapeComment(tmp);
 }
 
 /**
@@ -187,6 +187,15 @@ function joinObjectVals(keyval) {
     return result;
 }
 //https://github.com/json-schema/json-schema/wiki/anyOf,-allOf,-oneOf,-not
+
+function escapeComment(str) {
+    return str.replace(/\*\//g, "END-COMMENT-TOKEN");
+}
+
+function unEscapeComment(str) {
+    return str.replace(/END-COMMENT-TOKEN/g, "*/");
+}
+
 function resolveNested(schema, def) {
     var comment = "";
     try {
@@ -202,15 +211,15 @@ function resolveNested(schema, def) {
                         keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
                     }
                     else {
-                        comment = schema.properties[prop].description ? "/*" + schema.properties[prop].description + "*/" : "";
+                        comment = schema.properties[prop].description ? "/*" + escapeComment(schema.properties[prop].description) + "*/" : "";
                         keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"' + comment);
                     }
                 }
-                comment = schema.description ? comment = "/*" + schema.description + "*/" : "";
+                comment = schema.description ? comment = "/*" + escapeComment(schema.description) + "*/" : "";
                 return "{" + comment + joinObjectVals(keyval) + "}";
             }
             else {
-                comment = schema.description ? comment = "/*" + schema.description + "*/" : "";
+                comment = schema.description ? comment = "/*" + escapeComment(schema.description) + "*/" : "";
                 return '"' + schema.type + '"' + comment;
             }
         }
