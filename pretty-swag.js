@@ -60,7 +60,7 @@ function format(tokens, indent_num) {
             }
             else {
                 result += "     /* " + tmpLines[0] + newline;
-                indent = ' '.repeat(lineLen + 2);
+                indent = ' '.repeat(lineLen + (level*indent_num));
                 for (var j = 1; j < tmpLines.length; j++) {
                     result += indent + "      * " + tmpLines[j] + newline;
                 }
