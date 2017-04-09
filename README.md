@@ -129,7 +129,8 @@ Valid keys are:
     "PUT": "amber"
   },
   "fixedNav": true,
-  "autoTags": true
+  "autoTags": true,
+  "indent": 2
 }
 ```
 
