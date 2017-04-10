@@ -88,7 +88,7 @@ prettySwag.run(input,output,config,function(err){
 |   -m     | markdown    |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
 |   -th    | theme       |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
 |   -c     | config      |      Yes | Location of a configuration file                                                           |
-|-fixedNav | fixedNav    |      Yes | Include this flag to fixed the navigation bar on screen                                    |
+|-fixedNav | fixedNav    |      Yes | Include this flag to fix the navigation bar on screen                                    |
 |-autoTags | autoTags    |      Yes | Include this flag to turn on/off automatically generate tags by path and method name       |
 |-noDate   | noDate      |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit | noCredit    |      Yes | Include this flag to remove credit                                                         |
