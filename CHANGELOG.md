@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.96 [Apr 13, 2017]
+ - add collapse configuration
+
 ### version 0.1.94 [Apr 09, 2017]
  - change default indent_num to 3
  - fix missing comma in schema when comment present
