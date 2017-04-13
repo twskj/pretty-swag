@@ -350,6 +350,7 @@ function parse(src, dst, config, callback) {
             var api = livedoc.initApi();
             result.apis.push(api);
             api.path = path;
+            api.showMe = !config.collapse.path;
             var path_params = [];
             if ("parameters" in input.paths[path]) {
                 var path_scope_params = input.paths[path]["parameters"]; //array
@@ -384,6 +385,8 @@ function parse(src, dst, config, callback) {
                 var input_method = input.paths[path][method_name];
                 method.name = method_name.toUpperCase();
                 method.tags = input_method.tags || [];
+                method.showMe = !config.collapse.method;
+                method.showTool = !config.collapse.tool;
                 if (config.autoTags == undefined) {
                     config.autoTags = true;
                 }

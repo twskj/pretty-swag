@@ -85,6 +85,28 @@ var noCredit = "-noCredit" in argv ? true : undefined;
 var noNav = "-noNav" in argv ? true : "-hideNav" in argv ? true : undefined;
 var noRequest = "-noReq" in argv ? true : undefined;
 var indent_num = parseInt(argv["-indent"]) || 3;
+var collapse;
+if("-collapsePath" in argv){
+    if(!collapse){
+        collapse = {};
+    }
+    collapse.path = (!argv["-collapsePath"] || argv["-collapsePath"] === "true");
+}
+
+if("-collapseMethod" in argv){
+    if(!collapse){
+        collapse = {};
+    }
+
+    collapse.method = (!argv["-collapseMethod"] || argv["-collapseMethod"] === "true");
+}
+
+if("-collapseTool" in argv){
+    if(!collapse){
+        collapse = {};
+    }
+    collapse.tool = (argv["-collapseTool"] === "true");
+}
 
 var config = {};
 if (configFile) {
@@ -123,6 +145,7 @@ config.noCredit = firstNonUndefineVal(noCredit,config["noCredit"],false);
 config.noNav = firstNonUndefineVal(noNav,config["noNav"],config["hideNav"],false);
 config.noRequest = firstNonUndefineVal(noRequest,config["noRequest"],false);
 config.indent_num = indent_num || config["indent"];
+config.collapse = firstNonUndefineVal(collapse,config.collapse,{path:false,method:false,tool:true});
 
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);
@@ -130,6 +153,7 @@ console.log("Format: ", config.format);
 console.log("MarkDown: ", config.markdown ? "Enable" : "Disable");
 console.log("Nav Bar: ", config.noNav ? "Hide" : config.fixedNav ? "Fixed" : "Normal");
 console.log("Auto tags: ", config.autoTags ? "Enable" : "Disable");
+console.log("Collapse Path: " + config.collapse.path + ", Method: "+ config.collapse.method + ", Tool :" + config.collapse.tool);
 
 if (typeof config.theme === "object") {
     console.log("Theme: " + JSON.stringify(config.theme, null, 2));
