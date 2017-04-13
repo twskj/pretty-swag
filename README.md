@@ -116,6 +116,7 @@ Valid keys are:
  - noDate
  - noCredit
  - noRequest
+ - indent
 
 **Example of Configuration file**
 ```javascript
