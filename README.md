@@ -80,20 +80,25 @@ prettySwag.run(input,output,config,function(err){
 
 ## Command switch
 
-| Switch   | Name        | Optional | Description                                                                                |
-| -------  | ----------- | -------- | ------------------------------------------------------------------------------------------ |
-|   -i     | input       |       No | Location of a Swagger spec file(can be JSON or YAML)                                       |
-|   -o     | output      |      Yes | Location of generated document(s). Default to doc.html                                     |
-|   -f     | format      |      Yes | Format of the output (`singlefile`, `offline`, `lite`, `noicon`). Default to `singlefile`  |
-|   -m     | markdown    |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
-|   -th    | theme       |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
-|   -c     | config      |      Yes | Location of a configuration file                                                           |
-|   -nav   | fixedNav    |      Yes | Include this flag to fixed the navigation bar on screen                                    |
-|-autoTags | autoTags    |      Yes | Include this flag to turn on/off automatically generate tags by path and method name       |
-|-noDate   | noDate      |      Yes | Include this flag to remove generated date                                                 |
-|-noCredit | noCredit    |      Yes | Include this flag to remove credit                                                         |
-|-hideNav  | hideNav     |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
-|   -v     | version     |      Yes | To show pertty-swag current version                                                        |
+| Switch         | Name            | Optional | Description                                                                                |
+| -------------- | --------------- | -------- | ------------------------------------------------------------------------------------------ |
+|      -i        | input           |       No | Location of a Swagger spec file(can be JSON or YAML)                                       |
+|      -o        | output          |      Yes | Location of generated document(s). Default to doc.html                                     |
+|      -f        | format          |      Yes | Format of the output (`singlefile`, `offline`, `lite`, `noicon`). Default to `singlefile`  |
+|      -m        | markdown        |      Yes | Render Summary & Description as markdown. `true` or `false`. Default to `false`            |
+|      -th       | theme           |      Yes | One of the [supported colors](#available-colors) or pre-defined theme `default`            |
+|      -c        | config          |      Yes | Location of a configuration file                                                           |
+|-fixedNav       | fixedNav        |      Yes | Include this flag to fixed the navigation bar on screen                                    |
+|-autoTags       | autoTags        |      Yes | Include this flag to turn on/off automatically generate tags by path and method name       |
+|-noDate         | noDate          |      Yes | Include this flag to remove generated date                                                 |
+|-noCredit       | noCredit        |      Yes | Include this flag to remove credit                                                         |
+|-noNav          | noNav           |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|-noReq          | noRequest       |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|-indent         | indent          |      Yes | Include this flag to specify space per indentation. Default to 3                           |
+|      -v        | version         |      Yes | To show pertty-swag current version                                                        |
+|-collapsePath   | collapse.path   |      Yes | Collapse path by default. `true` or `false`. Default to `false`                            |
+|-collapseMethod | collapse.method |      Yes | Collapse method by default. `true` or `false`. Default to `false`                          |
+|-collapseTool   | collapse.tool   |      Yes | Collapse tool by default. `true` or `false`. Default to `true`                             |
 
 
 
@@ -110,6 +115,9 @@ Valid keys are:
  - autoTags
  - noDate
  - noCredit
+ - noRequest
+ - indent
+ - collapse
 
 **Example of Configuration file**
 ```javascript
@@ -126,7 +134,13 @@ Valid keys are:
     "PUT": "amber"
   },
   "fixedNav": true,
-  "autoTags": true
+  "autoTags": true,
+  "indent": 2,
+  "collapse":{
+    "path":true
+    ,"method":true
+    ,"tool":true
+  }
 }
 ```
 
@@ -190,7 +204,6 @@ Valid keys are:
 | ----------------------------------- | ---------------------------------------------- |
 | add header -g \<key\> \<value\>     | Adding the header to all paths/methods         |
 | remove header -g \<key\> \<value\>  | Remove a given header from all paths/methods   |
-
 
 
 ## Features
