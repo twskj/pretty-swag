@@ -345,6 +345,9 @@ function parse(src, dst, config, callback) {
         result.appConfig.fixedNav = config.fixedNav;
         result.appConfig.showDevPlayground = !config.noRequest;
 
+        if(!config.collapse){
+            config.collapse = {};
+        }
         for (var path in input.paths) {
 
             var api = livedoc.initApi();
