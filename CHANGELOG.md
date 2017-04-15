@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.97 [Apr 15, 2017]
+ - fix undefined collapse configuration bug
+
 ### version 0.1.96 [Apr 13, 2017]
  - add collapse configuration
 
