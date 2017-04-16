@@ -280,237 +280,242 @@ function merge(objs) {
 }
 
 function parse(src, dst, config, callback) {
-
     var $RefParser = require('json-schema-ref-parser');
     $RefParser.dereference(src, function (err, input) {
 
         if (err) {
-            throw err;
+            callback(err);
         }
 
-        var marked_opt = {
-            renderer: new marked.Renderer(),
-            gfm: true,
-            tables: true,
-            breaks: false,
-            pedantic: false,
-            sanitize: true,
-            smartLists: true,
-            smartypants: false
-        };
+        try {
+            var marked_opt = {
+                renderer: new marked.Renderer(),
+                gfm: true,
+                tables: true,
+                breaks: false,
+                pedantic: false,
+                sanitize: true,
+                smartLists: true,
+                smartypants: false
+            };
 
-        var hasCodeSection = false;
-        marked_opt.renderer.code = function (code, language) {
-            hasCodeSection = true;
-            if (language) {
-                return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlight(language, code, true).value + '</code></pre>';
-            }
-            else {
-                return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlightAuto(code).value + '</code></pre>';
-            }
-        };
-        marked.setOptions(marked_opt);
-        indent_num = config.indent_num || indent_num;
+            var hasCodeSection = false;
+            marked_opt.renderer.code = function (code, language) {
+                hasCodeSection = true;
+                if (language) {
+                    return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlight(language, code, true).value + '</code></pre>';
+                }
+                else {
+                    return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlightAuto(code).value + '</code></pre>';
+                }
+            };
+            marked.setOptions(marked_opt);
+            indent_num = config.indent_num || indent_num;
 
-        var result = livedoc.initContainer();
-        result.name = input.info.title;
-        result.summary = config.markdown ? marked(input.info.description || "") : input.info.description || "";
-        result.version = input.info.version || "";
-        result.host = input.host || "";
-        result.basePath = input.basePath || "";
-        result.appConfig.showNav = !config.noNav;
-        if (config.theme) {
-            if (config.theme === "default") {
-                result.bgColor = {
-                    default: "blue"
-                    , GET: "blue"
-                    , HEAD: "cyan"
-                    , POST: "teal"
-                    , PUT: "deep-purple"
-                    , DELETE: "red"
-                    , CONNECT: "purple"
-                    , OPTIONS: "light-blue"
-                    , TRACE: "blue-grey"
-                    , PATCH: "deep-purple"
-                };
-            }
-            else if (typeof config.theme === "string") {
-                result.appConfig.bgColor = { default: config.theme };
-            }
-            else {
-                //custom
-                result.appConfig.bgColor = config.theme;
-            }
-        }
-        result.appConfig.fixedNav = config.fixedNav;
-        result.appConfig.showDevPlayground = !config.noRequest;
-
-        if(!config.collapse){
-            config.collapse = {};
-        }
-        for (var path in input.paths) {
-
-            var api = livedoc.initApi();
-            result.apis.push(api);
-            api.path = path;
-            api.showMe = !config.collapse.path;
-            var path_params = [];
-            if ("parameters" in input.paths[path]) {
-                var path_scope_params = input.paths[path]["parameters"]; //array
-                for (var i = 0; i < path_scope_params.length; i++) {
-                    var path_param = livedoc.initParam();
-                    var input_path_param = path_scope_params[i];
-                    if ("$ref" in input_path_param) {
-                        input_path_param = input.parameters[input_path_param["$ref"].substr(13)]; //remove "#/parameters/" portion
-                    }
-                    path_param.name = input_path_param.name;
-                    path_param.location = input_path_param.in;
-                    path_param.desc = input_path_param.description;
-                    path_param.required = input_path_param.required;
-                    if (input_path_param.schema) {
-                        path_param.schema = computeSchema(input_path_param.schema, input.definitions);
-                    }
-                    else if (input_path_param.type) {
-                        path_param.schema = computeSchema(input_path_param.type, input.definitions, input_path_param);
-                    }
-                    if (path_param.name && path_param.location) {
-                        path_params.push(path_param);
-                    }
+            var result = livedoc.initContainer();
+            result.name = input.info.title;
+            result.summary = config.markdown ? marked(input.info.description || "") : input.info.description || "";
+            result.version = input.info.version || "";
+            result.host = input.host || "";
+            result.basePath = input.basePath || "";
+            result.appConfig.showNav = !config.noNav;
+            if (config.theme) {
+                if (config.theme === "default") {
+                    result.bgColor = {
+                        default: "blue"
+                        , GET: "blue"
+                        , HEAD: "cyan"
+                        , POST: "teal"
+                        , PUT: "deep-purple"
+                        , DELETE: "red"
+                        , CONNECT: "purple"
+                        , OPTIONS: "light-blue"
+                        , TRACE: "blue-grey"
+                        , PATCH: "deep-purple"
+                    };
+                }
+                else if (typeof config.theme === "string") {
+                    result.appConfig.bgColor = { default: config.theme };
+                }
+                else {
+                    //custom
+                    result.appConfig.bgColor = config.theme;
                 }
             }
-            for (var method_name in input.paths[path]) {
+            result.appConfig.fixedNav = config.fixedNav;
+            result.appConfig.showDevPlayground = !config.noRequest;
 
-                if (method_name === "parameters") {
-                    continue;
-                }
-                var method = livedoc.initMethod();
-                api.methods.push(method);
-                var input_method = input.paths[path][method_name];
-                method.name = method_name.toUpperCase();
-                method.tags = input_method.tags || [];
-                method.showMe = !config.collapse.method;
-                method.showTool = !config.collapse.tool;
-                if (config.autoTags == undefined) {
-                    config.autoTags = true;
-                }
-                if (config.autoTags) {
-                    var tmp_tags = method.tags.map(function (x) { return x.toLowerCase().trim() });
-                    method.tags.push(method.name);
-                    var segments = path.split("/");
-                    segmentLoop:
-                    for (var i = 0; i < segments.length; i++) {
-                        var seg = segments[i].trim();
-                        if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
-                            continue;
+            if (!config.collapse) {
+                config.collapse = {};
+            }
+            for (var path in input.paths) {
+
+                var api = livedoc.initApi();
+                result.apis.push(api);
+                api.path = path;
+                api.showMe = !config.collapse.path;
+                var path_params = [];
+                if ("parameters" in input.paths[path]) {
+                    var path_scope_params = input.paths[path]["parameters"]; //array
+                    for (var i = 0; i < path_scope_params.length; i++) {
+                        var path_param = livedoc.initParam();
+                        var input_path_param = path_scope_params[i];
+                        if ("$ref" in input_path_param) {
+                            input_path_param = input.parameters[input_path_param["$ref"].substr(13)]; //remove "#/parameters/" portion
                         }
-                        var norm_seg = seg.toLowerCase();
-                        //don't add placeholder and plural when already have a singular in
-                        var singular = pluralize.singular(norm_seg);
-                        if (tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
-                            continue;
+                        path_param.name = input_path_param.name;
+                        path_param.location = input_path_param.in;
+                        path_param.desc = input_path_param.description;
+                        path_param.required = input_path_param.required;
+                        if (input_path_param.schema) {
+                            path_param.schema = computeSchema(input_path_param.schema, input.definitions);
                         }
+                        else if (input_path_param.type) {
+                            path_param.schema = computeSchema(input_path_param.type, input.definitions, input_path_param);
+                        }
+                        if (path_param.name && path_param.location) {
+                            path_params.push(path_param);
+                        }
+                    }
+                }
+                for (var method_name in input.paths[path]) {
 
-                        for (var j = 0; j < method.tags.length; j++) {
-                            var longerTag = method.tags[j].toLowerCase();
-
-                            if (longerTag.startsWith(singular) || longerTag.startsWith(norm_seg)) {
-                                continue segmentLoop;
+                    if (method_name === "parameters") {
+                        continue;
+                    }
+                    var method = livedoc.initMethod();
+                    api.methods.push(method);
+                    var input_method = input.paths[path][method_name];
+                    method.name = method_name.toUpperCase();
+                    method.tags = input_method.tags || [];
+                    method.showMe = !config.collapse.method;
+                    method.showTool = !config.collapse.tool;
+                    if (config.autoTags == undefined) {
+                        config.autoTags = true;
+                    }
+                    if (config.autoTags) {
+                        var tmp_tags = method.tags.map(function (x) { return x.toLowerCase().trim() });
+                        method.tags.push(method.name);
+                        var segments = path.split("/");
+                        segmentLoop:
+                        for (var i = 0; i < segments.length; i++) {
+                            var seg = segments[i].trim();
+                            if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
+                                continue;
+                            }
+                            var norm_seg = seg.toLowerCase();
+                            //don't add placeholder and plural when already have a singular in
+                            var singular = pluralize.singular(norm_seg);
+                            if (tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
+                                continue;
                             }
 
-                        }
-                        method.tags.push(singular);
-                        tmp_tags.push(norm_seg);
-                    }
-                }
-                method.tags = replace(' ', '-', method.tags);
-                method.tags.sort(sortTags);
-                input_method.summary = input_method.summary || "";
-                input_method.description = input_method.description || "";
-                method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
-                method.desc = config.markdown ? marked(input_method.description) : input_method.description;
+                            for (var j = 0; j < method.tags.length; j++) {
+                                var longerTag = method.tags[j].toLowerCase();
 
-                if (path_params.length > 0) {
-                    method.params = method.params.concat(path_params);
-                }
-                if (input_method.parameters) {
-                    for (i = 0; i < input_method.parameters.length; i++) {
-                        var param = livedoc.initParam();
-                        method.params.push(param);
-                        var parameter = input_method.parameters[i];
-                        param.name = parameter.name;
-                        param.location = parameter.in;
-                        param.desc = parameter.description ? (config.markdown ? marked(parameter.description) : parameter.description) : "";
-                        param.required = parameter.required;
-                        param.value = parameter.default || "";
-                        if (parameter.schema) {
-                            param.schema = computeSchema(parameter.schema, input.definitions);
-                        }
-                        else if (parameter.type) {
-                            param.schema = computeSchema(parameter.type, input.definitions, parameter);
+                                if (longerTag.startsWith(singular) || longerTag.startsWith(norm_seg)) {
+                                    continue segmentLoop;
+                                }
+
+                            }
+                            method.tags.push(singular);
+                            tmp_tags.push(norm_seg);
                         }
                     }
-                }
+                    method.tags = replace(' ', '-', method.tags);
+                    method.tags.sort(sortTags);
+                    input_method.summary = input_method.summary || "";
+                    input_method.description = input_method.description || "";
+                    method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
+                    method.desc = config.markdown ? marked(input_method.description) : input_method.description;
 
-                for (var code in input_method.responses) {
-                    var res = livedoc.initResponse();
-                    method.responses.push(res);
-                    var response = input_method.responses[code];
-                    res.code = code;
-                    res.desc = response.description ? (config.markdown ? marked(response.description) : response.description) : "";
-                    if (response.schema) {
-                        res.schema = computeSchema(response.schema, input.definitions);
+                    if (path_params.length > 0) {
+                        method.params = method.params.concat(path_params);
+                    }
+                    if (input_method.parameters) {
+                        for (i = 0; i < input_method.parameters.length; i++) {
+                            var param = livedoc.initParam();
+                            method.params.push(param);
+                            var parameter = input_method.parameters[i];
+                            param.name = parameter.name;
+                            param.location = parameter.in;
+                            param.desc = parameter.description ? (config.markdown ? marked(parameter.description) : parameter.description) : "";
+                            param.required = parameter.required;
+                            param.value = parameter.default || "";
+                            if (parameter.schema) {
+                                param.schema = computeSchema(parameter.schema, input.definitions);
+                            }
+                            else if (parameter.type) {
+                                param.schema = computeSchema(parameter.type, input.definitions, parameter);
+                            }
+                        }
+                    }
+
+                    for (var code in input_method.responses) {
+                        var res = livedoc.initResponse();
+                        method.responses.push(res);
+                        var response = input_method.responses[code];
+                        res.code = code;
+                        res.desc = response.description ? (config.markdown ? marked(response.description) : response.description) : "";
+                        if (response.schema) {
+                            res.schema = computeSchema(response.schema, input.definitions);
+                        }
                     }
                 }
             }
-        }
-        var conf = {
-            mode: config.format
-            , pathParamLeftToken: "{"
-            , pathParamRightToken: "}"
-            , formDataToken: "formData"
-            , allowHtml: config.markdown
-            , syntaxHighlight: hasCodeSection
-        };
+            var conf = {
+                mode: config.format
+                , pathParamLeftToken: "{"
+                , pathParamRightToken: "}"
+                , formDataToken: "formData"
+                , allowHtml: config.markdown
+                , syntaxHighlight: hasCodeSection
+            };
 
-        var footer = "";
-        if (!config.noDate) {
-            footer = ' __GENERATED_DATE__';
-        }
-        if (!config.noCredit) {
-            footer = footer + ' by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
-        }
-        if (footer) {
-            conf.footer = "Generated" + footer;
-        }
-        else {
-            conf.noFooter = true;
-        }
-        if (config.format === "offline") {
-            conf.outputFilename = dst;
-        }
-        try {
-            if (typeof result.bgColor === "object") {
-                conf.mainColor = result.bgColor.default
+            var footer = "";
+            if (!config.noDate) {
+                footer = ' __GENERATED_DATE__';
+            }
+            if (!config.noCredit) {
+                footer = footer + ' by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
+            }
+            if (footer) {
+                conf.footer = "Generated" + footer;
             }
             else {
-                conf.mainColor = result.bgColor;
+                conf.noFooter = true;
             }
-        }
-        catch (err) {
-            conf.mainColor = 'blue';
-        }
-
-        livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
-            fs.writeFile(dst, data, 'utf8', function (err) {
-                if (err) {
-                    callback(err);
-                    return;
+            if (config.format === "offline") {
+                conf.outputFilename = dst;
+            }
+            try {
+                if (typeof result.bgColor === "object") {
+                    conf.mainColor = result.bgColor.default
                 }
-                callback(null);
-                return;
+                else {
+                    conf.mainColor = result.bgColor;
+                }
+            }
+            catch (err) {
+                conf.mainColor = 'blue';
+            }
+
+            livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
+                fs.writeFile(dst, data, 'utf8', function (err) {
+                    if (err) {
+                        callback(err);
+                        return;
+                    }
+                    callback(null);
+                    return;
+                });
             });
-        });
+        }
+        catch(err){
+            callback(err);
+        }
     });
+
 }
 
 map = {
