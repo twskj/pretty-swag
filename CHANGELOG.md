@@ -1,7 +1,10 @@
 # Change Log
 
+### version 0.1.99 [Apr 15, 2017]
+ - enable customCSS
+
 ### version 0.1.98 [Apr 15, 2017]
- - add with try-catch
+ - wrap main func with try-catch
 
 ### version 0.1.97 [Apr 15, 2017]
  - fix undefined collapse configuration bug

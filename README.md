@@ -118,6 +118,7 @@ Valid keys are:
  - noRequest
  - indent
  - collapse
+ - customCSS
 
 **Example of Configuration file**
 ```javascript
