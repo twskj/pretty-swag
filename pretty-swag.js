@@ -470,6 +470,7 @@ function parse(src, dst, config, callback) {
                 , formDataToken: "formData"
                 , allowHtml: config.markdown
                 , syntaxHighlight: hasCodeSection
+                , customCSS: config.customCSS
             };
 
             var footer = "";
