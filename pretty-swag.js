@@ -502,14 +502,19 @@ function parse(src, dst, config, callback) {
             }
 
             livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
-                fs.writeFile(dst, data, 'utf8', function (err) {
-                    if (err) {
-                        callback(err);
-                        return;
-                    }
-                    callback(null);
+                if (dst === null) {
+                    callback(err, data);
                     return;
-                });
+                } else {
+                    fs.writeFile(dst, data, 'utf8', function (err) {
+                        if (err) {
+                            callback(err);
+                            return;
+                        }
+                        callback(null);
+                        return;
+                    });
+                }
             });
         }
         catch(err){
