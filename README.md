@@ -86,7 +86,7 @@ prettySwag.run(input,null,config,function(err,data){
         console.log(err);
     }
     else{
-        console.log(data"); // Plain html
+        console.log(data); // Plain html
     }
 });
 ```
