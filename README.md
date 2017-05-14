@@ -78,6 +78,19 @@ prettySwag.run(input,output,config,function(err){
 });
 ```
 
+When `dst` equals `null`, no file will be written and the html will be returned as second parameter.
+```
+...
+prettySwag.run(input,null,config,function(err,data){
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log(data"); // Plain html
+    }
+});
+```
+
 ## Command switch
 
 | Switch         | Name            | Optional | Description                                                                                |
