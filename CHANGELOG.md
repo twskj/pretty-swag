@@ -1,5 +1,11 @@
 # Change Log
 
+### version 0.1.101 [May 31, 2017]
+ - Table column now adjustable
+
+### version 0.1.100 [May 14, 2017]
+ - API return html when dst is null
+
 ### version 0.1.99 [Apr 15, 2017]
  - enable customCSS
 
