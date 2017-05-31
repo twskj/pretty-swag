@@ -79,7 +79,7 @@ prettySwag.run(input,output,config,function(err){
 ```
 
 When `dst` equals `null`, no file will be written and the html will be returned as second parameter.
-```
+```javascript
 ...
 prettySwag.run(input,null,config,function(err,data){
     if(err){
