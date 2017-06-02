@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.103 [Jun 2, 2017]
+ - Fix Request Panel visibility when Method Folding Flag present
+
 ### version 0.1.102 [Jun 2, 2017]
  - Change behavior of auto-tagging faeture
 
