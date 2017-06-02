@@ -79,7 +79,7 @@ prettySwag.run(input,output,config,function(err){
 ```
 
 When `dst` equals `null`, no file will be written and the html will be returned as second parameter.
-```
+```javascript
 ...
 prettySwag.run(input,null,config,function(err,data){
     if(err){
@@ -218,3 +218,9 @@ Valid keys are:
 | ----------------------------------- | ---------------------------------------------- |
 | add header -g \<key\> \<value\>     | Adding the header to all paths/methods         |
 | remove header -g \<key\> \<value\>  | Remove a given header from all paths/methods   |
+
+
+
+## License
+ 
+The contents of this repository are covered under the [MIT License](LICENSE)

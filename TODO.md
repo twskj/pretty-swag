@@ -17,4 +17,4 @@
 - [ ] Radio button color should follow method's color
 - [X] Schema Table could have its content overflow. should it be limited to fixed and scroll? or maybe a larger content box? --> it will eventually have a longer content
 - [ ] Foldable block comment?
-- [ ] Resizable Table's columns
+- [X] Resizable Table's columns
