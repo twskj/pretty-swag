@@ -279,6 +279,7 @@ function merge(objs) {
     return result;
 }
 
+
 function parse(src, dst, config, callback) {
     var $RefParser = require('json-schema-ref-parser');
     $RefParser.dereference(src, function (err, input) {
@@ -394,7 +395,9 @@ function parse(src, dst, config, callback) {
                         config.autoTags = true;
                     }
                     if (config.autoTags) {
-                        var tmp_tags = method.tags.map(function (x) { return x.toLowerCase().trim() });
+                        //tmp_tags is a place holder for token that will not be added to tags
+                        var tmp_tags = method.tags.map(function (x) { return pluralize.singular(x.replace(/[ -_]/g, '').toLowerCase()); });
+
                         method.tags.push(method.name);
                         var segments = path.split("/");
                         segmentLoop:
@@ -403,23 +406,26 @@ function parse(src, dst, config, callback) {
                             if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
                                 continue;
                             }
-                            var norm_seg = seg.toLowerCase();
+
+                            var normed_seg = seg.trim();
+                            var singular = pluralize.singular(normed_seg);
+                            normed_seg = pluralize.singular(normed_seg.toLowerCase().replace(/[ -_]/g, ''))
                             //don't add placeholder and plural when already have a singular in
-                            var singular = pluralize.singular(norm_seg);
-                            if (tmp_tags.indexOf(norm_seg) > -1 || tmp_tags.indexOf(singular) > -1) {
+                            //var singular = pluralize.singular(normed_seg);
+                            if (tmp_tags.indexOf(normed_seg) > -1) {
                                 continue;
                             }
 
                             for (var j = 0; j < method.tags.length; j++) {
                                 var longerTag = method.tags[j].toLowerCase();
 
-                                if (longerTag.startsWith(singular) || longerTag.startsWith(norm_seg)) {
+                                if (longerTag.startsWith(singular) || longerTag.startsWith(normed_seg)) {
                                     continue segmentLoop;
                                 }
 
                             }
                             method.tags.push(singular);
-                            tmp_tags.push(norm_seg);
+                            tmp_tags.push(normed_seg);
                         }
                     }
                     method.tags = replace(' ', '-', method.tags);

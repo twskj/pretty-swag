@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.102 [Jun 2, 2017]
+ - Change behavior of auto-tagging faeture
+
 ### version 0.1.101 [May 31, 2017]
  - Table column now adjustable
 
