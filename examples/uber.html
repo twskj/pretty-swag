@@ -4,21 +4,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>.pointer,footer>a{cursor:pointer}[v-cloak]{display:none}body{background:#fdfdfd}.indent{padding-left:1em}.r-margin{margin-right:2em}.r-indent{padding-right:1em}.padding-all{padding:1em}.b-margin{margin-bottom:1em}no-overflow{overflow:auto}.bold{font-weight:700}.api-block{border:1px solid #82b1ff;margin:.5rem 0 1.5rem}.margin-bottom-1rem,.api-header{font-size:13pt}.api-header>.api-title{font-size:13pt;padding:.5em;display:inline-block}.tag-container{padding:.3em;height:2em}.tag-container>.tag{display:inline-block;margin-right:10px;padding:0 .5rem;white-space:nowrap;position:relative;min-width:3rem;text-align:center;background:linear-gradient(to bottom,#fed970 0,#febc4a 100%);background-color:#FEC95B;color:#963;font-weight:700;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.4);border-top:1px solid #EDB14A;border-bottom:1px solid #CE922E;border-right:1px solid #DCA03B;border-left:1px solid #EDB14A;border-radius:3px;box-shadow:inset 0 1px #FEE395,0 1px 2px rgba(0,0,0,.21)}.round-border{border-radius:3px}.showReqBtn{padding:1rem 0}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-leave-active{transition:opacity .05s}.fade-enter,.fade-leave-to{opacity:0}.tool-panel{border:1px solid #9e9e9e;padding:1em 1em 0 1em;margin:1rem 0 1rem 0}[type=radio].with-gap:checked+label:before{border-radius:50%;border:2px solid #2196f3}[type=radio].with-gap:checked+label:after{border-radius:50%;border:2px solid #2196f3;background-color:#2196f3;z-index:0;-webkit-transform:scale(.5);-moz-transform:scale(.5);-ms-transform:scale(.5);-o-transform:scale(.5);transform:scale(.5)}.input-field input[type=text]:focus+label{color:#666}.input-field input[type=text]:focus{border-bottom:1px solid #64b5f6;box-shadow:0 1px 0 0 #42a5f5}textarea{white-space:pre;overflow:scroll;overflow-x:scroll;overflow-y:scroll;height:10em}.console{font-family:monospace;font-weight:400;font-style:normal}.yellow-border{border-color:#ffc400}blockquote{padding:.5em 0 .5em 1em}#toast-container{min-width:100%;bottom:0;top:95%;right:0;left:0}::-webkit-input-placeholder{color:#DDD}::-moz-placeholder{color:#DDD}:-ms-input-placeholder{color:#DDD}:-moz-placeholder{color:#DDD}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.navButtonContainer{position:absolute;top:0;right:1rem}.navButton{padding:0 1rem}footer>a{color:#f5f5f5}td{vertical-align:top}h1{font-size:2.75rem}h2{font-size:2.2rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.5rem}h6{font-size:1.28rem}table.fixed{table-layout:fixed}table.fixed td{overflow-x:auto}th.status{width:64px}th.desc{width:256px}no-padding-bot{padding-bottom:0}</style>
+    <meta charset="UTF-8">
+    <style>.pointer,footer>a{cursor:pointer}[v-cloak]{display:none}body{background:#fdfdfd}.indent{padding-left:1em}.r-margin{margin-right:2em}.r-indent{padding-right:1em}.padding-all{padding:1em}.b-margin{margin-bottom:1em}no-overflow{overflow:auto}.bold{font-weight:700}.api-block{border:1px solid;margin:.5rem 0 1.5rem}.margin-bottom-1rem,.api-header{font-size:13pt}.api-header>.api-title{font-size:13pt;padding:.5em;display:inline-block}.tag-container{padding:1em .3em 0 .3em;height:2.2em}.tag-container>.tag{display:inline-block;margin-right:10px;padding:0 .5rem;white-space:nowrap;position:relative;min-width:3rem;text-align:center;background:linear-gradient(to bottom,#fed970 0,#febc4a 100%);background-color:#FEC95B;color:#963;font-weight:700;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.4);border-top:1px solid #EDB14A;border-bottom:1px solid #CE922E;border-right:1px solid #DCA03B;border-left:1px solid #EDB14A;border-radius:3px;box-shadow:inset 0 1px #FEE395,0 1px 2px rgba(0,0,0,.21)}.round-border{border-radius:3px}.showReqBtn{padding:1rem 0}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-leave-active{transition:opacity .05s}.fade-enter,.fade-leave-to{opacity:0}.tool-panel{border:1px solid #9e9e9e;padding:1em 1em 0 1em;margin:1rem 0 1rem 0}[type=radio].with-gap:checked+label:before{border-radius:50%;border:2px solid #555555}[type=radio].with-gap:checked+label:after{border-radius:50%;border:1px solid #2196f3;background-color:#2196f3;z-index:0;-webkit-transform:scale(.5);-moz-transform:scale(.5);-ms-transform:scale(.5);-o-transform:scale(.5);transform:scale(.5)}input[type=text]:focus:not([readonly])+label{color:#666}input[type=text]:focus:not([readonly]){border-bottom:1px solid #64b5f6;box-shadow:0 1px 0 0 #42a5f5}textarea{white-space:pre;overflow:scroll;overflow-x:scroll;overflow-y:scroll;height:10em}.console{font-family:monospace;font-weight:400;font-style:normal}.warning-yellow-border{border-color:#ffc400}blockquote{padding:.5em 0 .5em 1em}#toast-container{min-width:100%;bottom:0;top:95%;right:0;left:0}::-webkit-input-placeholder{color:#DDD}::-moz-placeholder{color:#DDD}:-ms-input-placeholder{color:#DDD}:-moz-placeholder{color:#DDD}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.navButtonContainer{position:absolute;top:0;right:1rem}.navButton{padding:0 1rem}footer>a{color:#f5f5f5}td{vertical-align:top}h1{font-size:2.75rem}h2{font-size:2.2rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.5rem}h6{font-size:1.28rem}table.fixed{table-layout:fixed}table.fixed td{overflow-x:auto}th.status{width:64px}th.desc{width:256px}no-padding-bot{padding-bottom:0}.red-border{border-color:#ff8a80}.pink-border{border-color:#ff80ab}.purple-border{border-color:#ea80fc}.deep-purple-border{border-color:#b388ff}.indigo-border{border-color:#8c9eff}.blue-border{border-color:#82b1ff}.light-blue-border{border-color:#80d8ff}.cyan-border{border-color:#4dd0e1}.teal-border{border-color:#80cbc4}.green-border{border-color:#4caf50}.light-green-border{border-color:#aed581}.lime-border{border-color:#c0ca33}.yellow-border{border-color:#fdd835}.amber-border{border-color:#ffb300}.orange-border{border-color:#ffd180}.deep-orange-border{border-color:#ff9e80}.brown-border{border-color:#bcaaa4}.grey-border{border-color:#bdbdbd}.blue-grey-border{border-color:#90a4ae}.white-border{border-color:#fdfdfd}.slide-vert-enter-active{transition:all .4s ease}.slide-vert-leave-active{transition:all .2s ease}.slide-vert-enter,.slide-vert-leave-to{transform:translateY(100%)}table.compact input{margin:0;border-bottom:0;height:1rem}</style>
     <title></title>
 </head>
 <body>
     <div id="app" v-cloak>
-        <nav class="blue" role="navigation">
-            <div class="nav-wrapper container">
-                <div class="input-field">
-                    <input id="search" type="search" placeholder="search by tag" title="Use - prefix to exclude unwanted tags. Ex: -POST" required v-model="filterByTag" @keyup.enter="$event.target.blur()">
-                    <label class="label-icon" for="search"><i class="material-icons">search by tags</i></label>
-                    <i class="material-icons">close</i>
+        <div :class="[fixedNav ? 'navbar-fixed':'']">
+            <nav :class="getThemeColor('default')" role="navigation">
+                <div class="nav-wrapper container">
+                    <div class="input-field">
+                        <input id="search" type="search" placeholder="search by tag" title="Use - prefix to exclude unwanted tags. Ex: -POST" required v-model="filterByTag" @keyup.enter="$event.target.blur()">
+                        <label class="label-icon" for="search"><i class="material-icons">search by tags</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
                 </div>
-            </div>
-            <div class="navButtonContainer"><a class="navButton pointer" @click="collapseAllApi(false)">Collapse</a><a class="navButton pointer" @click="collapseAllApi(true)">Expand</a></div>
-        </nav>
+                <div class="navButtonContainer">
+                    <a class="navButton pointer waves-effect waves-light" @click="collapseAllApi(false)">Collapse</a>
+                    <a class="navButton pointer waves-effect waves-light" @click="collapseAllApi(true)">Expand</a>
+                </div>
+            </nav>
+        </div>
+
+        <transition name="slide-vert">
+          <div v-show="showConsole" id="consolePanel" class="input-field" style="background-color: rgba(0,0,0,.67);color: whitesmoke; position: absolute; left:0;right:-1; z-index: 2; padding: 1.5rem;">
+            <div v-for="log in consoleLogs">{{log}}</div>
+            <input type="text" spellcheck="false" v-model="console" @keyup.enter="parseCmd" @keydown.tab.prevent @keyup.tab="autoComplete" ref="txtConsole">
+          </div>
+        </transition>
 
         <div class="container">
             <div class="section">
@@ -39,9 +52,9 @@
                         <div class="row pointer blue-text text-lighten-1"><span @click="api.showMe=!api.showMe">{{api.path}}</span></div>
                         <transition name="fade">
                             <div v-if="api.showMe">
-                                <div class="api-block round-border" v-for="(method,method_idx) in api.methods" v-if="method.visible">
-                                    <div class="api-header blue lighten-5 round-border pointer" @click="method.showMe = !method.showMe">
-                                        <div class="api-title white-text blue light">{{method.name}} {{api.path}}</div>
+                                <div class="api-block round-border" :class="[getThemeColor(method.name)+'-border']" v-for="(method,method_idx) in api.methods" v-if="method.visible">
+                                    <div class="api-header lighten-5 round-border pointer" :class="[getThemeColor(method.name)]" @click="method.showMe = !method.showMe">
+                                        <div class="api-title light" :class="[getThemeColor(method.name,true)]">{{method.name}} {{api.path}}</div>
                                     </div>
                                     <transition name="fade">
                                         <div v-if="method.showMe">
@@ -49,11 +62,11 @@
                                                 <div class="tag right pointer no-overflow" v-for="tag in method.tags" @click="addToSearch(tag)">{{tag}}</div>
                                             </div>
                                             <div class="indent r-indent">
-                                                <h5 class="blue-text" v-if="method.summary">Summary</h5>
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.summary">Summary</h5>
                                                 <p class="indent" v-if="method.summary" v-html="method.summary"></p>
-                                                <h5 class="blue-text" v-if="method.desc">Description</h5>
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.desc">Description</h5>
                                                 <p class="indent" v-if="method.desc" v-html="method.desc"></p>
-                                                <h5 class="blue-text" v-if="method.params.length > 0">Parameters</h5>
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.params.length > 0">Parameters</h5>
                                                 <table class="bordered" v-if="method.params.length > 0">
                                                     <thead>
                                                         <tr>
@@ -74,7 +87,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <h5 class="blue-text" v-if="method.responses.length > 0">Responses</h5>
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.responses.length > 0">Responses</h5>
                                                 <table class="bordered fixed" v-if="method.responses.length > 0">
                                                     <thead>
                                                         <tr>
@@ -93,7 +106,7 @@
                                                 </table>
 
                                                 <div class="showReqBtn" v-if="host">
-                                                    <a class="blue btn waves-effect" @click="method.showTool = true" v-if="!method.showTool"><i class="material-icons left">mode_edit</i>Try this operation</a>
+                                                    <a class="btn waves-effect" :class="[getThemeColor(method.name,true)]" @click="method.showTool = true" v-if="!method.showTool"><i class="material-icons left">mode_edit</i>Try this operation</a>
                                                     <a class="right pointer" @click="method.showTool = false" v-else>Hide</a>
                                                 </div>
 
@@ -101,17 +114,17 @@
                                                     <div class="request-panel" v-if="method.showTool">
                                                         <h5>Request</h5>
                                                         <div class="tool-panel round-border">
-                                                            <p class="600">Scheme</p>
+                                                            <p class="bold">Scheme</p>
                                                             <p>
                                                                 <form>
                                                                     <span v-for="(scheme,idx) in method.request.schemes">
                                                                         <input class="with-gap" v-bind:name="scheme" type="radio" v-bind:value="scheme" v-bind:id="api_idx+'_'+method_idx+'_'+scheme" v-model="method.request.choosen.scheme"/>
-                                                                        <label class="r-margin" v-bind:for="api_idx+'_'+method_idx+'_'+scheme" v-bind:class="method.request.choosen.scheme === scheme ? 'bold black-text' : ''">{{scheme}}</label>
+                                                                        <label class="r-margin" v-bind:for="api_idx+'_'+method_idx+'_'+scheme" v-bind:class="method.request.choosen.scheme === scheme ? 'black-text' : ''">{{scheme}}</label>
                                                                     </span>
                                                                 </form>
                                                             </p>
-                                                            <p>HTTP Headers</p>
-                                                            <table class="bordered" v-if="Object.keys(method.request.choosen.headers).length !== 0">
+                                                            <p class="bold">HTTP Headers</p>
+                                                            <table class="highlight compact" v-if="Object.keys(method.request.choosen.headers).length !== 0">
                                                                 <colgroup>
                                                                     <col span="1" style="width: 42%;">
                                                                     <col span="1" style="width: 48%;">
@@ -142,14 +155,14 @@
                                                                     <label v-bind:for="api_idx+'_'+method_idx+'_headerValue'">value</label>
                                                                 </div>
                                                                 <div class="input-field col s1">
-                                                                    <a class="btn-floating btn-large waves-effect waves-light blue" @click="addToHeaderList(method.request.choosen,api_idx+'_'+method_idx+'_headerName')"><i class="material-icons">add</i></a>
+                                                                    <a class="btn-floating btn-large waves-effect waves-light" :class="[getThemeColor(method.name,true)]" @click="addToHeaderList(method.request.choosen,api_idx+'_'+method_idx+'_headerName')"><i class="material-icons">add</i></a>
                                                                 </div>
                                                             </div>
                                                             <h5>Parameters</h5>
                                                             <div class="tool-panel round-border">
                                                                 <div v-for="(param,param_idx) in method.params">
                                                                     <div class="input-field" v-if="param.location !== 'body' && param.location !== 'header'">
-                                                                        <label v-bind:for="api_idx+'_'+method_idx+'_'+param.name">{{param.name}}</label>
+                                                                        <label v-bind:for="api_idx+'_'+method_idx+'_'+param.name" :class="[method.params[param_idx].value ? 'active' : '']">{{param.name}}</label>
                                                                         <input v-bind:id="api_idx+'_'+method_idx+'_'+param.name" type="text" v-model="method.params[param_idx].value">
                                                                     </div>
                                                                 </div>
@@ -171,12 +184,12 @@
                                                                 </div>
 
                                                                 <div v-if="mixContent(method.request.choosen)">
-                                                                    <blockquote class="yellow-border yellow lighten-5"> <i class="material-icons left">warning</i> This is a Mixed Content call. Many browsers will block this by default. <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content" target="_blank">Learn more</a></blockquote>
+                                                                    <blockquote class="warning-yellow-border yellow lighten-5"> <i class="material-icons left">warning</i> This is a Mixed Content call. Many browsers will block this by default. <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content" target="_blank">Learn more</a></blockquote>
                                                                 </div>
                                                                 <div v-else-if="crossDomain(method.request.choosen)">
-                                                                    <blockquote class="yellow-border yellow lighten-5"> <i class="material-icons left">warning</i> This is a cross-origin call. Make sure the server at <span class="blue-text">{{getDestHost(method.request.choosen.scheme)}}</span> accepts POST requests from <span class="blue-text">{{currentHost}}</span>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">Learn more</a></blockquote>
+                                                                    <blockquote class="warning-yellow-border yellow lighten-5"> <i class="material-icons left">warning</i> This is a cross-origin call. Make sure the server at <span class="blue-text">{{getDestHost(method.request.choosen.scheme)}}</span> accepts POST requests from <span class="blue-text">{{currentHost}}</span>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">Learn more</a></blockquote>
                                                                 </div>
-                                                                <a class="blue waves-effect waves-light btn b-margin" @click="sendRequest(method.name,getURL(method,api.path),method.request.choosen.body,method.request.choosen.headers,api_idx,method_idx)">Send Request</a>
+                                                                <a class="waves-effect waves-light btn b-margin" :class="[getThemeColor(method.name,true)]" @click="sendRequest(method.name,getURL(method,api.path),method.request.choosen.body,method.request.choosen.headers,api_idx,method_idx)">Send Request</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,7 +205,7 @@
             </div>
         </div>
     </div>
-    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Feb 18, 2017, 2:06 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
+    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Jun 3, 2017, 4:21 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
@@ -479,7 +492,7 @@
                     return result.join("&");
                 }
                 ,getURL: function(method,path){
-                    if((method.request.choosen.scheme === "http" && this.port['http'] == 80) || (method.request.choosen.scheme === "https" && this.port['http'] == 443)){
+                    if((method.request.choosen.scheme === "http" && this.port['http'] == 80) || (method.request.choosen.scheme === "https" && this.port['https'] == 443)){
                         return method.request.choosen.scheme+'://'+ this.host + this.basePath + this.computePath(method,path) + this.getUrlParamString(method);
                     }
                     var port = this.port[method.request.choosen.scheme] ? ":" + this.port[method.request.choosen.scheme]  : "";
@@ -565,6 +578,99 @@
                         return formData+"\r\n"+body;
                     }
                 }
+                , getThemeColor: function(method_name,withFontsColor){
+
+                    if(!withFontsColor){
+                        return this.bgColor[method_name.toUpperCase()] || this.bgColor["default"] || "blue" ;
+                    }
+
+                    var tmp = this.bgColor[method_name.toUpperCase()] || this.bgColor["default"] || "blue" ;
+                    switch(tmp){
+                        case "yellow":
+                        case "lime":
+                        case "white":
+                            return "black-text " + tmp;
+                        default:
+                            return "white-text " + tmp;
+                    }
+                }
+                , toggleConsole: function(event){
+
+                    if(event){
+                      var keycode = event.keyCode;
+                      if(keycode !== 192 || !event.ctrlKey){
+                          return;
+                      }
+                    }
+
+                    this.showConsole = !this.showConsole;
+                    if(this.showConsole){
+                      var self = this;
+                      Vue.nextTick(function () {
+                        self.$refs.txtConsole.focus();
+                      });
+                    }
+                }
+
+                , autoComplete: function(){
+                    if(!this.console){
+                        return;
+                    }
+
+                    if("add header -g".startsWith(this.console)){
+                        this.console = "add header -g ";
+                    }
+
+                    if("remove header -g".startsWith(this.console)){
+                        this.console = "remove header -g ";
+                    }
+
+                    if("clear".startsWith(this.console)){
+                        this.console = "clear";
+                    }
+                }
+                , parseCmd: function(){
+                    var tokens = this.console.split(" ");
+                    if(tokens[0] === "add"){
+                        if(tokens[1] === "header"){
+                            if(tokens[2] === "-g"){
+                                var header = tokens[3];
+                                var val = tokens.length > 5 ? tokens.slice(4).join(" ") : tokens[4];
+                                for(var i = 0;i<this.apis.length;i++){
+                                    var api = this.apis[i];
+                                    for(var j=0;j<api.methods.length;j++){
+                                        var method = api.methods[j];
+                                        Vue.set(method.request.choosen.headers,header,val);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(tokens[0] === "remove"){
+                        if(tokens[1] === "header"){
+                            if(tokens[2] === "-g"){
+                                var header = tokens[3];
+                                var val = tokens.length > 5 ? tokens.slice(4).join(" ") : tokens[4];
+                                for(var i = 0;i<this.apis.length;i++){
+                                    var api = this.apis[i];
+                                    for(var j=0;j<api.methods.length;j++){
+                                        var method = api.methods[j];
+                                        delete method.request.choosen.headers[header];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if(tokens[0] === "clear"){
+                        this.console = "";
+                        this.consoleLogs = [];
+                    }
+                    else{
+                        this.consoleLogs.push("> "+this.console);
+                    }
+                    this.console = "";
+                }
             }
             , data: {
   "name": "Uber API",
@@ -579,6 +685,13 @@
   "currentHost": location.host || "null",
   "currentScheme": location.protocol.replace(":",""),
   "search": "",
+  "bgColor": {
+    "default": "blue"
+  },
+  "fixedNav": true,
+  "showConsole": false,
+  "consoleLogs": [],
+  "console": "",
   "apis": [
     {
       "path": "/products",
@@ -586,10 +699,11 @@
       "showMe": true,
       "methods": [
         {
-          "name": "get",
+          "name": "GET",
           "visible": true,
           "tags": [
-            "Products"
+            "Products",
+            "GET"
           ],
           "summary": "<p>Product Types</p>\n",
           "desc": "<p>The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.</p>\n",
@@ -617,7 +731,7 @@
             {
               "code": "200",
               "desc": "An array of products",
-              "schema": "[\n  {\n    \"product_id\": \"string\",\n    \"description\": \"string\",\n    \"display_name\": \"string\",\n    \"capacity\": \"string\",\n    \"image\": \"string\"\n  }\n]",
+              "schema": "[\n  {\n    \"product_id\": \"string\"     /* Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. */\n    \"description\": \"string\"     /* Description of product. */\n    \"display_name\": \"string\"     /* Display name of product. */\n    \"capacity\": \"string\"     /* Capacity of product. For example, 4 people. */\n    \"image\": \"string\"     /* Image URL representing the product. */\n  }\n]",
               "schemaState": []
             },
             {
@@ -653,9 +767,11 @@
       "showMe": true,
       "methods": [
         {
-          "name": "get",
+          "name": "GET",
           "visible": true,
           "tags": [
+            "price",
+            "GET",
             "Estimates"
           ],
           "summary": "<p>Price Estimates</p>\n",
@@ -702,7 +818,7 @@
             {
               "code": "200",
               "desc": "An array of price estimates by product",
-              "schema": "[\n  {\n    \"product_id\": \"string\",\n    \"currency_code\": \"string\",\n    \"display_name\": \"string\",\n    \"estimate\": \"string\",\n    \"low_estimate\": \"number\",\n    \"high_estimate\": \"number\",\n    \"surge_multiplier\": \"number\"\n  }\n]",
+              "schema": "[\n  {\n    \"product_id\": \"string\"     /* Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles */\n    \"currency_code\": \"string\"     /* [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. */\n    \"display_name\": \"string\"     /* Display name of product. */\n    \"estimate\": \"string\"     /* Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or \"Metered\" for TAXI. */\n    \"low_estimate\": \"number\"     /* Lower bound of the estimated price. */\n    \"high_estimate\": \"number\"     /* Upper bound of the estimated price. */\n    \"surge_multiplier\": \"number\"     /* Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier. */\n  }\n]",
               "schemaState": []
             },
             {
@@ -738,9 +854,11 @@
       "showMe": true,
       "methods": [
         {
-          "name": "get",
+          "name": "GET",
           "visible": true,
           "tags": [
+            "time",
+            "GET",
             "Estimates"
           ],
           "summary": "<p>Time Estimates</p>\n",
@@ -785,7 +903,7 @@
             {
               "code": "200",
               "desc": "An array of products",
-              "schema": "[\n  {\n    \"product_id\": \"string\",\n    \"description\": \"string\",\n    \"display_name\": \"string\",\n    \"capacity\": \"string\",\n    \"image\": \"string\"\n  }\n]",
+              "schema": "[\n  {\n    \"product_id\": \"string\"     /* Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. */\n    \"description\": \"string\"     /* Description of product. */\n    \"display_name\": \"string\"     /* Display name of product. */\n    \"capacity\": \"string\"     /* Capacity of product. For example, 4 people. */\n    \"image\": \"string\"     /* Image URL representing the product. */\n  }\n]",
               "schemaState": []
             },
             {
@@ -821,10 +939,12 @@
       "showMe": true,
       "methods": [
         {
-          "name": "get",
+          "name": "GET",
           "visible": true,
           "tags": [
-            "User"
+            "me",
+            "User",
+            "GET"
           ],
           "summary": "<p>User Profile</p>\n",
           "desc": "<p>The User Profile endpoint returns information about the Uber user that has authorized with the application.</p>\n",
@@ -833,7 +953,7 @@
             {
               "code": "200",
               "desc": "Profile information for a user",
-              "schema": "{\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"email\": \"string\",\n  \"picture\": \"string\",\n  \"promo_code\": \"string\"\n}",
+              "schema": "{\n  \"first_name\": \"string\"     /* First name of the Uber user. */\n  \"last_name\": \"string\"     /* Last name of the Uber user. */\n  \"email\": \"string\"     /* Email address of the Uber user */\n  \"picture\": \"string\"     /* Image URL of the Uber user. */\n  \"promo_code\": \"string\"     /* Promo code of the Uber user. */\n}",
               "schemaState": []
             },
             {
@@ -869,10 +989,12 @@
       "showMe": true,
       "methods": [
         {
-          "name": "get",
+          "name": "GET",
           "visible": true,
           "tags": [
-            "User"
+            "history",
+            "User",
+            "GET"
           ],
           "summary": "<p>User Activity</p>\n",
           "desc": "<p>The User Activity endpoint returns data about a user&#39;s lifetime activity with Uber. The response will include pickup locations and times, dropoff locations and times, the distance of past requests, and information about which products were requested.&lt;br&gt;&lt;br&gt;The history array in the response will have a maximum length based on the limit parameter. The response value count may exceed limit, therefore subsequent API requests may be necessary.</p>\n",
@@ -898,7 +1020,7 @@
             {
               "code": "200",
               "desc": "History information for the given user",
-              "schema": "{\n  \"offset\": \"integer\",\n  \"limit\": \"integer\",\n  \"count\": \"integer\",\n  \"history\": [\n    {\n      \"uuid\": \"string\"\n    }\n  ]\n}",
+              "schema": "{\n  \"offset\": \"integer\"     /* Position in pagination. */\n  \"limit\": \"integer\"     /* Number of items to retrieve (100 max). */\n  \"count\": \"integer\"     /* Total number of items available. */\n  \"history\": [\n    {\n      \"uuid\": \"string\"     /* Unique identifier for the activity */\n    }\n  ]\n}",
               "schemaState": []
             },
             {
@@ -930,9 +1052,24 @@
     }
   ]
 }
+            , mounted: function(){
+                document.body.addEventListener('keyup', this.toggleConsole);
+            }
         };
         var vm = new Vue(context);
         document.title = context.data.name;
+
+        $(function(){
+            function fixDiv() {
+                var consolePanel = $('#consolePanel');
+                consolePanel.css({
+                    'position': 'fixed',
+                    'bottom': '0px'
+                });
+          }
+          $(window).scroll(fixDiv);
+          fixDiv();
+        });
     </script>
 </body>
 </html>
