@@ -275,7 +275,12 @@ function resolveNested(schema, def) {
                     }
                     else {
                         comment = schema.properties[prop].description ? "/*" + escapeComment(schema.properties[prop].description) + "*/" : "";
-                        keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"' + comment);
+                        if (schema.properties[prop]["type"]) {
+                            keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"' + comment);
+                        }
+                        else {
+                            keyval.push('"' + prop + '":""' + comment);
+                        }
                     }
                 }
                 comment = schema.description ? comment = "/*" + escapeComment(schema.description) + "*/" : "";
