@@ -78,6 +78,19 @@ prettySwag.run(input,output,config,function(err){
 });
 ```
 
+When `dst` equals `null`, no file will be written and the html will be returned as second parameter.
+```javascript
+...
+prettySwag.run(input,null,config,function(err,data){
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log(data); // Plain html
+    }
+});
+```
+
 ## Command switch
 
 | Switch         | Name            | Optional | Description                                                                                |
@@ -118,6 +131,7 @@ Valid keys are:
  - noRequest
  - indent
  - collapse
+ - customCSS
 
 **Example of Configuration file**
 ```javascript
@@ -206,27 +220,7 @@ Valid keys are:
 | remove header -g \<key\> \<value\>  | Remove a given header from all paths/methods   |
 
 
-## Features
 
-**Search by Tag**
-![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/search.gif?raw=true)
-
----------------------------------------
-
-**Collapsible Panel**
-![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/collapsible.gif?raw=true)
-
----------------------------------------
-
-**Fold / Unfold Schema**
-![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/foldable.gif?raw=true)
-
----------------------------------------
-
-**Live Request / Response Feedback**
-![Image shows search feature](https://raw.githubusercontent.com/twskj/pretty-swag/gh-pages/images/liveReqRes.gif?raw=true)
-
----------------------------------------
-
-
-[![analytics](http://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https://twskj.github.io/pretty-swag&_u=MAC~&cid=1757014354.1393964045&tid=UA-91877741-1)]()
+## License
+ 
+The contents of this repository are covered under the [MIT License](LICENSE)
