@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>.pointer,footer>a{cursor:pointer}[v-cloak]{display:none}body{background:#fdfdfd}.indent{padding-left:1em}.r-margin{margin-right:2em}.r-indent{padding-right:1em}.padding-all{padding:1em}.b-margin{margin-bottom:1em}no-overflow{overflow:auto}.bold{font-weight:700}.api-block{border:1px solid;margin:.5rem 0 1.5rem}.margin-bottom-1rem,.api-header{font-size:13pt}.api-header>.api-title{font-size:13pt;padding:.5em;display:inline-block}.tag-container{padding:1em .3em 0 .3em;height:2.2em}.tag-container>.tag{display:inline-block;margin-right:10px;padding:0 .5rem;white-space:nowrap;position:relative;min-width:3rem;text-align:center;background:linear-gradient(to bottom,#fed970 0,#febc4a 100%);background-color:#FEC95B;color:#963;font-weight:700;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.4);border-top:1px solid #EDB14A;border-bottom:1px solid #CE922E;border-right:1px solid #DCA03B;border-left:1px solid #EDB14A;border-radius:3px;box-shadow:inset 0 1px #FEE395,0 1px 2px rgba(0,0,0,.21)}.round-border{border-radius:3px}.showReqBtn{padding:1rem 0}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-leave-active{transition:opacity .05s}.fade-enter,.fade-leave-to{opacity:0}.tool-panel{border:1px solid #9e9e9e;padding:1em 1em 0 1em;margin:1rem 0 1rem 0}[type=radio].with-gap:checked+label:before{border-radius:50%;border:2px solid #2196f3}[type=radio].with-gap:checked+label:after{border-radius:50%;border:2px solid #2196f3;background-color:#2196f3;z-index:0;-webkit-transform:scale(.5);-moz-transform:scale(.5);-ms-transform:scale(.5);-o-transform:scale(.5);transform:scale(.5)}.input-field input[type=text]:focus+label{color:#666}.input-field input[type=text]:focus{border-bottom:1px solid #64b5f6;box-shadow:0 1px 0 0 #42a5f5}textarea{white-space:pre;overflow:scroll;overflow-x:scroll;overflow-y:scroll;height:10em}.console{font-family:monospace;font-weight:400;font-style:normal}.warning-yellow-border{border-color:#ffc400}blockquote{padding:.5em 0 .5em 1em}#toast-container{min-width:100%;bottom:0;top:95%;right:0;left:0}::-webkit-input-placeholder{color:#DDD}::-moz-placeholder{color:#DDD}:-ms-input-placeholder{color:#DDD}:-moz-placeholder{color:#DDD}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.navButtonContainer{position:absolute;top:0;right:1rem}.navButton{padding:0 1rem}footer>a{color:#f5f5f5}td{vertical-align:top}h1{font-size:2.75rem}h2{font-size:2.2rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.5rem}h6{font-size:1.28rem}table.fixed{table-layout:fixed}table.fixed td{overflow-x:auto}th.status{width:64px}th.desc{width:256px}no-padding-bot{padding-bottom:0}.red-border{border-color:#ff8a80}.pink-border{border-color:#ff80ab}.purple-border{border-color:#ea80fc}.deep-purple-border{border-color:#b388ff}.indigo-border{border-color:#8c9eff}.blue-border{border-color:#82b1ff}.light-blue-border{border-color:#80d8ff}.cyan-border{border-color:#4dd0e1}.teal-border{border-color:#80cbc4}.green-border{border-color:#4caf50}.light-green-border{border-color:#aed581}.lime-border{border-color:#c0ca33}.yellow-border{border-color:#fdd835}.amber-border{border-color:#ffb300}.orange-border{border-color:#ffd180}.deep-orange-border{border-color:#ff9e80}.brown-border{border-color:#bcaaa4}.grey-border{border-color:#bdbdbd}.blue-grey-border{border-color:#90a4ae}.white-border{border-color:#fdfdfd}.slide-vert-enter-active{transition:all .4s ease}.slide-vert-leave-active{transition:all .2s ease}.slide-vert-enter,.slide-vert-leave-to{transform:translateY(100%)}</style>
+    <meta charset="UTF-8">
+    <style>.pointer,footer>a{cursor:pointer}[v-cloak]{display:none}body{background:#fdfdfd}.indent{padding-left:1em}.r-margin{margin-right:2em}.r-indent{padding-right:1em}.padding-all{padding:1em}.b-margin{margin-bottom:1em}no-overflow{overflow:auto}.bold{font-weight:700}.api-block{border:1px solid;margin:.5rem 0 1.5rem}.margin-bottom-1rem,.api-header{font-size:13pt}.api-header>.api-title{font-size:13pt;padding:.5em;display:inline-block}.tag-container{padding:1em .3em 0 .3em;height:2.2em}.tag-container>.tag{display:inline-block;margin-right:10px;padding:0 .5rem;white-space:nowrap;position:relative;min-width:3rem;text-align:center;background:linear-gradient(to bottom,#fed970 0,#febc4a 100%);background-color:#FEC95B;color:#963;font-weight:700;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.4);border-top:1px solid #EDB14A;border-bottom:1px solid #CE922E;border-right:1px solid #DCA03B;border-left:1px solid #EDB14A;border-radius:3px;box-shadow:inset 0 1px #FEE395,0 1px 2px rgba(0,0,0,.21)}.round-border{border-radius:3px}.showReqBtn{padding:1rem 0}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-leave-active{transition:opacity .05s}.fade-enter,.fade-leave-to{opacity:0}.tool-panel{border:1px solid #9e9e9e;padding:1em 1em 0 1em;margin:1rem 0 1rem 0}[type=radio].with-gap:checked+label:before{border-radius:50%;border:2px solid #555555}[type=radio].with-gap:checked+label:after{border-radius:50%;border:1px solid #2196f3;background-color:#2196f3;z-index:0;-webkit-transform:scale(.5);-moz-transform:scale(.5);-ms-transform:scale(.5);-o-transform:scale(.5);transform:scale(.5)}input[type=text]:focus:not([readonly])+label{color:#666}input[type=text]:focus:not([readonly]){border-bottom:1px solid #64b5f6;box-shadow:0 1px 0 0 #42a5f5}textarea{white-space:pre;overflow:scroll;overflow-x:scroll;overflow-y:scroll;height:10em}.console{font-family:monospace;font-weight:400;font-style:normal}.warning-yellow-border{border-color:#ffc400}blockquote{padding:.5em 0 .5em 1em}#toast-container{min-width:100%;bottom:0;top:95%;right:0;left:0}::-webkit-input-placeholder{color:#DDD}::-moz-placeholder{color:#DDD}:-ms-input-placeholder{color:#DDD}:-moz-placeholder{color:#DDD}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.navButtonContainer{position:absolute;top:0;right:1rem}.navButton{padding:0 1rem}footer>a{color:#f5f5f5}td{vertical-align:top}h1{font-size:2.75rem}h2{font-size:2.2rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.5rem}h6{font-size:1.28rem}table.fixed{table-layout:fixed}table.fixed td{overflow-x:auto}th.status{width:64px}th.desc{width:256px}no-padding-bot{padding-bottom:0}.red-border{border-color:#ff8a80}.pink-border{border-color:#ff80ab}.purple-border{border-color:#ea80fc}.deep-purple-border{border-color:#b388ff}.indigo-border{border-color:#8c9eff}.blue-border{border-color:#82b1ff}.light-blue-border{border-color:#80d8ff}.cyan-border{border-color:#4dd0e1}.teal-border{border-color:#80cbc4}.green-border{border-color:#4caf50}.light-green-border{border-color:#aed581}.lime-border{border-color:#c0ca33}.yellow-border{border-color:#fdd835}.amber-border{border-color:#ffb300}.orange-border{border-color:#ffd180}.deep-orange-border{border-color:#ff9e80}.brown-border{border-color:#bcaaa4}.grey-border{border-color:#bdbdbd}.blue-grey-border{border-color:#90a4ae}.white-border{border-color:#fdfdfd}.slide-vert-enter-active{transition:all .4s ease}.slide-vert-leave-active{transition:all .2s ease}.slide-vert-enter,.slide-vert-leave-to{transform:translateY(100%)}table.compact input{margin:0;border-bottom:0;height:1rem}</style>
     <title></title>
 </head>
 <body>
@@ -113,17 +114,17 @@
                                                     <div class="request-panel" v-if="method.showTool">
                                                         <h5>Request</h5>
                                                         <div class="tool-panel round-border">
-                                                            <p class="600">Scheme</p>
+                                                            <p class="bold">Scheme</p>
                                                             <p>
                                                                 <form>
                                                                     <span v-for="(scheme,idx) in method.request.schemes">
                                                                         <input class="with-gap" v-bind:name="scheme" type="radio" v-bind:value="scheme" v-bind:id="api_idx+'_'+method_idx+'_'+scheme" v-model="method.request.choosen.scheme"/>
-                                                                        <label class="r-margin" v-bind:for="api_idx+'_'+method_idx+'_'+scheme" v-bind:class="method.request.choosen.scheme === scheme ? 'bold black-text' : ''">{{scheme}}</label>
+                                                                        <label class="r-margin" v-bind:for="api_idx+'_'+method_idx+'_'+scheme" v-bind:class="method.request.choosen.scheme === scheme ? 'black-text' : ''">{{scheme}}</label>
                                                                     </span>
                                                                 </form>
                                                             </p>
-                                                            <p>HTTP Headers</p>
-                                                            <table class="bordered" v-if="Object.keys(method.request.choosen.headers).length !== 0">
+                                                            <p class="bold">HTTP Headers</p>
+                                                            <table class="highlight compact" v-if="Object.keys(method.request.choosen.headers).length !== 0">
                                                                 <colgroup>
                                                                     <col span="1" style="width: 42%;">
                                                                     <col span="1" style="width: 48%;">
@@ -161,7 +162,7 @@
                                                             <div class="tool-panel round-border">
                                                                 <div v-for="(param,param_idx) in method.params">
                                                                     <div class="input-field" v-if="param.location !== 'body' && param.location !== 'header'">
-                                                                        <label v-bind:for="api_idx+'_'+method_idx+'_'+param.name">{{param.name}}</label>
+                                                                        <label v-bind:for="api_idx+'_'+method_idx+'_'+param.name" :class="[method.params[param_idx].value ? 'active' : '']">{{param.name}}</label>
                                                                         <input v-bind:id="api_idx+'_'+method_idx+'_'+param.name" type="text" v-model="method.params[param_idx].value">
                                                                     </div>
                                                                 </div>
@@ -204,7 +205,7 @@
             </div>
         </div>
     </div>
-    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Mar 4, 2017, 11:14 AM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
+    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Jun 3, 2017, 4:15 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
@@ -491,7 +492,7 @@
                     return result.join("&");
                 }
                 ,getURL: function(method,path){
-                    if((method.request.choosen.scheme === "http" && this.port['http'] == 80) || (method.request.choosen.scheme === "https" && this.port['http'] == 443)){
+                    if((method.request.choosen.scheme === "http" && this.port['http'] == 80) || (method.request.choosen.scheme === "https" && this.port['https'] == 443)){
                         return method.request.choosen.scheme+'://'+ this.host + this.basePath + this.computePath(method,path) + this.getUrlParamString(method);
                     }
                     var port = this.port[method.request.choosen.scheme] ? ":" + this.port[method.request.choosen.scheme]  : "";
@@ -673,7 +674,7 @@
             }
             , data: {
   "name": "Swagger Petstore",
-  "summary": "<p>This is a sample server Petstore server.</p>\n<p><a href=\"http://swagger.io\">Learn about Swagger</a> or join the IRC channel <code>#swagger</code> on irc.freenode.net.</p>\n<p>For this sample, you can use the api key <code>special-key</code> to test the authorization filters</p>\n",
+  "summary": "<p>This is a <strong>sample server</strong> Petstore server.</p>\n<p><a href=\"http://swagger.io\">Learn about Swagger</a> or join the IRC channel <code>#swagger</code> on irc.freenode.net.</p>\n<p>For this sample, you can use the api key <code>special-key</code> to test the authorization filters</p>\n",
   "version": "1.0.0",
   "host": "petstore.swagger.io",
   "port": {
@@ -701,8 +702,8 @@
           "name": "POST",
           "visible": true,
           "tags": [
-            "POST",
-            "pet"
+            "pet",
+            "POST"
           ],
           "summary": "<p>Add a new pet to the store</p>\n",
           "desc": "",
@@ -747,8 +748,8 @@
           "name": "PUT",
           "visible": true,
           "tags": [
-            "PUT",
-            "pet"
+            "pet",
+            "PUT"
           ],
           "summary": "<p>Update an existing pet</p>\n",
           "desc": "",
@@ -812,9 +813,9 @@
           "name": "GET",
           "visible": true,
           "tags": [
-            "GET",
-            "findByStatus",
-            "pet"
+            "pet",
+            "findbystatus",
+            "GET"
           ],
           "summary": "<p>Finds Pets by status</p>\n",
           "desc": "<p>Multiple status values can be provided with comma seperated strings</p>\n",
@@ -872,9 +873,9 @@
           "name": "GET",
           "visible": true,
           "tags": [
-            "GET",
-            "findByTags",
-            "pet"
+            "pet",
+            "findbytag",
+            "GET"
           ],
           "summary": "<p>Finds Pets by tags</p>\n",
           "desc": "<p>Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.</p>\n",
@@ -932,8 +933,8 @@
           "name": "GET",
           "visible": true,
           "tags": [
-            "GET",
-            "pet"
+            "pet",
+            "GET"
           ],
           "summary": "<p>Find pet by ID</p>\n",
           "desc": "<p>Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions</p>\n",
@@ -990,8 +991,8 @@
           "name": "POST",
           "visible": true,
           "tags": [
-            "POST",
-            "pet"
+            "pet",
+            "POST"
           ],
           "summary": "<p>Updates a pet in the store with form data</p>\n",
           "desc": "",
@@ -1054,8 +1055,8 @@
           "name": "DELETE",
           "visible": true,
           "tags": [
-            "DELETE",
-            "pet"
+            "pet",
+            "DELETE"
           ],
           "summary": "<p>Deletes a pet</p>\n",
           "desc": "",
@@ -1116,9 +1117,9 @@
           "name": "POST",
           "visible": true,
           "tags": [
-            "POST",
+            "store",
             "order",
-            "store"
+            "POST"
           ],
           "summary": "<p>Place an order for a pet</p>\n",
           "desc": "",
@@ -1176,9 +1177,9 @@
           "name": "GET",
           "visible": true,
           "tags": [
-            "GET",
+            "store",
             "order",
-            "store"
+            "GET"
           ],
           "summary": "<p>Find purchase order by ID</p>\n",
           "desc": "<p>For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions</p>\n",
@@ -1235,9 +1236,9 @@
           "name": "DELETE",
           "visible": true,
           "tags": [
-            "DELETE",
+            "store",
             "order",
-            "store"
+            "DELETE"
           ],
           "summary": "<p>Delete purchase order by ID</p>\n",
           "desc": "<p>For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors</p>\n",
@@ -1295,8 +1296,8 @@
           "name": "POST",
           "visible": true,
           "tags": [
-            "POST",
-            "user"
+            "user",
+            "POST"
           ],
           "summary": "<p>Create user</p>\n",
           "desc": "<p>This can only be done by the logged in user.</p>\n",
@@ -1348,9 +1349,9 @@
           "name": "POST",
           "visible": true,
           "tags": [
-            "POST",
-            "createWithArray",
-            "user"
+            "user",
+            "createwitharray",
+            "POST"
           ],
           "summary": "<p>Creates list of users with given input array</p>\n",
           "desc": "",
@@ -1402,9 +1403,9 @@
           "name": "POST",
           "visible": true,
           "tags": [
-            "POST",
-            "createWithList",
-            "user"
+            "user",
+            "createwithlist",
+            "POST"
           ],
           "summary": "<p>Creates list of users with given input array</p>\n",
           "desc": "",
@@ -1456,9 +1457,9 @@
           "name": "GET",
           "visible": true,
           "tags": [
-            "GET",
+            "user",
             "login",
-            "user"
+            "GET"
           ],
           "summary": "<p>Logs user into the system</p>\n",
           "desc": "",
@@ -1525,9 +1526,9 @@
           "name": "GET",
           "visible": true,
           "tags": [
-            "GET",
+            "user",
             "logout",
-            "user"
+            "GET"
           ],
           "summary": "<p>Logs out current logged in user session</p>\n",
           "desc": "",
@@ -1569,8 +1570,8 @@
           "name": "GET",
           "visible": true,
           "tags": [
-            "GET",
-            "user"
+            "user",
+            "GET"
           ],
           "summary": "<p>Get user by user name</p>\n",
           "desc": "",
@@ -1627,8 +1628,8 @@
           "name": "PUT",
           "visible": true,
           "tags": [
-            "PUT",
-            "user"
+            "user",
+            "PUT"
           ],
           "summary": "<p>Updated user</p>\n",
           "desc": "<p>This can only be done by the logged in user.</p>\n",
@@ -1688,8 +1689,8 @@
           "name": "DELETE",
           "visible": true,
           "tags": [
-            "DELETE",
-            "user"
+            "user",
+            "DELETE"
           ],
           "summary": "<p>Delete user</p>\n",
           "desc": "<p>This can only be done by the logged in user.</p>\n",
