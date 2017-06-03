@@ -1,0 +1,1764 @@
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <style>.pointer,footer>a{cursor:pointer}[v-cloak]{display:none}body{background:#fdfdfd}.indent{padding-left:1em}.r-margin{margin-right:2em}.r-indent{padding-right:1em}.padding-all{padding:1em}.b-margin{margin-bottom:1em}no-overflow{overflow:auto}.bold{font-weight:700}.api-block{border:1px solid;margin:.5rem 0 1.5rem}.margin-bottom-1rem,.api-header{font-size:13pt}.api-header>.api-title{font-size:13pt;padding:.5em;display:inline-block}.tag-container{padding:1em .3em 0 .3em;height:2.2em}.tag-container>.tag{display:inline-block;margin-right:10px;padding:0 .5rem;white-space:nowrap;position:relative;min-width:3rem;text-align:center;background:linear-gradient(to bottom,#fed970 0,#febc4a 100%);background-color:#FEC95B;color:#963;font-weight:700;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.4);border-top:1px solid #EDB14A;border-bottom:1px solid #CE922E;border-right:1px solid #DCA03B;border-left:1px solid #EDB14A;border-radius:3px;box-shadow:inset 0 1px #FEE395,0 1px 2px rgba(0,0,0,.21)}.round-border{border-radius:3px}.showReqBtn{padding:1rem 0}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-leave-active{transition:opacity .05s}.fade-enter,.fade-leave-to{opacity:0}.tool-panel{border:1px solid #9e9e9e;padding:1em 1em 0 1em;margin:1rem 0 1rem 0}[type=radio].with-gap:checked+label:before{border-radius:50%;border:2px solid #555555}[type=radio].with-gap:checked+label:after{border-radius:50%;border:1px solid #000000;background-color:#000000;z-index:0;-webkit-transform:scale(.5);-moz-transform:scale(.5);-ms-transform:scale(.5);-o-transform:scale(.5);transform:scale(.5)}input[type=text]:focus:not([readonly])+label{color:#666}input[type=text]:focus:not([readonly]){border-bottom:1px solid #000000;box-shadow:0 1px 0 0 #000000}textarea{white-space:pre;overflow:scroll;overflow-x:scroll;overflow-y:scroll;height:10em}.console{font-family:monospace;font-weight:400;font-style:normal}.warning-yellow-border{border-color:#ffc400}blockquote{padding:.5em 0 .5em 1em}#toast-container{min-width:100%;bottom:0;top:95%;right:0;left:0}::-webkit-input-placeholder{color:#DDD}::-moz-placeholder{color:#DDD}:-ms-input-placeholder{color:#DDD}:-moz-placeholder{color:#DDD}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.navButtonContainer{position:absolute;top:0;right:1rem}.navButton{padding:0 1rem}footer>a{color:#f5f5f5}td{vertical-align:top}h1{font-size:2.75rem}h2{font-size:2.2rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.5rem}h6{font-size:1.28rem}table.fixed{table-layout:fixed}table.fixed td{overflow-x:auto}th.status{width:64px}th.desc{width:256px}no-padding-bot{padding-bottom:0}.red-border{border-color:#ff8a80}.pink-border{border-color:#ff80ab}.purple-border{border-color:#ea80fc}.deep-purple-border{border-color:#b388ff}.indigo-border{border-color:#8c9eff}.blue-border{border-color:#82b1ff}.light-blue-border{border-color:#80d8ff}.cyan-border{border-color:#4dd0e1}.teal-border{border-color:#80cbc4}.green-border{border-color:#4caf50}.light-green-border{border-color:#aed581}.lime-border{border-color:#c0ca33}.yellow-border{border-color:#fdd835}.amber-border{border-color:#ffb300}.orange-border{border-color:#ffd180}.deep-orange-border{border-color:#ff9e80}.brown-border{border-color:#bcaaa4}.grey-border{border-color:#bdbdbd}.blue-grey-border{border-color:#90a4ae}.white-border{border-color:#fdfdfd}.slide-vert-enter-active{transition:all .4s ease}.slide-vert-leave-active{transition:all .2s ease}.slide-vert-enter,.slide-vert-leave-to{transform:translateY(100%)}table.compact input{margin:0;border-bottom:0;height:1rem}</style>
+    <title></title>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div :class="[fixedNav ? 'navbar-fixed':'']">
+            <nav :class="getThemeColor('default')" role="navigation">
+                <div class="nav-wrapper container">
+                    <div class="input-field">
+                        <input id="search" type="search" placeholder="search by tag" title="Use - prefix to exclude unwanted tags. Ex: -POST" required v-model="filterByTag" @keyup.enter="$event.target.blur()">
+                        <label class="label-icon" for="search"><i class="material-icons">search by tags</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </div>
+                <div class="navButtonContainer">
+                    <a class="navButton pointer waves-effect waves-light" @click="collapseAllApi(false)">Collapse</a>
+                    <a class="navButton pointer waves-effect waves-light" @click="collapseAllApi(true)">Expand</a>
+                </div>
+            </nav>
+        </div>
+
+        <transition name="slide-vert">
+          <div v-show="showConsole" id="consolePanel" class="input-field" style="background-color: rgba(0,0,0,.67);color: whitesmoke; position: absolute; left:0;right:-1; z-index: 2; padding: 1.5rem;">
+            <div v-for="log in consoleLogs">{{log}}</div>
+            <input type="text" spellcheck="false" v-model="console" @keyup.enter="parseCmd" @keydown.tab.prevent @keyup.tab="autoComplete" ref="txtConsole">
+          </div>
+        </transition>
+
+        <div class="container">
+            <div class="section">
+                <h1 class="grey-text text-darken-3">{{name}}</h1>
+                <div class="indent">
+                    <p class="grey-text text-darken-1" v-html="summary"></p>
+                    <div><span class="bold">Version</span> <span class="grey-text text-darken-1">{{version}}</span></div>
+                    <div>
+                        <span class="bold">Available Tags: </span>{{getAllTags}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h5>Paths</h5>
+                <div class="indent" v-for="(api,api_idx) in apis" v-if="api.visible">
+                    <div class="indent">
+                        <div class="row pointer blue-text text-lighten-1"><span @click="api.showMe=!api.showMe">{{api.path}}</span></div>
+                        <transition name="fade">
+                            <div v-if="api.showMe">
+                                <div class="api-block round-border" :class="[getThemeColor(method.name)+'-border']" v-for="(method,method_idx) in api.methods" v-if="method.visible">
+                                    <div class="api-header lighten-5 round-border pointer" :class="[getThemeColor(method.name)]" @click="method.showMe = !method.showMe">
+                                        <div class="api-title light" :class="[getThemeColor(method.name,true)]">{{method.name}} {{api.path}}</div>
+                                    </div>
+                                    <transition name="fade">
+                                        <div v-if="method.showMe">
+                                            <div class="tag-container">
+                                                <div class="tag right pointer no-overflow" v-for="tag in method.tags" @click="addToSearch(tag)">{{tag}}</div>
+                                            </div>
+                                            <div class="indent r-indent">
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.summary">Summary</h5>
+                                                <p class="indent" v-if="method.summary" v-html="method.summary"></p>
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.desc">Description</h5>
+                                                <p class="indent" v-if="method.desc" v-html="method.desc"></p>
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.params.length > 0">Parameters</h5>
+                                                <table class="bordered" v-if="method.params.length > 0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Located In</th>
+                                                            <th>Description</th>
+                                                            <th>Required</th>
+                                                            <th>Schema</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="param in method.params">
+                                                            <td>{{param.name}}</td>
+                                                            <td>{{param.location}}</td>
+                                                            <td>{{param.desc}}</td>
+                                                            <td>{{param.required ? 'Yes':'No'}}</td>
+                                                            <td><pre><span v-for="token in getSchema(param.schema,param.schemaState)" v-bind:class="{pointer: isFoldable(token)}" @click="schemaClicked(token,param.schemaState)">{{token.val}}</span></pre></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <h5 :class="[getThemeColor('default')+'-text']" v-if="method.responses.length > 0">Responses</h5>
+                                                <table class="bordered fixed" v-if="method.responses.length > 0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="status">Code</th>
+                                                            <th class="desc">Description</th>
+                                                            <th>Schema</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="res in method.responses">
+                                                            <td v-bind:class="[res.code === '200' ? 'green-text darken-2' : '']" >{{res.code}}</td>
+                                                            <td>{{res.desc}}</td>
+                                                            <td><pre><span v-for="token in getSchema(res.schema,res.schemaState)" v-bind:class="{pointer: isFoldable(token)}" @click="schemaClicked(token,res.schemaState)">{{token.val}}</span></pre></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="showReqBtn" v-if="host">
+                                                    <a class="btn waves-effect" :class="[getThemeColor(method.name,true)]" @click="method.showTool = true" v-if="!method.showTool"><i class="material-icons left">mode_edit</i>Try this operation</a>
+                                                    <a class="right pointer" @click="method.showTool = false" v-else>Hide</a>
+                                                </div>
+
+                                                <transition name="fade">
+                                                    <div class="request-panel" v-if="method.showTool">
+                                                        <h5>Request</h5>
+                                                        <div class="tool-panel round-border">
+                                                            <p class="bold">Scheme</p>
+                                                            <p>
+                                                                <form>
+                                                                    <span v-for="(scheme,idx) in method.request.schemes">
+                                                                        <input class="with-gap" v-bind:name="scheme" type="radio" v-bind:value="scheme" v-bind:id="api_idx+'_'+method_idx+'_'+scheme" v-model="method.request.choosen.scheme"/>
+                                                                        <label class="r-margin" v-bind:for="api_idx+'_'+method_idx+'_'+scheme" v-bind:class="method.request.choosen.scheme === scheme ? 'black-text' : ''">{{scheme}}</label>
+                                                                    </span>
+                                                                </form>
+                                                            </p>
+                                                            <p class="bold">HTTP Headers</p>
+                                                            <table class="highlight compact" v-if="Object.keys(method.request.choosen.headers).length !== 0">
+                                                                <colgroup>
+                                                                    <col span="1" style="width: 42%;">
+                                                                    <col span="1" style="width: 48%;">
+                                                                    <col span="1" style="width: 10%;">
+                                                                </colgroup>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Value</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr v-for="(value, key) in method.request.choosen.headers">
+                                                                        <td>{{key}}</td>
+                                                                        <td><input type="text" v-model="method.request.choosen.headers[key]"></td>
+                                                                        <td><a class="pointer" @click="removeFromHeaderList(key,method.request.choosen)">Remove</a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="row">
+                                                                <div class="input-field col s5">
+                                                                    <input v-bind:id="api_idx+'_'+method_idx+'_headerName'" type="text" @keyup.enter="addToHeaderList(method.request.choosen,api_idx+'_'+method_idx+'_headerName')" v-model="method.request.choosen.headerName">
+                                                                    <label v-bind:for="api_idx+'_'+method_idx+'_headerName'">name</label>
+                                                                </div>
+                                                                <div class="input-field col s6">
+                                                                    <input v-bind:id="api_idx+'_'+method_idx+'_headerValue'" type="text" @keyup.enter="addToHeaderList(method.request.choosen,api_idx+'_'+method_idx+'_headerName')" v-model="method.request.choosen.headerValue">
+                                                                    <label v-bind:for="api_idx+'_'+method_idx+'_headerValue'">value</label>
+                                                                </div>
+                                                                <div class="input-field col s1">
+                                                                    <a class="btn-floating btn-large waves-effect waves-light" :class="[getThemeColor(method.name,true)]" @click="addToHeaderList(method.request.choosen,api_idx+'_'+method_idx+'_headerName')"><i class="material-icons">add</i></a>
+                                                                </div>
+                                                            </div>
+                                                            <h5>Parameters</h5>
+                                                            <div class="tool-panel round-border">
+                                                                <div v-for="(param,param_idx) in method.params">
+                                                                    <div class="input-field" v-if="param.location !== 'body' && param.location !== 'header'">
+                                                                        <label v-bind:for="api_idx+'_'+method_idx+'_'+param.name" :class="[method.params[param_idx].value ? 'active' : '']">{{param.name}}</label>
+                                                                        <input v-bind:id="api_idx+'_'+method_idx+'_'+param.name" type="text" v-model="method.params[param_idx].value">
+                                                                    </div>
+                                                                </div>
+                                                                <div v-if="hasBodyParam(method.params)">
+                                                                    <label  v-bind:for="api_idx+'_'+method_idx+'_requestBody'">Raw Body</label>
+                                                                    <textarea v-bind:id="api_idx+'_'+method_idx+'_requestBody'" v-model="method.request.choosen.body"></textarea>
+                                                                </div>
+                                                                <h6 class="grey-text">Request</h6>
+                                                                <div class="grey lighten-3 console padding-all">
+                                                                    <span class="bold red-text">{{method.name.toUpperCase()}}</span> <a v-bind:href="getURL(method,api.path)">{{getURL(method,api.path)}}</a> HTTP/1.1
+                                                                    <div><span class="bold">Host:</span> {{host}}</div>
+                                                                    <div v-for="(value,key) in method.request.choosen.headers"><span class="bold">{{key}}:</span> {{value}}</div>
+                                                                    <div v-if="computeBody(method)"><pre>{{computeBody(method)}}</pre></div>
+                                                                </div>
+
+                                                                <h6 class="grey-text">Response</h6>
+                                                                <div class="grey lighten-3 console padding-all">
+                                                                    <textarea wrap='off' readonly>{{method.request.choosen.result}}</textarea>
+                                                                </div>
+
+                                                                <div v-if="mixContent(method.request.choosen)">
+                                                                    <blockquote class="warning-yellow-border yellow lighten-5"> <i class="material-icons left">warning</i> This is a Mixed Content call. Many browsers will block this by default. <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content" target="_blank">Learn more</a></blockquote>
+                                                                </div>
+                                                                <div v-else-if="crossDomain(method.request.choosen)">
+                                                                    <blockquote class="warning-yellow-border yellow lighten-5"> <i class="material-icons left">warning</i> This is a cross-origin call. Make sure the server at <span class="blue-text">{{getDestHost(method.request.choosen.scheme)}}</span> accepts POST requests from <span class="blue-text">{{currentHost}}</span>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">Learn more</a></blockquote>
+                                                                </div>
+                                                                <a class="waves-effect waves-light btn b-margin" :class="[getThemeColor(method.name,true)]" @click="sendRequest(method.name,getURL(method,api.path),method.request.choosen.body,method.request.choosen.headers,api_idx,method_idx)">Send Request</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </transition>
+                                            </div>
+                                        </div>
+                                    </transition>
+                                </div>
+                            </div>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Jun 3, 2017, 4:15 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/vue@2.1.10/dist/vue.min.js"></script>
+
+    <script>
+        var context = {
+            el: "#app"
+            , computed: {
+                filterByTag: {
+
+                    get: function () {
+                        return this.search;
+                    }
+                    ,set: function (newValue) {
+
+                        this.search = newValue;
+                        if(newValue == ""){
+                            this.setAllVisible(true);
+                            return;
+                        }
+                        newValue = newValue || "";
+                        var search_tags = newValue.toLowerCase().split(/[\s,]+/);
+                        var includeTags = [];
+                        var excludeTags = [];
+
+                        for(var i = 0;i<search_tags.length;i++){
+
+                            if(search_tags[i] === ""){
+                                continue;
+                            }
+                            else if(search_tags[i][0] === "-"){
+                                excludeTags.push(search_tags[i].substr(1));
+                            }
+                            else{
+                                includeTags.push(search_tags[i]);
+                            }
+                        }
+
+                        for(var i=0;i<this.apis.length;i++){
+
+                            var api_visible = false;
+                            var api = this.apis[i];
+                            for(var j=0;j<api.methods.length;j++){
+
+                                var method = api.methods[j];
+                                var visible = includeTags.length == 0;
+
+                                for(var k=0;k<method.tags.length;k++){
+                                    var tag = method.tags[k].toLowerCase();
+                                    if(excludeTags.indexOf(tag) > -1){
+                                        visible = false;
+                                        break;
+                                    }
+                                    for(var l=0;l<includeTags.length;l++){
+                                        if(tag.startsWith(includeTags[l])){
+                                            visible = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                method.visible = visible;
+                                if(visible){
+                                    api_visible = true;
+                                }
+                            }
+
+                            this.apis[i].visible = api_visible;
+                        }
+                    }
+                }
+                , getAllTags: function(){
+
+                    var result = {};
+                    for(var i=0;i<this.apis.length;i++){
+                        if(!this.apis[i].visible){
+                            continue;
+                        }
+                        var api = this.apis[i];
+                        for(var j=0;j<api.methods.length;j++){
+                            if(!api.methods[j].visible){
+                                continue;
+                            }
+                            var method = api.methods[j];
+                            if(!method.tags){
+                                break;
+                            }
+                            for(var k=0;k<method.tags.length;k++){
+                                result[method.tags[k]] = null;
+                            }
+                        }
+                    }
+
+                    return Object.keys(result).sort().join(", ");
+                }
+            }
+            , methods:{
+                addToHeaderList: function(container,to_be_focused_id){
+                    var name = container.headerName.trim();
+                    if(!name){
+                        return;
+                    }
+                    var val = container.headerValue.trim();
+                    Vue.set(container.headers,name,val);
+                    container.headerName = "";
+                    container.headerValue = "";
+                    Vue.nextTick(function() {
+                        document.getElementById(to_be_focused_id).focus();
+                    });
+                }
+                ,addToSearch: function(keyword){
+
+                    var tags = this.search.split(" ");
+                    tags = new Set(tags);
+                    if(tags.has(keyword)){
+                        return;
+                    }
+
+                    this.filterByTag = this.search+" "+keyword;
+                }
+                ,getDestHost: function(scheme){
+                    var dest_port = ":"+this.port[scheme];
+                    if((dest_port === ":80" && scheme == "http") || (dest_port == ":443" && scheme === "https")){
+                        dest_port = "";
+                    }
+                    return this.host+dest_port;
+                }
+                ,crossDomain: function(choosen){
+
+                    var abs_target_host = this.host+':'+this.port[choosen.scheme];
+                    var curr_port = location.port;
+                    var abs_curr_host = this.currentHost;
+                    if(!curr_port){
+                        if(this.currentScheme === 'https'){
+                            abs_curr_host += ":443";
+                        }
+                        else if(this.currentScheme === 'http'){
+                            abs_curr_host += ":80";
+                        }
+                    }
+                    return abs_curr_host !== abs_target_host;
+                }
+                ,mixContent: function(choosen){
+                    return (this.currentScheme === "https" && choosen.scheme === "http");
+                }
+                ,removeFromHeaderList: function(key, container){
+                    Vue.delete(container.headers, key);
+                }
+                ,collapseAllApi: function(bool){
+                    for(var i=0;i<this.apis.length;i++){
+                        this.apis[i].showMe = bool;
+                    }
+                }
+                ,setAllVisible: function(bool){
+
+                    for(var i=0;i<this.apis.length;i++){
+
+                        for(var j=0;j<this.apis[i].methods.length;j++){
+                            this.apis[i].methods[j].visible = bool;
+                        }
+                        this.apis[i].visible = bool;
+                    }
+                }
+                ,hasBodyParam: function(params){
+                    var location;
+                    for(var i = 0;i<params.length;i++){
+                        if(!params[i].location){
+                            continue;
+                        }
+                        location = params[i].location.toLowerCase();
+                        if(location === 'body'){
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                ,getSchema: function(schema,state){
+                    var tmp = schema.split("\n");
+                    var tokens = [];
+                    var fold = false;
+                    var fold_lv = 0;
+                    var current_lv;
+                    var close_token ="";
+                    var open_token ="";
+                    var comment = "";
+                    var comment_idx;
+                    for(var i = 0; i < tmp.length;i++){
+
+                        if(fold){
+                            current_lv = tmp[i].length - tmp[i].replace(/^\s+/,"").length;
+                            var closeBraceRegex = new RegExp("^\s*"+close_token+"\s*,?$");
+                            if(fold_lv == current_lv && closeBraceRegex.exec(tmp[i].trim())){
+                                fold = false;
+                                close_token = "";
+                                continue;
+                            }
+                        }
+                        else{
+                            if(state.indexOf(i) !== -1){
+                                fold = true;
+                                open_token = tmp[i].trim();
+                                if(this.is_an_object_value_open_w_optional_comment(open_token)){
+                                    var match = /([[{])/.exec(tmp[i]);
+                                    open_token = match[1];
+                                    var brace_loc = match.index;
+                                    fold_lv = tmp[i].length - tmp[i].replace(/^\s+/,"").length;
+                                    close_token = open_token === "{" ? "}" : "]";
+                                    comment_idx = tmp[i].indexOf("/");
+                                    if(comment_idx > -1){
+                                        comment = tmp[i].substr(comment_idx).trim();
+                                        if(!comment.endsWith("*/")){
+                                            comment += " ... */";
+                                        }
+                                    }
+                                    else {
+                                        comment = '';
+                                    }
+                                    tokens.push({"val":tmp[i].substr(0,brace_loc)+open_token+"..."+close_token+" "+comment+"\n","line":i});
+                                }
+                                else{
+                                    fold_lv = tmp[i].length - tmp[i].replace(/^\s+/,"").length;
+                                    open_token = open_token[0];
+                                    close_token = open_token === "{" ? "}" : "]";
+                                    comment_idx = tmp[i].indexOf("/");
+                                    if(comment_idx > -1){
+                                        comment = tmp[i].substr(comment_idx).trim();
+                                        if(!comment.endsWith("*/")){
+                                            comment += " ... */";
+                                        }
+                                    }
+                                    else {
+                                        comment = '';
+                                    }
+                                    tokens.push({"val":tmp[i].substr(0,fold_lv)+open_token+"..."+close_token+" "+comment+"\n","line":i});
+                                }
+                            }
+                            else{
+                                tokens.push({"val":tmp[i]+"\n","line":i});
+                            }
+                        }
+                    }
+                    return tokens;
+                }
+                ,schemaClicked: function(token,state){
+                    if(!this.isFoldable(token)){
+                        return;
+                    }
+
+                    var idx = state.indexOf(token.line);
+                    if(idx == -1){
+                        state.push(token.line);
+                    }
+                    else{
+                        state.splice(idx, 1);
+                    }
+                }
+                ,isFoldable: function(token){
+                    var txt = token.val.trim();
+                    return txt==='{' || txt==='[' || txt==='{...}' || txt==='[...]'
+                        || this.is_an_open_brace_with_comment(txt)
+                        || this.is_an_object_value_open_w_optional_comment(txt)
+                        || this.is_an_array_folded_with_comment(txt)
+                        || this.is_an_object_folded_with_comment(txt)
+                        || this.is_an_object_value_folded_w_optional_comment(txt);
+                }
+                , is_an_open_brace_with_comment: function(line){ return /[[{]\s*\/\*\s*[^\r\n]*\s*\*\//.exec(line);}
+                , is_an_object_value_open_w_optional_comment: function(line){ return /^"[\s\S]+"\s*:\s*[[{](\s*\/\*[^\r\n]*\s*\*\/)?/.exec(line);}
+                , is_an_array_folded_with_comment:  function(line){ return /\[\.\.\.\]\s*\/\*[^\r\n]*\s*\*\//.exec(line);}
+                , is_an_object_folded_with_comment: function(line){ return /\{\.\.\.\}\s*\/\*[^\r\n]*\s*\*\//.exec(line);}
+                , is_an_object_value_folded_w_optional_comment: function(line){ return /^"[\s\S]+"\s*:\s*(\[\.\.\.\])|(\{\.\.\.\})(\s*\/\*[^\r\n]*\s*\*\/)?/.exec(line);}
+
+                ,getFormParam: function(method){
+
+                    var result = [];
+                    var len = method.params.length;
+                    for(var i=0;i<len;i++){
+                        if(method.params[i].location === "formData"){
+                            result.push(encodeURIComponent(method.params[i].name)+"="+encodeURIComponent(method.params[i].value));
+                        }
+                    }
+                    if(result.length == 0){
+                        return "";
+                    }
+                    return result.join("&");
+                }
+                ,getURL: function(method,path){
+                    if((method.request.choosen.scheme === "http" && this.port['http'] == 80) || (method.request.choosen.scheme === "https" && this.port['https'] == 443)){
+                        return method.request.choosen.scheme+'://'+ this.host + this.basePath + this.computePath(method,path) + this.getUrlParamString(method);
+                    }
+                    var port = this.port[method.request.choosen.scheme] ? ":" + this.port[method.request.choosen.scheme]  : "";
+                    return method.request.choosen.scheme+'://'+ this.host + port + this.basePath + this.computePath(method,path) + this.getUrlParamString(method);
+                }
+                ,getUrlParamString: function(method){
+
+                    var params = [];
+                    for(var i=0;i<method.params.length;i++){
+                        if(method.params[i].location.trim().toLowerCase() === "query"){
+                            params.push(method.params[i].name+'='+encodeURIComponent(method.params[i].value));
+                        }
+                    }
+
+                    if(params.length === 0){
+                        return "";
+                    }
+
+                    params = "?"+params.join("&");
+                    return params;
+                }
+                ,sendRequest: function(method,url,data,headers,api_idx,method_idx){
+
+                    var config = {
+                        type: method
+                        ,url: url
+                        ,processData: false
+                        ,context: this.apis
+                    };
+
+                    if(Object.keys(headers).length > 0){
+                        config.headers = headers;
+                    }
+
+                    if(data.length > 0){
+                        config.data = data;
+                    }
+
+                    $.ajax(config)
+                    .done(function(dat, textStatus, jqXHR) {
+                        var result = "HTTP/1.1 "+jqXHR.status+" "+textStatus+"\r\n";
+                        result += jqXHR.getAllResponseHeaders() + "\r\n";
+                        if (typeof(dat) === 'object')
+                            dat = JSON.stringify(dat,null,3);
+                        result += dat;
+                        this[api_idx].methods[method_idx].request.choosen.result = result;
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        var result = "HTTP/1.1 "+jqXHR.status+" "+textStatus+"\r\n";
+                        result += jqXHR.getAllResponseHeaders();
+                        result += "\r\n"+errorThrown;
+                        this[api_idx].methods[method_idx].request.choosen.result = result;
+                    });
+                    Materialize.toast('Request Sent', 1853);
+                }
+                , computePath: function(method,path){
+
+                    var params = method.params;
+                    var len = params.length;
+                    var new_path = path;
+                    for(var i=0;i<len;i++){
+                        if(!params[i].location){
+                            continue;
+                        }
+                        if(params[i].location.toLowerCase() === 'path' && params[i].value){
+                            new_path = new_path.split("{"+params[i].name+"}").join(params[i].value);
+                        }
+                    }
+                    return new_path;
+                }
+                , computeBody: function(method){
+
+                    var body = method.request.choosen.body;
+                    var formData = this.getFormParam(method);
+
+                    if(!body && !formData){
+                        return "";
+                    }
+                    else if(!body){
+                        return formData;
+                    }
+                    else{
+                        return formData+"\r\n"+body;
+                    }
+                }
+                , getThemeColor: function(method_name,withFontsColor){
+
+                    if(!withFontsColor){
+                        return this.bgColor[method_name.toUpperCase()] || this.bgColor["default"] || "blue" ;
+                    }
+
+                    var tmp = this.bgColor[method_name.toUpperCase()] || this.bgColor["default"] || "blue" ;
+                    switch(tmp){
+                        case "yellow":
+                        case "lime":
+                        case "white":
+                            return "black-text " + tmp;
+                        default:
+                            return "white-text " + tmp;
+                    }
+                }
+                , toggleConsole: function(event){
+
+                    if(event){
+                      var keycode = event.keyCode;
+                      if(keycode !== 192 || !event.ctrlKey){
+                          return;
+                      }
+                    }
+
+                    this.showConsole = !this.showConsole;
+                    if(this.showConsole){
+                      var self = this;
+                      Vue.nextTick(function () {
+                        self.$refs.txtConsole.focus();
+                      });
+                    }
+                }
+
+                , autoComplete: function(){
+                    if(!this.console){
+                        return;
+                    }
+
+                    if("add header -g".startsWith(this.console)){
+                        this.console = "add header -g ";
+                    }
+
+                    if("remove header -g".startsWith(this.console)){
+                        this.console = "remove header -g ";
+                    }
+
+                    if("clear".startsWith(this.console)){
+                        this.console = "clear";
+                    }
+                }
+                , parseCmd: function(){
+                    var tokens = this.console.split(" ");
+                    if(tokens[0] === "add"){
+                        if(tokens[1] === "header"){
+                            if(tokens[2] === "-g"){
+                                var header = tokens[3];
+                                var val = tokens.length > 5 ? tokens.slice(4).join(" ") : tokens[4];
+                                for(var i = 0;i<this.apis.length;i++){
+                                    var api = this.apis[i];
+                                    for(var j=0;j<api.methods.length;j++){
+                                        var method = api.methods[j];
+                                        Vue.set(method.request.choosen.headers,header,val);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(tokens[0] === "remove"){
+                        if(tokens[1] === "header"){
+                            if(tokens[2] === "-g"){
+                                var header = tokens[3];
+                                var val = tokens.length > 5 ? tokens.slice(4).join(" ") : tokens[4];
+                                for(var i = 0;i<this.apis.length;i++){
+                                    var api = this.apis[i];
+                                    for(var j=0;j<api.methods.length;j++){
+                                        var method = api.methods[j];
+                                        delete method.request.choosen.headers[header];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if(tokens[0] === "clear"){
+                        this.console = "";
+                        this.consoleLogs = [];
+                    }
+                    else{
+                        this.consoleLogs.push("> "+this.console);
+                    }
+                    this.console = "";
+                }
+            }
+            , data: {
+  "name": "Swagger Petstore",
+  "summary": "<p>This is a <strong>sample server</strong> Petstore server.</p>\n<p><a href=\"http://swagger.io\">Learn about Swagger</a> or join the IRC channel <code>#swagger</code> on irc.freenode.net.</p>\n<p>For this sample, you can use the api key <code>special-key</code> to test the authorization filters</p>\n",
+  "version": "1.0.0",
+  "host": "petstore.swagger.io",
+  "port": {
+    "http": 80,
+    "https": 443
+  },
+  "basePath": "/v2",
+  "currentHost": location.host || "null",
+  "currentScheme": location.protocol.replace(":",""),
+  "search": "",
+  "bgColor": {
+    "default": "white"
+  },
+  "fixedNav": true,
+  "showConsole": false,
+  "consoleLogs": [],
+  "console": "",
+  "apis": [
+    {
+      "path": "/pets",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "POST",
+          "visible": true,
+          "tags": [
+            "pet",
+            "POST"
+          ],
+          "summary": "<p>Add a new pet to the store</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "body",
+              "location": "body",
+              "desc": "Pet object that needs to be added to the store",
+              "required": false,
+              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"     /* pet status in the store */\n}",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "405",
+              "desc": "Invalid input",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        },
+        {
+          "name": "PUT",
+          "visible": true,
+          "tags": [
+            "pet",
+            "PUT"
+          ],
+          "summary": "<p>Update an existing pet</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "body",
+              "location": "body",
+              "desc": "Pet object that needs to be added to the store",
+              "required": false,
+              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"     /* pet status in the store */\n}",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "400",
+              "desc": "Invalid ID supplied",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "404",
+              "desc": "Pet not found",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "405",
+              "desc": "Validation exception",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/pets/findByStatus",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "GET",
+          "visible": true,
+          "tags": [
+            "pet",
+            "findbystatus",
+            "GET"
+          ],
+          "summary": "<p>Finds Pets by status</p>\n",
+          "desc": "<p>Multiple status values can be provided with comma seperated strings</p>\n",
+          "params": [
+            {
+              "name": "status",
+              "location": "query",
+              "desc": "Status values that need to be considered for filter",
+              "required": false,
+              "schema": "[string]",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "200",
+              "desc": "successful operation",
+              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"\n    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"     /* pet status in the store */\n  }\n]",
+              "schemaState": []
+            },
+            {
+              "code": "400",
+              "desc": "Invalid status value",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/pets/findByTags",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "GET",
+          "visible": true,
+          "tags": [
+            "pet",
+            "findbytag",
+            "GET"
+          ],
+          "summary": "<p>Finds Pets by tags</p>\n",
+          "desc": "<p>Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.</p>\n",
+          "params": [
+            {
+              "name": "tags",
+              "location": "query",
+              "desc": "Tags to filter by",
+              "required": false,
+              "schema": "[string]",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "200",
+              "desc": "successful operation",
+              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"\n    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"     /* pet status in the store */\n  }\n]",
+              "schemaState": []
+            },
+            {
+              "code": "400",
+              "desc": "Invalid tag value",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/pets/{petId}",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "GET",
+          "visible": true,
+          "tags": [
+            "pet",
+            "GET"
+          ],
+          "summary": "<p>Find pet by ID</p>\n",
+          "desc": "<p>Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions</p>\n",
+          "params": [
+            {
+              "name": "petId",
+              "location": "path",
+              "desc": "ID of pet that needs to be fetched",
+              "required": true,
+              "schema": "integer",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "200",
+              "desc": "successful operation",
+              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"     /* pet status in the store */\n}",
+              "schemaState": []
+            },
+            {
+              "code": "400",
+              "desc": "Invalid ID supplied",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "404",
+              "desc": "Pet not found",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        },
+        {
+          "name": "POST",
+          "visible": true,
+          "tags": [
+            "pet",
+            "POST"
+          ],
+          "summary": "<p>Updates a pet in the store with form data</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "petId",
+              "location": "path",
+              "desc": "ID of pet that needs to be updated",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            },
+            {
+              "name": "name",
+              "location": "formData",
+              "desc": "Updated name of the pet",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            },
+            {
+              "name": "status",
+              "location": "formData",
+              "desc": "Updated status of the pet",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "405",
+              "desc": "Invalid input",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        },
+        {
+          "name": "DELETE",
+          "visible": true,
+          "tags": [
+            "pet",
+            "DELETE"
+          ],
+          "summary": "<p>Deletes a pet</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "api_key",
+              "location": "header",
+              "desc": "",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            },
+            {
+              "name": "petId",
+              "location": "path",
+              "desc": "Pet id to delete",
+              "required": true,
+              "schema": "integer",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "400",
+              "desc": "Invalid pet value",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/stores/order",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "POST",
+          "visible": true,
+          "tags": [
+            "store",
+            "order",
+            "POST"
+          ],
+          "summary": "<p>Place an order for a pet</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "body",
+              "location": "body",
+              "desc": "order placed for purchasing the pet",
+              "required": false,
+              "schema": "{\n  \"id\": \"integer\",\n  \"petId\": \"integer\",\n  \"quantity\": \"integer\",\n  \"shipDate\": \"string\",\n  \"status\": \"string\"     /* Order Status */\n  \"complete\": \"boolean\"\n}",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "200",
+              "desc": "successful operation",
+              "schema": "{\n  \"id\": \"integer\",\n  \"petId\": \"integer\",\n  \"quantity\": \"integer\",\n  \"shipDate\": \"string\",\n  \"status\": \"string\"     /* Order Status */\n  \"complete\": \"boolean\"\n}",
+              "schemaState": []
+            },
+            {
+              "code": "400",
+              "desc": "Invalid Order",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/stores/order/{orderId}",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "GET",
+          "visible": true,
+          "tags": [
+            "store",
+            "order",
+            "GET"
+          ],
+          "summary": "<p>Find purchase order by ID</p>\n",
+          "desc": "<p>For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions</p>\n",
+          "params": [
+            {
+              "name": "orderId",
+              "location": "path",
+              "desc": "ID of pet that needs to be fetched",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "200",
+              "desc": "successful operation",
+              "schema": "{\n  \"id\": \"integer\",\n  \"petId\": \"integer\",\n  \"quantity\": \"integer\",\n  \"shipDate\": \"string\",\n  \"status\": \"string\"     /* Order Status */\n  \"complete\": \"boolean\"\n}",
+              "schemaState": []
+            },
+            {
+              "code": "400",
+              "desc": "Invalid ID supplied",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "404",
+              "desc": "Order not found",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        },
+        {
+          "name": "DELETE",
+          "visible": true,
+          "tags": [
+            "store",
+            "order",
+            "DELETE"
+          ],
+          "summary": "<p>Delete purchase order by ID</p>\n",
+          "desc": "<p>For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors</p>\n",
+          "params": [
+            {
+              "name": "orderId",
+              "location": "path",
+              "desc": "ID of the order that needs to be deleted",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "400",
+              "desc": "Invalid ID supplied",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "404",
+              "desc": "Order not found",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/users",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "POST",
+          "visible": true,
+          "tags": [
+            "user",
+            "POST"
+          ],
+          "summary": "<p>Create user</p>\n",
+          "desc": "<p>This can only be done by the logged in user.</p>\n",
+          "params": [
+            {
+              "name": "body",
+              "location": "body",
+              "desc": "Created user object",
+              "required": false,
+              "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"     /* User Status */\n}",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "default",
+              "desc": "successful operation",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/users/createWithArray",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "POST",
+          "visible": true,
+          "tags": [
+            "user",
+            "createwitharray",
+            "POST"
+          ],
+          "summary": "<p>Creates list of users with given input array</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "body",
+              "location": "body",
+              "desc": "List of user object",
+              "required": false,
+              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": \"integer\"     /* User Status */\n  }\n]",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "default",
+              "desc": "successful operation",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/users/createWithList",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "POST",
+          "visible": true,
+          "tags": [
+            "user",
+            "createwithlist",
+            "POST"
+          ],
+          "summary": "<p>Creates list of users with given input array</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "body",
+              "location": "body",
+              "desc": "List of user object",
+              "required": false,
+              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": \"integer\"     /* User Status */\n  }\n]",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "default",
+              "desc": "successful operation",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/users/login",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "GET",
+          "visible": true,
+          "tags": [
+            "user",
+            "login",
+            "GET"
+          ],
+          "summary": "<p>Logs user into the system</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "username",
+              "location": "query",
+              "desc": "The user name for login",
+              "required": false,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            },
+            {
+              "name": "password",
+              "location": "query",
+              "desc": "The password for login in clear text",
+              "required": false,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "200",
+              "desc": "successful operation",
+              "schema": "\"string\"",
+              "schemaState": []
+            },
+            {
+              "code": "400",
+              "desc": "Invalid username/password supplied",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/users/logout",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "GET",
+          "visible": true,
+          "tags": [
+            "user",
+            "logout",
+            "GET"
+          ],
+          "summary": "<p>Logs out current logged in user session</p>\n",
+          "desc": "",
+          "params": [],
+          "responses": [
+            {
+              "code": "default",
+              "desc": "successful operation",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    },
+    {
+      "path": "/users/{username}",
+      "visible": true,
+      "showMe": true,
+      "methods": [
+        {
+          "name": "GET",
+          "visible": true,
+          "tags": [
+            "user",
+            "GET"
+          ],
+          "summary": "<p>Get user by user name</p>\n",
+          "desc": "",
+          "params": [
+            {
+              "name": "username",
+              "location": "path",
+              "desc": "The name that needs to be fetched. Use user1 for testing.",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "200",
+              "desc": "successful operation",
+              "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"     /* User Status */\n}",
+              "schemaState": []
+            },
+            {
+              "code": "400",
+              "desc": "Invalid username supplied",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "404",
+              "desc": "User not found",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        },
+        {
+          "name": "PUT",
+          "visible": true,
+          "tags": [
+            "user",
+            "PUT"
+          ],
+          "summary": "<p>Updated user</p>\n",
+          "desc": "<p>This can only be done by the logged in user.</p>\n",
+          "params": [
+            {
+              "name": "username",
+              "location": "path",
+              "desc": "name that need to be deleted",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            },
+            {
+              "name": "body",
+              "location": "body",
+              "desc": "Updated user object",
+              "required": false,
+              "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"     /* User Status */\n}",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "400",
+              "desc": "Invalid user supplied",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "404",
+              "desc": "User not found",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        },
+        {
+          "name": "DELETE",
+          "visible": true,
+          "tags": [
+            "user",
+            "DELETE"
+          ],
+          "summary": "<p>Delete user</p>\n",
+          "desc": "<p>This can only be done by the logged in user.</p>\n",
+          "params": [
+            {
+              "name": "username",
+              "location": "path",
+              "desc": "The name that needs to be deleted",
+              "required": true,
+              "schema": "string",
+              "schemaState": [],
+              "value": ""
+            }
+          ],
+          "responses": [
+            {
+              "code": "400",
+              "desc": "Invalid username supplied",
+              "schema": "",
+              "schemaState": []
+            },
+            {
+              "code": "404",
+              "desc": "User not found",
+              "schema": "",
+              "schemaState": []
+            }
+          ],
+          "request": {
+            "schemes": [
+              "http",
+              "https"
+            ],
+            "headers": [],
+            "choosen": {
+              "scheme": "http",
+              "headers": {},
+              "body": "",
+              "headerName": "",
+              "headerValue": "",
+              "result": ""
+            }
+          },
+          "showTool": false,
+          "showMe": true
+        }
+      ]
+    }
+  ]
+}
+            , mounted: function(){
+                document.body.addEventListener('keyup', this.toggleConsole);
+            }
+        };
+        var vm = new Vue(context);
+        document.title = context.data.name;
+
+        $(function(){
+            function fixDiv() {
+                var consolePanel = $('#consolePanel');
+                consolePanel.css({
+                    'position': 'fixed',
+                    'bottom': '0px'
+                });
+          }
+          $(window).scroll(fixDiv);
+          fixDiv();
+        });
+    </script>
+</body>
+</html>
