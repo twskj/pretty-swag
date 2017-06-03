@@ -1,5 +1,9 @@
 # Change Log
 
+### version 0.1.104 [Jun 3, 2017]
+ - Roll out Object Composition (allOf keyword)
+ - Array now can show comment
+
 ### version 0.1.103 [Jun 2, 2017]
  - Fix Request Panel visibility when Method Folding Flag present
 
