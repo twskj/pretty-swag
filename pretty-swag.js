@@ -199,9 +199,66 @@ function unEscapeComment(str) {
 function resolveNested(schema, def) {
     var comment = "";
     try {
-        if ("type" in schema || "properties" in schema) {
+        var composition_type;
+
+        if ("allOf" in schema) {
+            composition_type = "allOf";
+        }
+        else if ("anyOf" in schema) {
+            composition_type = "anyOf";
+        }
+        else if ("oneOf" in schema) {
+            composition_type = "oneOf";
+        }
+        //idea
+        /**
+        * keyword | Array Represent |                            plain object |
+        * ------- | --------------- | --------------------------------------- |
+        *  allOf  |      [[1,2,3]]  |                          merge property |
+        *  anyOf  |        [1,2,3]  |                                  merge? |
+        *  oneOf  |      [[1],[2]]  | [ ]array of multiple objects?  [x]merge |
+        **/
+        //NOTE usually these keywords uses in a list of validation conditions
+        //allOf = all
+        //anyOf = > 0
+        //oneOf = ==1
+        if (composition_type) {
+
+            var objs = [];
+            var arr = schema[composition_type] || [];
+
+            for (var i = 0; i < arr.length; i++) {
+                objs.push(resolveNested(arr[i], def));
+            }
+
+            if ("properties" in schema) {
+                //delete schema[composition_type];
+                var tmp = JSON.parse(JSON.stringify(schema))
+                delete tmp[composition_type];
+                objs.push(resolveNested(tmp));
+            }
+
+            if (objs.length == 1) {
+                return objs[0];
+            }
+
+            return merge(objs);
+        }
+        else if ("type" in schema || "properties" in schema)
+        {
             if (schema.type === "array") {
-                return "[" + resolveNested(schema.items, def) + "]";
+                var resolvedItems = [];
+                comment = schema.description ? "/*" + escapeComment(schema.description) + "*/" : "";
+                if (Array.isArray(schema.items)) {
+                    for (var item in schema.items) {
+                        resolvedItems.push(resolveNested(schema.items[item], def));
+                    }
+                }
+                else {
+                    resolvedItems.push(resolveNested(schema.items, def));
+                }
+
+                return "[" + comment + resolvedItems.join(",") + "]";
             }
             else if (schema.type === "object" || "properties" in schema) {
                 var keyval = [];
@@ -230,33 +287,6 @@ function resolveNested(schema, def) {
             }
         }
 
-        //idea
-        /**
-        * keyword | Array Represent |                            plain object |
-        * ------- | --------------- | --------------------------------------- |
-        *  allOf  |      [[1,2,3]]  |                          merge property |
-        *  anyOf  |        [1,2,3]  |                                  merge? |
-        *  oneOf  |      [[1],[2]]  | [ ]array of multiple objects?  [x]merge |
-        **/
-        //NOTE usually these keywords uses in a list of validation conditions
-        //allOf = all
-        //anyOf = > 0
-        //oneOf = ==1
-        else if ("anyOf" in schema || "allOf" in schema || "oneOf" in schema)
-        {
-            var objs = [];
-            var arr = schema["allOf"] || schema["anyOf"] || schema["oneOf"] || [];
-
-            for (var i = 0; i < arr.length; i++) {
-                objs.push(resolveNested(arr[i], def));
-            }
-
-            if (objs.length == 1) {
-                return objs[0];
-            }
-
-            return merge(objs);
-        }
         else {
             return JSON.stringify(schema);
         }
