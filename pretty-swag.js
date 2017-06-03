@@ -232,7 +232,8 @@ function resolveNested(schema, def) {
             }
 
             if ("properties" in schema) {
-                //delete schema[composition_type];
+
+                // clone without the composition part
                 var tmp = JSON.parse(JSON.stringify(schema))
                 delete tmp[composition_type];
                 objs.push(resolveNested(tmp));
@@ -313,16 +314,13 @@ function resolveNested(schema, def) {
 function merge(objs) {
 
     var arr = [];
+    var val;
     for (var i = 0; i < objs.length; i++) {
-        var tmp = objs[i].trim();
-        if (tmp.startsWith("{")) {
-            arr.push(tmp.replace(/^{(.*)}$/, "$1"));
-        }
-        else {
-            arr.push(tmp);
-        }
+        val = objs[i].trim();
+        val = val.startsWith("{") ? val.substr(1, val.length - 2) : val;
+        arr.push(val);
     }
-    return "{" + arr.join(',') + "}";
+    return "{" + arr.join('') + "}";
 }
 
 
