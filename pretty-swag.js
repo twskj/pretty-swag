@@ -207,7 +207,13 @@ function resolveNested(schema, def) {
                 var keyval = [];
                 for (var prop in schema.properties) {
 
-                    if (schema.properties[prop].type === "array" || schema.properties[prop].type === "object" || "properties" in schema.properties[prop]) {
+                    if (schema.properties[prop].type === "array"
+                        || schema.properties[prop].type === "object"
+                        || "properties" in schema.properties[prop]
+                        || "allOf" in schema.properties[prop]
+                        || "anyOf" in schema.properties[prop]
+                        || "oneOf" in schema.properties[prop]
+                    ) {
                         keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
                     }
                     else {
@@ -236,20 +242,23 @@ function resolveNested(schema, def) {
         //allOf = all
         //anyOf = > 0
         //oneOf = ==1
-        else if ("anyOf" in schema || "allOf" in schema || "oneOf" in schema) {
+        else if ("anyOf" in schema || "allOf" in schema || "oneOf" in schema)
+        {
             var objs = [];
-            var arr = schema["anyOf"] || schema["allOf"] || schema["oneOf"] || [];
-            var tmp;
+            var arr = schema["allOf"] || schema["anyOf"] || schema["oneOf"] || [];
+
             for (var i = 0; i < arr.length; i++) {
                 objs.push(resolveNested(arr[i], def));
             }
-            return format(merge(objs), indent_num);
+
+            if (objs.length == 1) {
+                return objs[0];
+            }
+
+            return merge(objs);
         }
-        // else if ("not" in schema) {
-        //     //TODO return an object with one in direction call not? { "not": {...} }
-        // }
         else {
-            return JSON.stringify(schema, null, indent_num);
+            return JSON.stringify(schema);
         }
 
     }
@@ -261,22 +270,24 @@ function resolveNested(schema, def) {
     }
 }
 
+/**
+ *
+ * @param objs array of objects to be merged
+ * @returns json with comment
+ */
 function merge(objs) {
-    var result = {};
+
+    var arr = [];
     for (var i = 0; i < objs.length; i++) {
-        for (var prop in objs[i]) {
-            if (prop in result) {
-                if (Array.isArray(result[prop])) {
-                    result[prop] = [result[prop]];
-                }
-                result[prop].push(objs[i][prop]);
-            }
-            else {
-                result[prop] = objs[i][prop];
-            }
+        var tmp = objs[i].trim();
+        if (tmp.startsWith("{")) {
+            arr.push(tmp.replace(/^{(.*)}$/, "$1"));
+        }
+        else {
+            arr.push(tmp);
         }
     }
-    return result;
+    return "{" + arr.join(',') + "}";
 }
 
 
