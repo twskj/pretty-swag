@@ -3,14 +3,15 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8">
-    <style>.pointer,footer>a{cursor:pointer}[v-cloak]{display:none}body{background:#fdfdfd}.indent{padding-left:1em}.r-margin{margin-right:2em}.r-indent{padding-right:1em}.padding-all{padding:1em}.b-margin{margin-bottom:1em}no-overflow{overflow:auto}.bold{font-weight:700}.api-block{border:1px solid;margin:.5rem 0 1.5rem}.margin-bottom-1rem,.api-header{font-size:13pt}.api-header>.api-title{font-size:13pt;padding:.5em;display:inline-block}.tag-container{padding:1em .3em 0 .3em;height:2.2em}.tag-container>.tag{display:inline-block;margin-right:10px;padding:0 .5rem;white-space:nowrap;position:relative;min-width:3rem;text-align:center;background:linear-gradient(to bottom,#fed970 0,#febc4a 100%);background-color:#FEC95B;color:#963;font-weight:700;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.4);border-top:1px solid #EDB14A;border-bottom:1px solid #CE922E;border-right:1px solid #DCA03B;border-left:1px solid #EDB14A;border-radius:3px;box-shadow:inset 0 1px #FEE395,0 1px 2px rgba(0,0,0,.21)}.round-border{border-radius:3px}.showReqBtn{padding:1rem 0}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-leave-active{transition:opacity .05s}.fade-enter,.fade-leave-to{opacity:0}.tool-panel{border:1px solid #9e9e9e;padding:1em 1em 0 1em;margin:1rem 0 1rem 0}[type=radio].with-gap:checked+label:before{border-radius:50%;border:2px solid #555555}[type=radio].with-gap:checked+label:after{border-radius:50%;border:1px solid #2196f3;background-color:#2196f3;z-index:0;-webkit-transform:scale(.5);-moz-transform:scale(.5);-ms-transform:scale(.5);-o-transform:scale(.5);transform:scale(.5)}input[type=text]:focus:not([readonly])+label{color:#666}input[type=text]:focus:not([readonly]){border-bottom:1px solid #64b5f6;box-shadow:0 1px 0 0 #42a5f5}textarea{white-space:pre;overflow:scroll;overflow-x:scroll;overflow-y:scroll;height:10em}.console{font-family:monospace;font-weight:400;font-style:normal}.warning-yellow-border{border-color:#ffc400}blockquote{padding:.5em 0 .5em 1em}#toast-container{min-width:100%;bottom:0;top:95%;right:0;left:0}::-webkit-input-placeholder{color:#DDD}::-moz-placeholder{color:#DDD}:-ms-input-placeholder{color:#DDD}:-moz-placeholder{color:#DDD}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.navButtonContainer{position:absolute;top:0;right:1rem}.navButton{padding:0 1rem}footer>a{color:#f5f5f5}td{vertical-align:top}h1{font-size:2.75rem}h2{font-size:2.2rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.5rem}h6{font-size:1.28rem}table.fixed{table-layout:fixed}table.fixed td{overflow-x:auto}th.status{width:64px}th.desc{width:256px}no-padding-bot{padding-bottom:0}.red-border{border-color:#ff8a80}.pink-border{border-color:#ff80ab}.purple-border{border-color:#ea80fc}.deep-purple-border{border-color:#b388ff}.indigo-border{border-color:#8c9eff}.blue-border{border-color:#82b1ff}.light-blue-border{border-color:#80d8ff}.cyan-border{border-color:#4dd0e1}.teal-border{border-color:#80cbc4}.green-border{border-color:#4caf50}.light-green-border{border-color:#aed581}.lime-border{border-color:#c0ca33}.yellow-border{border-color:#fdd835}.amber-border{border-color:#ffb300}.orange-border{border-color:#ffd180}.deep-orange-border{border-color:#ff9e80}.brown-border{border-color:#bcaaa4}.grey-border{border-color:#bdbdbd}.blue-grey-border{border-color:#90a4ae}.white-border{border-color:#fdfdfd}.slide-vert-enter-active{transition:all .4s ease}.slide-vert-leave-active{transition:all .2s ease}.slide-vert-enter,.slide-vert-leave-to{transform:translateY(100%)}table.compact input{margin:0;border-bottom:0;height:1rem}</style>
+    <style>.pointer,footer>a{cursor:pointer}[v-cloak]{display:none}body{background:#fdfdfd}.indent{padding-left:1em}.r-margin{margin-right:2em}.r-indent{padding-right:1em}.padding-all{padding:1em}.b-margin{margin-bottom:1em}no-overflow{overflow:auto}.bold{font-weight:700}.api-block{border:1px solid;margin:.5rem 0 1.5rem}.api-header{font-size:13pt}.api-header>.api-title{font-size:13pt;padding:.5em;display:inline-block}.tag-container{padding:1em .3em 0 .3em;height:2.2em}.tag-container>.tag{display:inline-block;margin-right:10px;padding:0 .5rem;white-space:nowrap;position:relative;min-width:3rem;text-align:center;background:linear-gradient(to bottom,#fed970 0,#febc4a 100%);background-color:#FEC95B;color:#963;font-weight:700;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.4);border-top:1px solid #EDB14A;border-bottom:1px solid #CE922E;border-right:1px solid #DCA03B;border-left:1px solid #EDB14A;border-radius:3px;box-shadow:inset 0 1px #FEE395,0 1px 2px rgba(0,0,0,.21)}.round-border{border-radius:3px}.showReqBtn{padding-bottom:1.5rem}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-leave-active{transition:opacity .05s}.fade-enter,.fade-leave-to{opacity:0}.tool-panel{border:1px solid #9e9e9e;padding:1em 1em 0 1em;margin:1rem 0 1rem 0}[type=radio].with-gap:checked+label:before{border-radius:50%;border:2px solid #555555}[type=radio].with-gap:checked+label:after{border-radius:50%;border:1px solid #2196f3;background-color:#2196f3;z-index:0;-webkit-transform:scale(.5);-moz-transform:scale(.5);-ms-transform:scale(.5);-o-transform:scale(.5);transform:scale(.5)}input[type=text]:focus:not([readonly])+label{color:#666}input[type=text]:focus:not([readonly]){border-bottom:1px solid #64b5f6;box-shadow:0 1px 0 0 #42a5f5}textarea{white-space:pre;overflow:scroll;overflow-x:scroll;overflow-y:scroll;height:10em}.console{font-family:monospace;font-weight:400;font-style:normal}.warning-yellow-border{border-color:#ffc400}blockquote{padding:.5em 0 .5em 1em}#toast-container{min-width:100%;bottom:0;top:95%;right:0;left:0}::-webkit-input-placeholder{color:#DDD}::-moz-placeholder{color:#DDD}:-ms-input-placeholder{color:#DDD}:-moz-placeholder{color:#DDD}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.navButtonContainer{position:absolute;top:0;right:1rem}.navButton{padding:0 1rem}footer>a{color:#f5f5f5}td{vertical-align:top}h1{font-size:2.75rem}h2{font-size:2.2rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.5rem}h6{font-size:1.28rem}table.fixed{table-layout:fixed}table.fixed td{overflow-x:auto}.lpad5px{padding-left:5px}th.status{width:64px}th.desc{width:256px}th.location,th.name{width:128px}th.required{width:90px}no-padding-bot{padding-bottom:0}.red-border{border-color:#ff8a80}.pink-border{border-color:#ff80ab}.purple-border{border-color:#ea80fc}.deep-purple-border{border-color:#b388ff}.indigo-border{border-color:#8c9eff}.blue-border{border-color:#82b1ff}.light-blue-border{border-color:#80d8ff}.cyan-border{border-color:#4dd0e1}.teal-border{border-color:#80cbc4}.green-border{border-color:#4caf50}.light-green-border{border-color:#aed581}.lime-border{border-color:#c0ca33}.yellow-border{border-color:#fdd835}.amber-border{border-color:#ffb300}.orange-border{border-color:#ffd180}.deep-orange-border{border-color:#ff9e80}.brown-border{border-color:#bcaaa4}.grey-border{border-color:#bdbdbd}.blue-grey-border{border-color:#90a4ae}.white-border{border-color:#fdfdfd}.slide-vert-enter-active{transition:all .4s ease}.slide-vert-leave-active{transition:all .2s ease}.slide-vert-enter,.slide-vert-leave-to{transform:translateY(100%)}table.compact input{margin:0;border-bottom:0;height:1rem}strong{font-weight:900}.b-margin-one-half{margin-bottom:1.5rem}</style>
     <title></title>
 </head>
 <body>
     <div id="app" v-cloak>
-        <div :class="[fixedNav ? 'navbar-fixed':'']">
+        <div :class="{ 'navbar-fixed': appConfig.fixedNav, 'hide': !appConfig.showNav }">
             <nav :class="getThemeColor('default')" role="navigation">
                 <div class="nav-wrapper container">
                     <div class="input-field">
@@ -27,9 +28,9 @@
         </div>
 
         <transition name="slide-vert">
-          <div v-show="showConsole" id="consolePanel" class="input-field" style="background-color: rgba(0,0,0,.67);color: whitesmoke; position: absolute; left:0;right:-1; z-index: 2; padding: 1.5rem;">
-            <div v-for="log in consoleLogs">{{log}}</div>
-            <input type="text" spellcheck="false" v-model="console" @keyup.enter="parseCmd" @keydown.tab.prevent @keyup.tab="autoComplete" ref="txtConsole">
+          <div v-show="appData.showConsole" id="consolePanel" class="input-field" style="background-color: rgba(0,0,0,.67);color: whitesmoke; position: absolute; left:0;right:-1; z-index: 2; padding: 1.5rem;">
+            <div v-for="log in appData.consoleLogs">{{log}}</div>
+            <input type="text" spellcheck="false" v-model="appData.console" @keyup.enter="parseCmd" @keydown.tab.prevent @keyup.tab="autoComplete" ref="txtConsole">
           </div>
         </transition>
 
@@ -37,9 +38,9 @@
             <div class="section">
                 <h1 class="grey-text text-darken-3">{{name}}</h1>
                 <div class="indent">
-                    <p class="grey-text text-darken-1" v-html="summary"></p>
+                    <p class="grey-text text-darken-1">{{summary}}</p>
                     <div><span class="bold">Version</span> <span class="grey-text text-darken-1">{{version}}</span></div>
-                    <div>
+                    <div v-if="getAllTags.length > 0">
                         <span class="bold">Available Tags: </span>{{getAllTags}}
                     </div>
                 </div>
@@ -59,36 +60,36 @@
                                     <transition name="fade">
                                         <div v-if="method.showMe">
                                             <div class="tag-container">
-                                                <div class="tag right pointer no-overflow" v-for="tag in method.tags" @click="addToSearch(tag)">{{tag}}</div>
+                                                <div class="tag right no-overflow" :class="[appConfig.showNav ? 'pointer':'']" v-for="tag in method.tags" @click="addToSearch(tag)">{{tag}}</div>
                                             </div>
                                             <div class="indent r-indent">
                                                 <h5 :class="[getThemeColor('default')+'-text']" v-if="method.summary">Summary</h5>
-                                                <p class="indent" v-if="method.summary" v-html="method.summary"></p>
+                                                <p class="indent" v-if="method.summary">{{method.summary}}</p>
                                                 <h5 :class="[getThemeColor('default')+'-text']" v-if="method.desc">Description</h5>
-                                                <p class="indent" v-if="method.desc" v-html="method.desc"></p>
+                                                <p class="indent" v-if="method.desc">{{method.desc}}</p>
                                                 <h5 :class="[getThemeColor('default')+'-text']" v-if="method.params.length > 0">Parameters</h5>
-                                                <table class="bordered" v-if="method.params.length > 0">
+                                                <table class="bordered fixed b-margin-one-half" v-if="method.params.length > 0">
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Located In</th>
-                                                            <th>Description</th>
-                                                            <th>Required</th>
+                                                            <th class="name">Name</th>
+                                                            <th class="location">Located In</th>
+                                                            <th class="desc">Description</th>
+                                                            <th class="required">Required</th>
                                                             <th>Schema</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr v-for="param in method.params">
-                                                            <td>{{param.name}}</td>
-                                                            <td>{{param.location}}</td>
-                                                            <td>{{param.desc}}</td>
-                                                            <td>{{param.required ? 'Yes':'No'}}</td>
-                                                            <td><pre><span v-for="token in getSchema(param.schema,param.schemaState)" v-bind:class="{pointer: isFoldable(token)}" @click="schemaClicked(token,param.schemaState)">{{token.val}}</span></pre></td>
+                                                            <td><div class="lpad5px">{{param.name}}</div></td>
+                                                            <td><div class="lpad5px">{{param.location}}</div></td>
+                                                            <td><div class="lpad5px">{{param.desc}}</div></td>
+                                                            <td><div class="lpad5px">{{param.required ? 'Yes':'No'}}</div></td>
+                                                            <td><div class="lpad5px"><pre><span v-for="token in getSchema(param.schema,param.schemaState)" v-bind:class="{pointer: isFoldable(token)}" @click="schemaClicked(token,param.schemaState)">{{token.val}}</span></pre></div></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                                 <h5 :class="[getThemeColor('default')+'-text']" v-if="method.responses.length > 0">Responses</h5>
-                                                <table class="bordered fixed" v-if="method.responses.length > 0">
+                                                <table class="bordered fixed b-margin-one-half" v-if="method.responses.length > 0">
                                                     <thead>
                                                         <tr>
                                                             <th class="status">Code</th>
@@ -98,14 +99,14 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr v-for="res in method.responses">
-                                                            <td v-bind:class="[res.code === '200' ? 'green-text darken-2' : '']" >{{res.code}}</td>
-                                                            <td>{{res.desc}}</td>
-                                                            <td><pre><span v-for="token in getSchema(res.schema,res.schemaState)" v-bind:class="{pointer: isFoldable(token)}" @click="schemaClicked(token,res.schemaState)">{{token.val}}</span></pre></td>
+                                                            <td><div class="lpad5px" v-bind:class="[res.code === '200' ? 'green-text darken-2' : '']" >{{res.code}}</div></td>
+                                                            <td><div class="lpad5px">{{res.desc}}</div></td>
+                                                            <td><div class="lpad5px"><pre><span v-for="token in getSchema(res.schema,res.schemaState)" v-bind:class="{pointer: isFoldable(token)}" @click="schemaClicked(token,res.schemaState)">{{token.val}}</span></pre></div></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
 
-                                                <div class="showReqBtn" v-if="host">
+                                                <div class="showReqBtn" v-if="host && appConfig.showDevPlayground">
                                                     <a class="btn waves-effect" :class="[getThemeColor(method.name,true)]" @click="method.showTool = true" v-if="!method.showTool"><i class="material-icons left">mode_edit</i>Try this operation</a>
                                                     <a class="right pointer" @click="method.showTool = false" v-else>Hide</a>
                                                 </div>
@@ -205,11 +206,12 @@
             </div>
         </div>
     </div>
-    <footer class="container grey-text text-lighten-4 thin">Generated Saturday, Jun 3, 2017, 4:15 PM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
+    <footer class="container grey-text text-lighten-4 thin">Generated Wednesday, May 31, 2017, 1:21 AM by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a></footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script src="https://unpkg.com/vue@2.1.10/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alvaro-prieto/colResizable@1.6.0/colResizable-1.6.min.js"></script>
 
     <script>
         var context = {
@@ -218,11 +220,11 @@
                 filterByTag: {
 
                     get: function () {
-                        return this.search;
+                        return this.appData.search;
                     }
                     ,set: function (newValue) {
 
-                        this.search = newValue;
+                        this.appData.search = newValue;
                         if(newValue == ""){
                             this.setAllVisible(true);
                             return;
@@ -318,13 +320,16 @@
                 }
                 ,addToSearch: function(keyword){
 
-                    var tags = this.search.split(" ");
+                    if(!this.appConfig.showNav){
+                        return;
+                    }
+                    var tags = this.appData.search.split(" ");
                     tags = new Set(tags);
                     if(tags.has(keyword)){
                         return;
                     }
 
-                    this.filterByTag = this.search+" "+keyword;
+                    this.filterByTag = this.appData.search+" "+keyword;
                 }
                 ,getDestHost: function(scheme){
                     var dest_port = ":"+this.port[scheme];
@@ -581,10 +586,10 @@
                 , getThemeColor: function(method_name,withFontsColor){
 
                     if(!withFontsColor){
-                        return this.bgColor[method_name.toUpperCase()] || this.bgColor["default"] || "blue" ;
+                        return this.appConfig.bgColor[method_name.toUpperCase()] || this.appConfig.bgColor["default"] || "blue" ;
                     }
 
-                    var tmp = this.bgColor[method_name.toUpperCase()] || this.bgColor["default"] || "blue" ;
+                    var tmp = this.appConfig.bgColor[method_name.toUpperCase()] || this.appConfig.bgColor["default"] || "blue" ;
                     switch(tmp){
                         case "yellow":
                         case "lime":
@@ -603,8 +608,8 @@
                       }
                     }
 
-                    this.showConsole = !this.showConsole;
-                    if(this.showConsole){
+                    this.appData.showConsole = !this.appData.showConsole;
+                    if(this.appData.showConsole){
                       var self = this;
                       Vue.nextTick(function () {
                         self.$refs.txtConsole.focus();
@@ -613,24 +618,24 @@
                 }
 
                 , autoComplete: function(){
-                    if(!this.console){
+                    if(!this.appData.console){
                         return;
                     }
 
-                    if("add header -g".startsWith(this.console)){
-                        this.console = "add header -g ";
+                    if("add header -g".startsWith(this.appData.console)){
+                        this.appData.console = "add header -g ";
                     }
 
-                    if("remove header -g".startsWith(this.console)){
-                        this.console = "remove header -g ";
+                    if("remove header -g".startsWith(this.appData.console)){
+                        this.appData.console = "remove header -g ";
                     }
 
-                    if("clear".startsWith(this.console)){
-                        this.console = "clear";
+                    if("clear".startsWith(this.appData.console)){
+                        this.appData.console = "clear";
                     }
                 }
                 , parseCmd: function(){
-                    var tokens = this.console.split(" ");
+                    var tokens = this.appData.console.split(" ");
                     if(tokens[0] === "add"){
                         if(tokens[1] === "header"){
                             if(tokens[2] === "-g"){
@@ -663,1083 +668,1089 @@
                     }
 
                     if(tokens[0] === "clear"){
-                        this.console = "";
-                        this.consoleLogs = [];
+                        this.appData.console = "";
+                        this.appData.consoleLogs = [];
                     }
                     else{
-                        this.consoleLogs.push("> "+this.console);
+                        this.appData.consoleLogs.push("> "+this.appData.console);
                     }
-                    this.console = "";
+                    this.appData.console = "";
                 }
             }
             , data: {
-  "name": "Swagger Petstore",
-  "summary": "<p>This is a <strong>sample server</strong> Petstore server.</p>\n<p><a href=\"http://swagger.io\">Learn about Swagger</a> or join the IRC channel <code>#swagger</code> on irc.freenode.net.</p>\n<p>For this sample, you can use the api key <code>special-key</code> to test the authorization filters</p>\n",
-  "version": "1.0.0",
-  "host": "petstore.swagger.io",
-  "port": {
-    "http": 80,
-    "https": 443
-  },
-  "basePath": "/v2",
-  "currentHost": location.host || "null",
-  "currentScheme": location.protocol.replace(":",""),
-  "search": "",
-  "bgColor": {
-    "default": "blue"
-  },
-  "fixedNav": true,
-  "showConsole": false,
-  "consoleLogs": [],
-  "console": "",
-  "apis": [
-    {
-      "path": "/pets",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "POST",
-          "visible": true,
-          "tags": [
-            "pet",
-            "POST"
-          ],
-          "summary": "<p>Add a new pet to the store</p>\n",
-          "desc": "",
-          "params": [
+   "name": "Swagger Petstore",
+   "summary": "This is a **sample server** Petstore server.\n\n[Learn about Swagger](http://swagger.io) or join the IRC channel `#swagger` on irc.freenode.net.\n\nFor this sample, you can use the api key `special-key` to test the authorization filters\n",
+   "version": "1.0.0",
+   "host": "petstore.swagger.io",
+   "port": {
+      "http": 80,
+      "https": 443
+   },
+   "basePath": "/v2",
+   "currentHost": location.host || "null",
+   "currentScheme": location.protocol.replace(":",""),
+   "appConfig": {
+      "bgColor": {
+         "default": "blue"
+      },
+      "showDevPlayground": true,
+      "showNav": true,
+      "fixedNav": false
+   },
+   "appData": {
+      "search": "",
+      "console": "",
+      "consoleLogs": [],
+      "showConsole": false
+   },
+   "apis": [
+      {
+         "path": "/pets",
+         "visible": true,
+         "showMe": true,
+         "methods": [
             {
-              "name": "body",
-              "location": "body",
-              "desc": "Pet object that needs to be added to the store",
-              "required": false,
-              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"     /* pet status in the store */\n}",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "405",
-              "desc": "Invalid input",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        },
-        {
-          "name": "PUT",
-          "visible": true,
-          "tags": [
-            "pet",
-            "PUT"
-          ],
-          "summary": "<p>Update an existing pet</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "body",
-              "location": "body",
-              "desc": "Pet object that needs to be added to the store",
-              "required": false,
-              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"     /* pet status in the store */\n}",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "400",
-              "desc": "Invalid ID supplied",
-              "schema": "",
-              "schemaState": []
+               "name": "POST",
+               "visible": true,
+               "tags": [
+                  "pet",
+                  "POST"
+               ],
+               "summary": "Add a new pet to the store",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "body",
+                     "location": "body",
+                     "desc": "Pet object that needs to be added to the store",
+                     "required": false,
+                     "schema": "{\n   \"id\": \"integer\",\n   \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n   },\n   \"name\": \"string\",\n   \"photoUrls\": [\n      \"string\"\n   ],\n   \"tags\": [\n      {\n         \"id\": \"integer\",\n         \"name\": \"string\"\n      }\n   ],\n   \"status\": \"string\"     /* pet status in the store */\n}",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "405",
+                     "desc": "Invalid input",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             },
             {
-              "code": "404",
-              "desc": "Pet not found",
-              "schema": "",
-              "schemaState": []
+               "name": "PUT",
+               "visible": true,
+               "tags": [
+                  "pet",
+                  "PUT"
+               ],
+               "summary": "Update an existing pet",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "body",
+                     "location": "body",
+                     "desc": "Pet object that needs to be added to the store",
+                     "required": false,
+                     "schema": "{\n   \"id\": \"integer\",\n   \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n   },\n   \"name\": \"string\",\n   \"photoUrls\": [\n      \"string\"\n   ],\n   \"tags\": [\n      {\n         \"id\": \"integer\",\n         \"name\": \"string\"\n      }\n   ],\n   \"status\": \"string\"     /* pet status in the store */\n}",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "400",
+                     "desc": "Invalid ID supplied",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "404",
+                     "desc": "Pet not found",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "405",
+                     "desc": "Validation exception",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
+            }
+         ]
+      },
+      {
+         "path": "/pets/findByStatus",
+         "visible": true,
+         "showMe": true,
+         "methods": [
+            {
+               "name": "GET",
+               "visible": true,
+               "tags": [
+                  "pet",
+                  "findbystatus",
+                  "GET"
+               ],
+               "summary": "Finds Pets by status",
+               "desc": "Multiple status values can be provided with comma seperated strings",
+               "params": [
+                  {
+                     "name": "status",
+                     "location": "query",
+                     "desc": "Status values that need to be considered for filter",
+                     "required": false,
+                     "schema": "[string]",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "200",
+                     "desc": "successful operation",
+                     "schema": "[\n   {\n      \"id\": \"integer\",\n      \"category\": {\n         \"id\": \"integer\",\n         \"name\": \"string\"\n      },\n      \"name\": \"string\",\n      \"photoUrls\": [\n         \"string\"\n      ],\n      \"tags\": [\n         {\n            \"id\": \"integer\",\n            \"name\": \"string\"\n         }\n      ],\n      \"status\": \"string\"     /* pet status in the store */\n   }\n]",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "400",
+                     "desc": "Invalid status value",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
+            }
+         ]
+      },
+      {
+         "path": "/pets/findByTags",
+         "visible": true,
+         "showMe": true,
+         "methods": [
+            {
+               "name": "GET",
+               "visible": true,
+               "tags": [
+                  "pet",
+                  "findbytag",
+                  "GET"
+               ],
+               "summary": "Finds Pets by tags",
+               "desc": "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+               "params": [
+                  {
+                     "name": "tags",
+                     "location": "query",
+                     "desc": "Tags to filter by",
+                     "required": false,
+                     "schema": "[string]",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "200",
+                     "desc": "successful operation",
+                     "schema": "[\n   {\n      \"id\": \"integer\",\n      \"category\": {\n         \"id\": \"integer\",\n         \"name\": \"string\"\n      },\n      \"name\": \"string\",\n      \"photoUrls\": [\n         \"string\"\n      ],\n      \"tags\": [\n         {\n            \"id\": \"integer\",\n            \"name\": \"string\"\n         }\n      ],\n      \"status\": \"string\"     /* pet status in the store */\n   }\n]",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "400",
+                     "desc": "Invalid tag value",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
+            }
+         ]
+      },
+      {
+         "path": "/pets/{petId}",
+         "visible": true,
+         "showMe": true,
+         "methods": [
+            {
+               "name": "GET",
+               "visible": true,
+               "tags": [
+                  "pet",
+                  "GET"
+               ],
+               "summary": "Find pet by ID",
+               "desc": "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions",
+               "params": [
+                  {
+                     "name": "petId",
+                     "location": "path",
+                     "desc": "ID of pet that needs to be fetched",
+                     "required": true,
+                     "schema": "integer",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "200",
+                     "desc": "successful operation",
+                     "schema": "{\n   \"id\": \"integer\",\n   \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n   },\n   \"name\": \"string\",\n   \"photoUrls\": [\n      \"string\"\n   ],\n   \"tags\": [\n      {\n         \"id\": \"integer\",\n         \"name\": \"string\"\n      }\n   ],\n   \"status\": \"string\"     /* pet status in the store */\n}",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "400",
+                     "desc": "Invalid ID supplied",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "404",
+                     "desc": "Pet not found",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             },
             {
-              "code": "405",
-              "desc": "Validation exception",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/pets/findByStatus",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "GET",
-          "visible": true,
-          "tags": [
-            "pet",
-            "findbystatus",
-            "GET"
-          ],
-          "summary": "<p>Finds Pets by status</p>\n",
-          "desc": "<p>Multiple status values can be provided with comma seperated strings</p>\n",
-          "params": [
-            {
-              "name": "status",
-              "location": "query",
-              "desc": "Status values that need to be considered for filter",
-              "required": false,
-              "schema": "[string]",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"\n    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"     /* pet status in the store */\n  }\n]",
-              "schemaState": []
+               "name": "POST",
+               "visible": true,
+               "tags": [
+                  "pet",
+                  "POST"
+               ],
+               "summary": "Updates a pet in the store with form data",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "petId",
+                     "location": "path",
+                     "desc": "ID of pet that needs to be updated",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  },
+                  {
+                     "name": "name",
+                     "location": "formData",
+                     "desc": "Updated name of the pet",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  },
+                  {
+                     "name": "status",
+                     "location": "formData",
+                     "desc": "Updated status of the pet",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "405",
+                     "desc": "Invalid input",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             },
             {
-              "code": "400",
-              "desc": "Invalid status value",
-              "schema": "",
-              "schemaState": []
+               "name": "DELETE",
+               "visible": true,
+               "tags": [
+                  "pet",
+                  "DELETE"
+               ],
+               "summary": "Deletes a pet",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "api_key",
+                     "location": "header",
+                     "desc": "",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  },
+                  {
+                     "name": "petId",
+                     "location": "path",
+                     "desc": "Pet id to delete",
+                     "required": true,
+                     "schema": "integer",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "400",
+                     "desc": "Invalid pet value",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/pets/findByTags",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "GET",
-          "visible": true,
-          "tags": [
-            "pet",
-            "findbytag",
-            "GET"
-          ],
-          "summary": "<p>Finds Pets by tags</p>\n",
-          "desc": "<p>Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.</p>\n",
-          "params": [
+         ]
+      },
+      {
+         "path": "/stores/order",
+         "visible": true,
+         "showMe": true,
+         "methods": [
             {
-              "name": "tags",
-              "location": "query",
-              "desc": "Tags to filter by",
-              "required": false,
-              "schema": "[string]",
-              "schemaState": [],
-              "value": ""
+               "name": "POST",
+               "visible": true,
+               "tags": [
+                  "store",
+                  "order",
+                  "POST"
+               ],
+               "summary": "Place an order for a pet",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "body",
+                     "location": "body",
+                     "desc": "order placed for purchasing the pet",
+                     "required": false,
+                     "schema": "{\n   \"id\": \"integer\",\n   \"petId\": \"integer\",\n   \"quantity\": \"integer\",\n   \"shipDate\": \"string\",\n   \"status\": \"string\",     /* Order Status */\n   \"complete\": \"boolean\"\n}",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "200",
+                     "desc": "successful operation",
+                     "schema": "{\n   \"id\": \"integer\",\n   \"petId\": \"integer\",\n   \"quantity\": \"integer\",\n   \"shipDate\": \"string\",\n   \"status\": \"string\",     /* Order Status */\n   \"complete\": \"boolean\"\n}",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "400",
+                     "desc": "Invalid Order",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             }
-          ],
-          "responses": [
+         ]
+      },
+      {
+         "path": "/stores/order/{orderId}",
+         "visible": true,
+         "showMe": true,
+         "methods": [
             {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"category\": {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    },\n    \"name\": \"string\",\n    \"photoUrls\": [\n      \"string\"\n    ],\n    \"tags\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\"\n      }\n    ],\n    \"status\": \"string\"     /* pet status in the store */\n  }\n]",
-              "schemaState": []
+               "name": "GET",
+               "visible": true,
+               "tags": [
+                  "store",
+                  "order",
+                  "GET"
+               ],
+               "summary": "Find purchase order by ID",
+               "desc": "For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions",
+               "params": [
+                  {
+                     "name": "orderId",
+                     "location": "path",
+                     "desc": "ID of pet that needs to be fetched",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "200",
+                     "desc": "successful operation",
+                     "schema": "{\n   \"id\": \"integer\",\n   \"petId\": \"integer\",\n   \"quantity\": \"integer\",\n   \"shipDate\": \"string\",\n   \"status\": \"string\",     /* Order Status */\n   \"complete\": \"boolean\"\n}",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "400",
+                     "desc": "Invalid ID supplied",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "404",
+                     "desc": "Order not found",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             },
             {
-              "code": "400",
-              "desc": "Invalid tag value",
-              "schema": "",
-              "schemaState": []
+               "name": "DELETE",
+               "visible": true,
+               "tags": [
+                  "store",
+                  "order",
+                  "DELETE"
+               ],
+               "summary": "Delete purchase order by ID",
+               "desc": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
+               "params": [
+                  {
+                     "name": "orderId",
+                     "location": "path",
+                     "desc": "ID of the order that needs to be deleted",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "400",
+                     "desc": "Invalid ID supplied",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "404",
+                     "desc": "Order not found",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/pets/{petId}",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "GET",
-          "visible": true,
-          "tags": [
-            "pet",
-            "GET"
-          ],
-          "summary": "<p>Find pet by ID</p>\n",
-          "desc": "<p>Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions</p>\n",
-          "params": [
+         ]
+      },
+      {
+         "path": "/users",
+         "visible": true,
+         "showMe": true,
+         "methods": [
             {
-              "name": "petId",
-              "location": "path",
-              "desc": "ID of pet that needs to be fetched",
-              "required": true,
-              "schema": "integer",
-              "schemaState": [],
-              "value": ""
+               "name": "POST",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "POST"
+               ],
+               "summary": "Create user",
+               "desc": "This can only be done by the logged in user.",
+               "params": [
+                  {
+                     "name": "body",
+                     "location": "body",
+                     "desc": "Created user object",
+                     "required": false,
+                     "schema": "{\n   \"id\": \"integer\",\n   \"username\": \"string\",\n   \"firstName\": \"string\",\n   \"lastName\": \"string\",\n   \"email\": \"string\",\n   \"password\": \"string\",\n   \"phone\": \"string\",\n   \"userStatus\": \"integer\"     /* User Status */\n}",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "default",
+                     "desc": "successful operation",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             }
-          ],
-          "responses": [
+         ]
+      },
+      {
+         "path": "/users/createWithArray",
+         "visible": true,
+         "showMe": true,
+         "methods": [
             {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "{\n  \"id\": \"integer\",\n  \"category\": {\n    \"id\": \"integer\",\n    \"name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": \"integer\",\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"string\"     /* pet status in the store */\n}",
-              "schemaState": []
+               "name": "POST",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "createwitharray",
+                  "POST"
+               ],
+               "summary": "Creates list of users with given input array",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "body",
+                     "location": "body",
+                     "desc": "List of user object",
+                     "required": false,
+                     "schema": "[\n   {\n      \"id\": \"integer\",\n      \"username\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"password\": \"string\",\n      \"phone\": \"string\",\n      \"userStatus\": \"integer\"     /* User Status */\n   }\n]",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "default",
+                     "desc": "successful operation",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
+            }
+         ]
+      },
+      {
+         "path": "/users/createWithList",
+         "visible": true,
+         "showMe": true,
+         "methods": [
+            {
+               "name": "POST",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "createwithlist",
+                  "POST"
+               ],
+               "summary": "Creates list of users with given input array",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "body",
+                     "location": "body",
+                     "desc": "List of user object",
+                     "required": false,
+                     "schema": "[\n   {\n      \"id\": \"integer\",\n      \"username\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"password\": \"string\",\n      \"phone\": \"string\",\n      \"userStatus\": \"integer\"     /* User Status */\n   }\n]",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "default",
+                     "desc": "successful operation",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
+            }
+         ]
+      },
+      {
+         "path": "/users/login",
+         "visible": true,
+         "showMe": true,
+         "methods": [
+            {
+               "name": "GET",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "login",
+                  "GET"
+               ],
+               "summary": "Logs user into the system",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "username",
+                     "location": "query",
+                     "desc": "The user name for login",
+                     "required": false,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  },
+                  {
+                     "name": "password",
+                     "location": "query",
+                     "desc": "The password for login in clear text",
+                     "required": false,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "200",
+                     "desc": "successful operation",
+                     "schema": "\"string\"",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "400",
+                     "desc": "Invalid username/password supplied",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
+            }
+         ]
+      },
+      {
+         "path": "/users/logout",
+         "visible": true,
+         "showMe": true,
+         "methods": [
+            {
+               "name": "GET",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "logout",
+                  "GET"
+               ],
+               "summary": "Logs out current logged in user session",
+               "desc": "",
+               "params": [],
+               "responses": [
+                  {
+                     "code": "default",
+                     "desc": "successful operation",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
+            }
+         ]
+      },
+      {
+         "path": "/users/{username}",
+         "visible": true,
+         "showMe": true,
+         "methods": [
+            {
+               "name": "GET",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "GET"
+               ],
+               "summary": "Get user by user name",
+               "desc": "",
+               "params": [
+                  {
+                     "name": "username",
+                     "location": "path",
+                     "desc": "The name that needs to be fetched. Use user1 for testing.",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "200",
+                     "desc": "successful operation",
+                     "schema": "{\n   \"id\": \"integer\",\n   \"username\": \"string\",\n   \"firstName\": \"string\",\n   \"lastName\": \"string\",\n   \"email\": \"string\",\n   \"password\": \"string\",\n   \"phone\": \"string\",\n   \"userStatus\": \"integer\"     /* User Status */\n}",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "400",
+                     "desc": "Invalid username supplied",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "404",
+                     "desc": "User not found",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             },
             {
-              "code": "400",
-              "desc": "Invalid ID supplied",
-              "schema": "",
-              "schemaState": []
+               "name": "PUT",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "PUT"
+               ],
+               "summary": "Updated user",
+               "desc": "This can only be done by the logged in user.",
+               "params": [
+                  {
+                     "name": "username",
+                     "location": "path",
+                     "desc": "name that need to be deleted",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  },
+                  {
+                     "name": "body",
+                     "location": "body",
+                     "desc": "Updated user object",
+                     "required": false,
+                     "schema": "{\n   \"id\": \"integer\",\n   \"username\": \"string\",\n   \"firstName\": \"string\",\n   \"lastName\": \"string\",\n   \"email\": \"string\",\n   \"password\": \"string\",\n   \"phone\": \"string\",\n   \"userStatus\": \"integer\"     /* User Status */\n}",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "400",
+                     "desc": "Invalid user supplied",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "404",
+                     "desc": "User not found",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             },
             {
-              "code": "404",
-              "desc": "Pet not found",
-              "schema": "",
-              "schemaState": []
+               "name": "DELETE",
+               "visible": true,
+               "tags": [
+                  "user",
+                  "DELETE"
+               ],
+               "summary": "Delete user",
+               "desc": "This can only be done by the logged in user.",
+               "params": [
+                  {
+                     "name": "username",
+                     "location": "path",
+                     "desc": "The name that needs to be deleted",
+                     "required": true,
+                     "schema": "string",
+                     "schemaState": [],
+                     "value": ""
+                  }
+               ],
+               "responses": [
+                  {
+                     "code": "400",
+                     "desc": "Invalid username supplied",
+                     "schema": "",
+                     "schemaState": []
+                  },
+                  {
+                     "code": "404",
+                     "desc": "User not found",
+                     "schema": "",
+                     "schemaState": []
+                  }
+               ],
+               "request": {
+                  "schemes": [
+                     "http",
+                     "https"
+                  ],
+                  "headers": [],
+                  "choosen": {
+                     "scheme": "http",
+                     "headers": {},
+                     "body": "",
+                     "headerName": "",
+                     "headerValue": "",
+                     "result": ""
+                  }
+               },
+               "showTool": false,
+               "showMe": true
             }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        },
-        {
-          "name": "POST",
-          "visible": true,
-          "tags": [
-            "pet",
-            "POST"
-          ],
-          "summary": "<p>Updates a pet in the store with form data</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "petId",
-              "location": "path",
-              "desc": "ID of pet that needs to be updated",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            },
-            {
-              "name": "name",
-              "location": "formData",
-              "desc": "Updated name of the pet",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            },
-            {
-              "name": "status",
-              "location": "formData",
-              "desc": "Updated status of the pet",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "405",
-              "desc": "Invalid input",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        },
-        {
-          "name": "DELETE",
-          "visible": true,
-          "tags": [
-            "pet",
-            "DELETE"
-          ],
-          "summary": "<p>Deletes a pet</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "api_key",
-              "location": "header",
-              "desc": "",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            },
-            {
-              "name": "petId",
-              "location": "path",
-              "desc": "Pet id to delete",
-              "required": true,
-              "schema": "integer",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "400",
-              "desc": "Invalid pet value",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/stores/order",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "POST",
-          "visible": true,
-          "tags": [
-            "store",
-            "order",
-            "POST"
-          ],
-          "summary": "<p>Place an order for a pet</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "body",
-              "location": "body",
-              "desc": "order placed for purchasing the pet",
-              "required": false,
-              "schema": "{\n  \"id\": \"integer\",\n  \"petId\": \"integer\",\n  \"quantity\": \"integer\",\n  \"shipDate\": \"string\",\n  \"status\": \"string\"     /* Order Status */\n  \"complete\": \"boolean\"\n}",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "{\n  \"id\": \"integer\",\n  \"petId\": \"integer\",\n  \"quantity\": \"integer\",\n  \"shipDate\": \"string\",\n  \"status\": \"string\"     /* Order Status */\n  \"complete\": \"boolean\"\n}",
-              "schemaState": []
-            },
-            {
-              "code": "400",
-              "desc": "Invalid Order",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/stores/order/{orderId}",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "GET",
-          "visible": true,
-          "tags": [
-            "store",
-            "order",
-            "GET"
-          ],
-          "summary": "<p>Find purchase order by ID</p>\n",
-          "desc": "<p>For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions</p>\n",
-          "params": [
-            {
-              "name": "orderId",
-              "location": "path",
-              "desc": "ID of pet that needs to be fetched",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "{\n  \"id\": \"integer\",\n  \"petId\": \"integer\",\n  \"quantity\": \"integer\",\n  \"shipDate\": \"string\",\n  \"status\": \"string\"     /* Order Status */\n  \"complete\": \"boolean\"\n}",
-              "schemaState": []
-            },
-            {
-              "code": "400",
-              "desc": "Invalid ID supplied",
-              "schema": "",
-              "schemaState": []
-            },
-            {
-              "code": "404",
-              "desc": "Order not found",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        },
-        {
-          "name": "DELETE",
-          "visible": true,
-          "tags": [
-            "store",
-            "order",
-            "DELETE"
-          ],
-          "summary": "<p>Delete purchase order by ID</p>\n",
-          "desc": "<p>For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors</p>\n",
-          "params": [
-            {
-              "name": "orderId",
-              "location": "path",
-              "desc": "ID of the order that needs to be deleted",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "400",
-              "desc": "Invalid ID supplied",
-              "schema": "",
-              "schemaState": []
-            },
-            {
-              "code": "404",
-              "desc": "Order not found",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/users",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "POST",
-          "visible": true,
-          "tags": [
-            "user",
-            "POST"
-          ],
-          "summary": "<p>Create user</p>\n",
-          "desc": "<p>This can only be done by the logged in user.</p>\n",
-          "params": [
-            {
-              "name": "body",
-              "location": "body",
-              "desc": "Created user object",
-              "required": false,
-              "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"     /* User Status */\n}",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "default",
-              "desc": "successful operation",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/users/createWithArray",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "POST",
-          "visible": true,
-          "tags": [
-            "user",
-            "createwitharray",
-            "POST"
-          ],
-          "summary": "<p>Creates list of users with given input array</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "body",
-              "location": "body",
-              "desc": "List of user object",
-              "required": false,
-              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": \"integer\"     /* User Status */\n  }\n]",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "default",
-              "desc": "successful operation",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/users/createWithList",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "POST",
-          "visible": true,
-          "tags": [
-            "user",
-            "createwithlist",
-            "POST"
-          ],
-          "summary": "<p>Creates list of users with given input array</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "body",
-              "location": "body",
-              "desc": "List of user object",
-              "required": false,
-              "schema": "[\n  {\n    \"id\": \"integer\",\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": \"integer\"     /* User Status */\n  }\n]",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "default",
-              "desc": "successful operation",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/users/login",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "GET",
-          "visible": true,
-          "tags": [
-            "user",
-            "login",
-            "GET"
-          ],
-          "summary": "<p>Logs user into the system</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "username",
-              "location": "query",
-              "desc": "The user name for login",
-              "required": false,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            },
-            {
-              "name": "password",
-              "location": "query",
-              "desc": "The password for login in clear text",
-              "required": false,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "\"string\"",
-              "schemaState": []
-            },
-            {
-              "code": "400",
-              "desc": "Invalid username/password supplied",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/users/logout",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "GET",
-          "visible": true,
-          "tags": [
-            "user",
-            "logout",
-            "GET"
-          ],
-          "summary": "<p>Logs out current logged in user session</p>\n",
-          "desc": "",
-          "params": [],
-          "responses": [
-            {
-              "code": "default",
-              "desc": "successful operation",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    },
-    {
-      "path": "/users/{username}",
-      "visible": true,
-      "showMe": true,
-      "methods": [
-        {
-          "name": "GET",
-          "visible": true,
-          "tags": [
-            "user",
-            "GET"
-          ],
-          "summary": "<p>Get user by user name</p>\n",
-          "desc": "",
-          "params": [
-            {
-              "name": "username",
-              "location": "path",
-              "desc": "The name that needs to be fetched. Use user1 for testing.",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "200",
-              "desc": "successful operation",
-              "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"     /* User Status */\n}",
-              "schemaState": []
-            },
-            {
-              "code": "400",
-              "desc": "Invalid username supplied",
-              "schema": "",
-              "schemaState": []
-            },
-            {
-              "code": "404",
-              "desc": "User not found",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        },
-        {
-          "name": "PUT",
-          "visible": true,
-          "tags": [
-            "user",
-            "PUT"
-          ],
-          "summary": "<p>Updated user</p>\n",
-          "desc": "<p>This can only be done by the logged in user.</p>\n",
-          "params": [
-            {
-              "name": "username",
-              "location": "path",
-              "desc": "name that need to be deleted",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            },
-            {
-              "name": "body",
-              "location": "body",
-              "desc": "Updated user object",
-              "required": false,
-              "schema": "{\n  \"id\": \"integer\",\n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": \"integer\"     /* User Status */\n}",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "400",
-              "desc": "Invalid user supplied",
-              "schema": "",
-              "schemaState": []
-            },
-            {
-              "code": "404",
-              "desc": "User not found",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        },
-        {
-          "name": "DELETE",
-          "visible": true,
-          "tags": [
-            "user",
-            "DELETE"
-          ],
-          "summary": "<p>Delete user</p>\n",
-          "desc": "<p>This can only be done by the logged in user.</p>\n",
-          "params": [
-            {
-              "name": "username",
-              "location": "path",
-              "desc": "The name that needs to be deleted",
-              "required": true,
-              "schema": "string",
-              "schemaState": [],
-              "value": ""
-            }
-          ],
-          "responses": [
-            {
-              "code": "400",
-              "desc": "Invalid username supplied",
-              "schema": "",
-              "schemaState": []
-            },
-            {
-              "code": "404",
-              "desc": "User not found",
-              "schema": "",
-              "schemaState": []
-            }
-          ],
-          "request": {
-            "schemes": [
-              "http",
-              "https"
-            ],
-            "headers": [],
-            "choosen": {
-              "scheme": "http",
-              "headers": {},
-              "body": "",
-              "headerName": "",
-              "headerValue": "",
-              "result": ""
-            }
-          },
-          "showTool": false,
-          "showMe": true
-        }
-      ]
-    }
-  ]
+         ]
+      }
+   ]
 }
             , mounted: function(){
                 document.body.addEventListener('keyup', this.toggleConsole);
@@ -1758,6 +1769,11 @@
           }
           $(window).scroll(fixDiv);
           fixDiv();
+          $("table").colResizable({
+              liveDrag:true
+              ,gripInnerHtml:"<div class='grip'></div>"
+              ,draggingClass:"dragging"
+          });
         });
     </script>
 </body>
