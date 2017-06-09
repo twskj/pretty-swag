@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.105 [Jun 9, 2017]
+ - Add Home button
+
 ### version 0.1.104 [Jun 3, 2017]
  - Roll out Object Composition (allOf keyword)
  - Array now can show comment
