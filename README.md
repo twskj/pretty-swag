@@ -215,7 +215,7 @@ Valid keys are:
 
 ## Filtering
 
-- Use prefix `-` to exclude unwanted tags. For example `-store` will exclude api that contain `store` tag.
+- Use prefix `-` to exclude unwanted tags. For example `-store` will exclude api(s) that contain `store` tag.
 
 ## Console
 
