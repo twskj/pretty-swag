@@ -551,6 +551,10 @@ function parse(src, dst, config, callback) {
                 conf.mainColor = 'blue';
             }
 
+            if(config.home){
+                conf.home = config.home;
+            }
+
             livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
                 if (dst === null) {
                     callback(err, data);

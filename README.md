@@ -112,6 +112,10 @@ prettySwag.run(input,null,config,function(err,data){
 |-collapsePath   | collapse.path   |      Yes | Collapse path by default. `true` or `false`. Default to `false`                            |
 |-collapseMethod | collapse.method |      Yes | Collapse method by default. `true` or `false`. Default to `false`                          |
 |-collapseTool   | collapse.tool   |      Yes | Collapse tool by default. `true` or `false`. Default to `true`                             |
+|-home.url       | home.url        |      Yes | A home URL. Leave it blank to suppress the display                                         |
+|-home.loation   | home.location   |      Yes | A location on navigation bar. Either L (Left) RL (Right before Expand) RR(Right most)      |
+|-home.text      | home.text       |      Yes | A text on navigation bar. Default to `Home`                                                |
+
 
 
 
@@ -132,6 +136,7 @@ Valid keys are:
  - indent
  - collapse
  - customCSS
+ - home
 
 **Example of Configuration file**
 ```javascript
@@ -154,6 +159,11 @@ Valid keys are:
     "path":true
     ,"method":true
     ,"tool":true
+  }
+  "home":{
+      "URL": "https://github.com/twskj/pretty-swag/"
+      ,"location": "RR"
+      ,"text": "Home"
   }
 }
 ```
@@ -222,5 +232,5 @@ Valid keys are:
 
 
 ## License
- 
+
 The contents of this repository are covered under the [MIT License](LICENSE)

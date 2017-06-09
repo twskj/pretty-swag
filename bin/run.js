@@ -67,6 +67,9 @@ function printHelp() {
     console.log("-noFooter Use this flag to remove footer");
     console.log("-noNav Use this flag to remove navigation bar");
     console.log("-noReq Use this flag to suppress request section");
+    console.log("-home.url <url> address of `home` on navigation bar");
+    console.log("-home.text <text> Text that will be used for home url. default to `Home`");
+    console.log("-home.location <L,RL,RR> Location of home link on navigation bar. default to `RR`");
     console.log("-indent Use this flag to adjust schema indentation. default to 3");
     console.log("-v --version to show version number");
     console.log();
@@ -84,6 +87,10 @@ var noDate = "-noDate" in argv ? true : undefined;
 var noCredit = "-noCredit" in argv ? true : undefined;
 var noNav = "-noNav" in argv ? true : "-hideNav" in argv ? true : undefined;
 var noRequest = "-noReq" in argv ? true : undefined;
+var home_url = argv["-home.url"];
+var home_location = argv["-home.location"];
+var home_text = argv["-home.text"];
+
 var indent_num = parseInt(argv["-indent"]) || 3;
 var collapse;
 if("-collapsePath" in argv){
@@ -147,13 +154,29 @@ config.noRequest = firstNonUndefineVal(noRequest,config["noRequest"],false);
 config.indent_num = indent_num || config["indent"];
 config.collapse = firstNonUndefineVal(collapse,config.collapse,{path:false,method:false,tool:true});
 
+if(home_url || home_location || home_text)
+{
+    if(config.home){
+        config.home.URL = home_url || config.home.URL;
+        config.home.location = home_location || config.home.location || "RR";
+        config.home.text = home_text || config.home.text || "Home";
+    }
+    else{
+        config.home = {
+            URL: home_url
+            ,location: home_location || "RR"
+            ,text: home_text || "Home"
+        };
+    }
+}
+
 console.log("Source: " + config.input);
 console.log("Dest: " + config.output);
 console.log("Format: ", config.format);
 console.log("MarkDown: ", config.markdown ? "Enable" : "Disable");
 console.log("Nav Bar: ", config.noNav ? "Hide" : config.fixedNav ? "Fixed" : "Normal");
 console.log("Auto tags: ", config.autoTags ? "Enable" : "Disable");
-console.log("Collapse Path: " + config.collapse.path + ", Method: "+ config.collapse.method + ", Tool :" + config.collapse.tool);
+console.log("Initial Collapse [Path: " + config.collapse.path + ", Method: "+ config.collapse.method + ", Tool :" + config.collapse.tool+"]");
 
 if (typeof config.theme === "object") {
     console.log("Theme: " + JSON.stringify(config.theme, null, 2));
@@ -169,6 +192,10 @@ if(noCredit){
 }
 if(noRequest){
     console.log("No Request Panel");
+}
+
+if(config.home){
+    console.log("Home: "+JSON.stringify(config.home));
 }
 prettySwag.run(config.input, config.output, config, function (err, msg) {
 
