@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.106 [Jun 10, 2017]
+ - Add "termsOfService", "contact", "license" information
+
 ### version 0.1.105 [Jun 9, 2017]
  - Add Home button
 

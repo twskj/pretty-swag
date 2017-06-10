@@ -324,6 +324,10 @@ function merge(objs) {
 }
 
 
+function isEmail(text) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(text);
+}
+
 function parse(src, dst, config, callback) {
     var $RefParser = require('json-schema-ref-parser');
     $RefParser.dereference(src, function (err, input) {
@@ -360,7 +364,49 @@ function parse(src, dst, config, callback) {
             var result = livedoc.initContainer();
             result.name = input.info.title;
             result.summary = config.markdown ? marked(input.info.description || "") : input.info.description || "";
-            result.version = input.info.version || "";
+            if (input.info.version) {
+                result.metadata["Version"] = input.info.version;
+            }
+            if (input.info.contact) {
+                if (input.info.contact.email && input.info.contact.url) {
+                    result.metadata["Contact"] = '<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.url + '</a> | <a href="mailto:' + input.info.contact.email + '" target="_blank">' + input.info.contact.email + '</a>';
+                }
+                else if (input.info.contact.email) {
+                    result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.email + '" target="_blank">' + input.info.contact.name ? input.info.contact.name : input.info.contact.email + '</a>';
+                }
+                else if (input.info.contact.url) {
+                    result.metadata["Contact"] = '<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.name ? input.info.contact.name : input.info.contact.url + '</a>';
+                }
+                else if (input.info.contact.name) {
+
+                    if (input.info.contact.name.toLowerCase().startsWith("http")) {
+                        result.metadata["Contact"] = '<a href="' + input.info.contact.name + '" target="_blank">' + input.info.contact.name  + '</a>';
+                    }
+                    else if (isEmail(input.info.contact.name)) {
+                        result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.name + '" target="_blank">' + input.info.contact.name  + '</a>';
+                    }
+                    else {
+                        result.metadata["Contact"] = input.info.contact.name;
+                    }
+                }
+            }
+            if (input.info.license) {
+
+                if (input.info.license.url) {
+                    result.metadata["License"] = '<a href="' + input.info.license.url + '" target="_blank">' + input.info.license.name + '</a>';
+                }
+                else {
+                    result.metadata["License"] = input.info.license.name;
+                }
+            }
+            if (input.info.termsOfService) {
+                if (input.info.termsOfService.toUpperCase().startsWith("HTTP")) {
+                    result.metadata["Terms of service"] = '<a href="' + input.info.termsOfService + '" target="_blank">' + input.info.termsOfService + '</a>';
+                }
+                else {
+                    result.metadata["Terms of service"] = input.info.termsOfService;
+                }
+            }
             result.host = input.host || "";
             result.basePath = input.basePath || "";
             result.appConfig.showNav = !config.noNav;
@@ -551,7 +597,7 @@ function parse(src, dst, config, callback) {
                 conf.mainColor = 'blue';
             }
 
-            if(config.home){
+            if (config.home) {
                 conf.home = config.home;
             }
 
@@ -571,7 +617,7 @@ function parse(src, dst, config, callback) {
                 }
             });
         }
-        catch(err){
+        catch (err) {
             callback(err);
         }
     });
