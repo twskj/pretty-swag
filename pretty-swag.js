@@ -245,8 +245,7 @@ function resolveNested(schema, def) {
 
             return merge(objs);
         }
-        else if ("type" in schema || "properties" in schema)
-        {
+        else if ("type" in schema || "properties" in schema) {
             if (schema.type === "array") {
                 var resolvedItems = [];
                 comment = schema.description ? "/*" + escapeComment(schema.description) + "*/" : "";
@@ -369,21 +368,26 @@ function parse(src, dst, config, callback) {
             }
             if (input.info.contact) {
                 if (input.info.contact.email && input.info.contact.url) {
-                    result.metadata["Contact"] = '<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.url + '</a> | <a href="mailto:' + input.info.contact.email + '" target="_blank">' + input.info.contact.email + '</a>';
+                    result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.email + '">' + input.info.contact.email + '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.url + '</a>';
                 }
                 else if (input.info.contact.email) {
-                    result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.email + '" target="_blank">' + input.info.contact.name ? input.info.contact.name : input.info.contact.email + '</a>';
+                    result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.email + '">' + input.info.contact.name ? input.info.contact.name : input.info.contact.email + '</a>';
                 }
                 else if (input.info.contact.url) {
-                    result.metadata["Contact"] = '<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.name ? input.info.contact.name : input.info.contact.url + '</a>';
+                    if (isEmail(input.info.contact.name)) {
+                        result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.name + '">' + input.info.contact.name + '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.url + '</a>';
+                    }
+                    else {
+                        result.metadata["Contact"] = '<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.name ? input.info.contact.name : input.info.contact.url + '</a>';
+                    }
                 }
                 else if (input.info.contact.name) {
 
                     if (input.info.contact.name.toLowerCase().startsWith("http")) {
-                        result.metadata["Contact"] = '<a href="' + input.info.contact.name + '" target="_blank">' + input.info.contact.name  + '</a>';
+                        result.metadata["Contact"] = '<a href="' + input.info.contact.name + '" target="_blank">' + input.info.contact.name + '</a>';
                     }
                     else if (isEmail(input.info.contact.name)) {
-                        result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.name + '" target="_blank">' + input.info.contact.name  + '</a>';
+                        result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.name + '">' + input.info.contact.name + '</a>';
                     }
                     else {
                         result.metadata["Contact"] = input.info.contact.name;

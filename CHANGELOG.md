@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.107 [Jun 10, 2017]
+ - Adjust email first then link in contact section
+
 ### version 0.1.106 [Jun 10, 2017]
  - Add "termsOfService", "contact", "license" information
 
