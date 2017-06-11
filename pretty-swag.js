@@ -354,7 +354,7 @@ function parse(src, dst, config, callback) {
                     return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlight(language, code, true).value + '</code></pre>';
                 }
                 else {
-                    return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlightAuto(code).value + '</code></pre>';
+                    return '<pre class="hljs"><code>' + require('highlight.js').highlightAuto(code).value + '</code></pre>';
                 }
             };
             marked.setOptions(marked_opt);
@@ -556,6 +556,29 @@ function parse(src, dst, config, callback) {
                         method.responses.push(res);
                         var response = input_method.responses[code];
                         res.code = code;
+                        if(response.examples && Object.keys(response.examples).length > 0){
+                            // add example section
+                            var allExamples = "";
+                            for(var res_type in response.examples){
+                                allExamples += "*"+res_type+"*\n```";
+                                lowered = res_type.toLowerCase();
+                                if(lowered.includes("html")){
+                                    allExamples += 'html\n';
+                                }
+                                else if(lowered.includes("xml")){
+                                    allExamples += 'xml\n';
+                                }
+                                else if(lowered.includes("json")){
+                                    allExamples += 'json\n';
+                                }
+                                else{
+                                    allExamples += "\n";
+                                }
+                                allExamples += response.examples[res_type]
+                            }
+                            method.examples[code] = marked(response.examples);
+                        }
+
                         res.desc = response.description ? (config.markdown ? marked(response.description) : response.description) : "";
                         if (response.schema) {
                             res.schema = computeSchema(response.schema, input.definitions);
