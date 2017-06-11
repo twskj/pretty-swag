@@ -1,6 +1,6 @@
 {
   "name": "pretty-swag",
-  "version": "0.1.109",
+  "version": "0.1.110",
   "description": "A Document Generator for Swagger (OpenAPI) Specification",
   "main": "pretty-swag.js",
   "bin": {
@@ -31,7 +31,7 @@
   "dependencies": {
     "highlight.js": "^9.10.0",
     "json-schema-ref-parser": "^3.1.2",
-    "livedoc": "^0.1.62",
+    "livedoc": "^0.1.63",
     "marked": "^0.3.6",
     "pluralize": "^3.1.0"
   }
