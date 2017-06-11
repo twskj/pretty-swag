@@ -556,27 +556,29 @@ function parse(src, dst, config, callback) {
                         method.responses.push(res);
                         var response = input_method.responses[code];
                         res.code = code;
-                        if(response.examples && Object.keys(response.examples).length > 0){
+                        if (response.examples && Object.keys(response.examples).length > 0) {
+                            hasCodeSection = true;
                             // add example section
                             var allExamples = "";
-                            for(var res_type in response.examples){
-                                allExamples += "*"+res_type+"*\n```";
+                            for (var res_type in response.examples) {
+                                allExamples += "*" + res_type + "*\n```";
                                 lowered = res_type.toLowerCase();
-                                if(lowered.includes("html")){
+                                if (lowered.includes("html")) {
                                     allExamples += 'html\n';
                                 }
-                                else if(lowered.includes("xml")){
+                                else if (lowered.includes("xml")) {
                                     allExamples += 'xml\n';
                                 }
-                                else if(lowered.includes("json")){
+                                else if (lowered.includes("json")) {
                                     allExamples += 'json\n';
                                 }
-                                else{
+                                else {
                                     allExamples += "\n";
                                 }
-                                allExamples += response.examples[res_type]
+                                allExamples += JSON.stringify(response.examples[res_type], null, indent_num);
+                                allExamples += "\n```\n";
                             }
-                            method.examples[code] = marked(response.examples);
+                            method.examples[code] = marked(allExamples.trim());
                         }
 
                         res.desc = response.description ? (config.markdown ? marked(response.description) : response.description) : "";
