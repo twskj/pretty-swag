@@ -1,6 +1,9 @@
 # Change Log
 
 ### version 0.1.110 [Jun 11, 2017]
+ - json response example can now be object and string
+
+### version 0.1.110 [Jun 11, 2017]
  - Default font color now 53,53,53,.087
 
 ### version 0.1.109 [Jun 10, 2017]
