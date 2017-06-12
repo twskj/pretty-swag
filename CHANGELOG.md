@@ -1,6 +1,6 @@
 # Change Log
 
-### version 0.1.110 [Jun 11, 2017]
+### version 0.1.111 [Jun 11, 2017]
  - json response example can now be object and string
 
 ### version 0.1.110 [Jun 11, 2017]
