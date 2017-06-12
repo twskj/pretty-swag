@@ -561,6 +561,7 @@ function parse(src, dst, config, callback) {
                             // add example section
                             var allExamples = "";
                             for (var res_type in response.examples) {
+                                var isJson = false;
                                 allExamples += "*" + res_type + "*\n```";
                                 lowered = res_type.toLowerCase();
                                 if (lowered.includes("html")) {
@@ -571,11 +572,17 @@ function parse(src, dst, config, callback) {
                                 }
                                 else if (lowered.includes("json")) {
                                     allExamples += 'json\n';
+                                    isJson = true;
                                 }
                                 else {
                                     allExamples += "\n";
                                 }
-                                allExamples += JSON.stringify(response.examples[res_type], null, indent_num);
+                                if (isJson && typeof response.examples[res_type] === 'string') {
+                                    allExamples += response.examples[res_type];
+                                }
+                                else{
+                                    allExamples += JSON.stringify(response.examples[res_type], null, indent_num);
+                                }
                                 allExamples += "\n```\n";
                             }
                             method.examples[code] = marked(allExamples.trim());
