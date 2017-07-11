@@ -34,6 +34,6 @@
     "livedoc": "^0.1.63",
     "marked": "^0.3.6",
     "pluralize": "^3.1.0",
-    "esprima": "^3.1.3"
+    "esprima": "^4.0.0"
   }
 }
