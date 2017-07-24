@@ -542,6 +542,7 @@ function parse(src, dst, config, callback) {
                             param.desc = parameter.description ? (config.markdown ? marked(parameter.description) : parameter.description) : "";
                             param.required = parameter.required;
                             param.value = parameter.default || "";
+                            param.type = parameter.type || "text";
                             if (parameter.schema) {
                                 param.schema = computeSchema(parameter.schema, input.definitions);
                             }
