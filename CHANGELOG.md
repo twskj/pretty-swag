@@ -1,5 +1,11 @@
 # Change Log
 
+### version 0.1.113 [Jun 11, 2017]
+ - Support parameter type `file`
+
+### version 0.1.112 [Jul 11, 2017]
+ - Add esprima as a direct dependency
+
 ### version 0.1.111 [Jun 11, 2017]
  - json response example can now be object and string
 
