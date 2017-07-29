@@ -1,6 +1,11 @@
 # Change Log
+### version 0.1.115 [Jul 29, 2017]
+ - Add JSON previewer
 
-### version 0.1.113 [Jun 11, 2017]
+### version 0.1.114 [Jul 28, 2017]
+ - Add Preview and Download Response
+
+### version 0.1.113 [Jul 23, 2017]
  - Support parameter type `file`
 
 ### version 0.1.112 [Jul 11, 2017]

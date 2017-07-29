@@ -213,6 +213,8 @@ Valid keys are:
 
 - Syntax Highlight code block
 
+- Download and Preview response data
+
 ## Filtering
 
 - Use prefix `-` to exclude unwanted tags. For example `-store` will exclude api(s) that contain `store` tag.
