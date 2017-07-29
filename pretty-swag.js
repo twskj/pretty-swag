@@ -412,7 +412,7 @@ function parse(src, dst, config, callback) {
                 }
             }
             result.host = input.host || "";
-            result.basePath = input.basePath || "";
+            result.basePath = (input.basePath || "").replace(/\/$/, "");
             result.appConfig.showNav = !config.noNav;
             if (config.theme) {
                 if (config.theme === "default") {
