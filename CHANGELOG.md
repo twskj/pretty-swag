@@ -1,5 +1,9 @@
 # Change Log
-### version 0.1.115 [Jul 29, 2017]
+
+### version 0.1.119 [Jul 29, 2017]
+ - Trim trailing backslash of base path
+
+### version 0.1.118 [Jul 29, 2017]
  - Add JSON previewer
 
 ### version 0.1.114 [Jul 28, 2017]
