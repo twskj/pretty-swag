@@ -113,7 +113,7 @@ prettySwag.run(input,null,config,function(err,data){
 |-collapseMethod | collapse.method |      Yes | Collapse method by default. `true` or `false`. Default to `false`                          |
 |-collapseTool   | collapse.tool   |      Yes | Collapse tool by default. `true` or `false`. Default to `true`                             |
 |-home.url       | home.url        |      Yes | A home URL. Leave it blank to suppress the display                                         |
-|-home.loation   | home.location   |      Yes | A location on navigation bar. Either L (Left) RL (Right before Expand) RR(Right most)      |
+|-home.location   | home.location   |      Yes | A location on navigation bar. Either L (Left) RL (Right before Expand) RR(Right most)      |
 |-home.text      | home.text       |      Yes | A text on navigation bar. Default to `Home`                                                |
 
 
