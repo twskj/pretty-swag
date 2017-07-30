@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.120 [Jul 30, 2017]
+ - Make IE less complain about missing tag
+
 ### version 0.1.119 [Jul 29, 2017]
  - Trim trailing backslash of base path
 
