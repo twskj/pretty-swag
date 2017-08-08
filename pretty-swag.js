@@ -1,4 +1,3 @@
-var fs = require('fs');
 var esprima = require('esprima');
 var livedoc = require('livedoc');
 var marked = require('marked');
@@ -640,16 +639,14 @@ function parse(src, dst, config, callback) {
 
             livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
                 if (dst === null) {
-                    callback(err, data);
-                    return;
+                    return callback(err, data);
                 } else {
+                    const fs = require('fs');
                     fs.writeFile(dst, data, 'utf8', function (err) {
                         if (err) {
-                            callback(err);
-                            return;
+                            return callback(err);
                         }
-                        callback(null);
-                        return;
+                        return callback(null);
                     });
                 }
             });

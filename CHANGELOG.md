@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.120 [Aug 7, 2017]
+ - Move require('fs') down the line to help browser based app
+
 ### version 0.1.120 [Jul 30, 2017]
  - Make IE less complain about missing tag
 
