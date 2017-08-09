@@ -1,8 +1,12 @@
 # Change Log
 
-### version 0.1.122 [Aug 9, 2017]
+
+### version 0.1.124 [Aug 9, 2017]
  - Improve download filename
  - Always show response body
+
+### version 0.1.123 [yank]
+### version 0.1.122 [yank]
 
 ### version 0.1.121 [Aug 9, 2017]
  - Update livedoc to embeded all resources
