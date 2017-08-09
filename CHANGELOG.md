@@ -1,5 +1,9 @@
 # Change Log
 
+
+### version 0.1.121 [Aug 9, 2017]
+ - Update livedoc to embeded all resources
+
 ### version 0.1.120 [Aug 7, 2017]
  - Move require('fs') down the line to help browser based app
 
