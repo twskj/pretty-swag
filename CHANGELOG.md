@@ -1,5 +1,9 @@
 # Change Log
+### version 0.1.127 [Sep 16, 2017]
+ - Fix Offline mode missing fs
 
+ ### version 0.1.126 [Sep 16, 2017]
+ - Fix Offline mode missing Path
 ### version 0.1.125 [Sep 16, 2017]
  - Add User-Agent header
 
