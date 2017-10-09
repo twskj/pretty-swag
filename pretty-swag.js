@@ -483,7 +483,12 @@ function parse(src, dst, config, callback) {
                     method.name = method_name.toUpperCase();
                     method.tags = input_method.tags || [];
                     method.showMe = !config.collapse.method;
-                    method.showTool = !config.collapse.tool;
+                    if(config.collapse.tool){
+                        method.showTool = !config.collapse.tool;
+                    }
+                    else{
+                        method.showTool = false;
+                    }
                     if (config.autoTags == undefined) {
                         config.autoTags = true;
                     }
