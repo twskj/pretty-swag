@@ -1,8 +1,14 @@
 # Change Log
+
+### version 0.1.131 [Oct 9, 2017]
+ - Default radio button color from blue to grey
+
 ### version 0.1.131 [Oct 9, 2017]
  - Fix default to "Try this operation"
+
 ### version 0.1.130 [Oct 9, 2017]
  - Fix conf.mode undefined
+
 ### version 0.1.129 [Oct 9, 2017]
  - Fix Offline mode overwrite result file with undefined
 
