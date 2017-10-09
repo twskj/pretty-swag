@@ -641,7 +641,7 @@ function parse(src, dst, config, callback) {
                 if (dst === null) {
                     return callback(err, data);
                 }
-                else if(config.mode === "offline"){
+                else if(conf.mode === "offline"){
                     return callback(err);
                 }
                 else {

@@ -1,4 +1,6 @@
 # Change Log
+### version 0.1.130 [Oct 9, 2017]
+ - Fix conf.mode undefined
 ### version 0.1.129 [Oct 9, 2017]
  - Fix Offline mode overwrite result file with undefined
 
