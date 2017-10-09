@@ -640,9 +640,13 @@ function parse(src, dst, config, callback) {
             livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
                 if (dst === null) {
                     return callback(err, data);
-                } else {
+                }
+                else if(config.mode === "offline"){
+                    return callback(err);
+                }
+                else {
                     const fs = require('fs');
-                    fs.writeFile(dst, data, 'utf8', function (err) {
+                    return fs.writeFile(dst, data, 'utf8', function (err) {
                         if (err) {
                             return callback(err);
                         }
