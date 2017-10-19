@@ -1,6 +1,7 @@
 # Change Log
-### version 0.1.131 [Oct 10, 2017]
- - Fix text alignment in table
+
+### version 0.1.134 [Oct 10, 2017]
+ - Add package-lock.json to play nice with npm 5
 
 ### version 0.1.131 [Oct 9, 2017]
  - Default radio button color from blue to grey
