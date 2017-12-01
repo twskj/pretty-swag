@@ -1,5 +1,9 @@
 # Change Log
-### version 0.1.135 [Oct 10, 2017]
+
+### version 0.1.135 [Dec 1, 2017]
+ - Fix data alignment
+
+### version 0.1.135 [Nov 30, 2017]
  - Fix generating error html when data contain $
 
 ### version 0.1.134 [Oct 10, 2017]
