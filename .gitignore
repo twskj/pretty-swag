@@ -8,3 +8,4 @@ typings.json
 .vs
 bin/*.dll
 obj
+.DS_Store
