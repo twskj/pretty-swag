@@ -1,4 +1,6 @@
 # Change Log
+### version 0.1.135 [Oct 10, 2017]
+ - Fix generating error html when data contain $
 
 ### version 0.1.134 [Oct 10, 2017]
  - Add package-lock.json to play nice with npm 5
