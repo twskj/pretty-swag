@@ -1,6 +1,8 @@
 # Change Log
-
-### version 0.1.135 [Dec 1, 2017]
+### version 0.1.138 [Dec 3, 2017]
+ - Update dependencies
+ 
+### version 0.1.136 [Dec 1, 2017]
  - Fix data alignment
 
 ### version 0.1.135 [Nov 30, 2017]
