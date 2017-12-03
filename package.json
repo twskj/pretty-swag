@@ -32,8 +32,8 @@
     "esprima": "^4.0.0",
     "highlight.js": "^9.10.0",
     "json-schema-ref-parser": "^3.1.2",
-    "livedoc": "^0.1.85",
-    "marked": "^0.3.6",
+    "livedoc": "^0.1.86",
+    "marked": "^0.3.7",
     "pluralize": "^3.1.0"
   }
 }
