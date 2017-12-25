@@ -1,5 +1,6 @@
 # Change Log
-
+### version 0.1.140 [Dec 25, 2017]
+- fix file upload placeholder contains p tag
 ### version 0.1.139 [Dec 25, 2017]
  - add border to request/response panel
 
