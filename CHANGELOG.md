@@ -1,4 +1,8 @@
 # Change Log
+
+### version 0.1.139 [Dec 25, 2017]
+ - add border to request/response panel
+
 ### version 0.1.138 [Dec 3, 2017]
  - Update dependencies
  
