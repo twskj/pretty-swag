@@ -1,7 +1,7 @@
 var esprima = require('esprima');
 var livedoc = require('livedoc');
 var marked = require('marked');
-var pluralize = require('pluralize')
+var pluralize = require('pluralize');
 
 var indent_num = 3;
 
