@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.144 [Jan 4, 2018]
+- Update dependencies
+
 ### version 0.1.143 [Dec 25, 2017]
 - fix file upload placeholder contains p tag
 
