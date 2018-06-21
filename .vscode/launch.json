@@ -11,9 +11,9 @@
             "program": "${workspaceFolder}/bin/run.js"
             , "args": [
               "-i"
-              ,"/tmp/data/pet.json"
+              ,"/tmp/input.json"
               ,"-o"
-              ,"/tmp/pet.html"
+              ,"/tmp/output.html"
             ]
         }
     ]

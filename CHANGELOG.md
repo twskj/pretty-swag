@@ -1,6 +1,6 @@
 # Change Log
 
-### version 0.1.145 [Jan 5, 2018]
+### version 0.1.145 [Jun 21, 2018]
 - Handle "additionalProperties" when base type is object
 
 ### version 0.1.144 [Jan 4, 2018]
