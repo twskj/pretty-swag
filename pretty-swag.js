@@ -221,6 +221,14 @@ function resolveNested(schema, def) {
         //allOf = all
         //anyOf = > 0
         //oneOf = ==1
+        if ("additionalProperties" in schema && schema.type === "object") {
+            if (!schema.properties) {
+                schema.properties = schema.additionalProperties.properties;
+            }
+            else {
+                Object.assign(schema.properties, schema.additionalProperties.properties);
+            }
+        }
         if (composition_type) {
 
             var objs = [];
@@ -483,10 +491,10 @@ function parse(src, dst, config, callback) {
                     method.name = method_name.toUpperCase();
                     method.tags = input_method.tags || [];
                     method.showMe = !config.collapse.method;
-                    if(config.collapse.tool){
+                    if (config.collapse.tool) {
                         method.showTool = !config.collapse.tool;
                     }
-                    else{
+                    else {
                         method.showTool = false;
                     }
                     if (config.autoTags == undefined) {
@@ -585,7 +593,7 @@ function parse(src, dst, config, callback) {
                                 if (isJson && typeof response.examples[res_type] === 'string') {
                                     allExamples += response.examples[res_type];
                                 }
-                                else{
+                                else {
                                     allExamples += JSON.stringify(response.examples[res_type], null, indent_num);
                                 }
                                 allExamples += "\n```\n";
@@ -646,7 +654,7 @@ function parse(src, dst, config, callback) {
                 if (dst === null) {
                     return callback(err, data);
                 }
-                else if(conf.mode === "offline"){
+                else if (conf.mode === "offline") {
                     return callback(err);
                 }
                 else {
