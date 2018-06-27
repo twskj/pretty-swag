@@ -1,7 +1,9 @@
 # Change Log
 
-### version 0.1.146 [Jun 27, 2018]
+### version 0.1.147 [Jun 27, 2018]
 - Suppress other parameters when one of them has `in` property as `body`
+
+### version 0.1.146 [YANKED]
 
 ### version 0.1.145 [Jun 21, 2018]
 - Handle "additionalProperties" when base type is object
