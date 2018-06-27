@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.148 [Jun 27, 2018]
+- Fix display file upload as text input
+
 ### version 0.1.147 [Jun 27, 2018]
 - Suppress other parameters when one of them has `in` property as `body`
 
