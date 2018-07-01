@@ -106,7 +106,7 @@ prettySwag.run(input,null,config,function(err,data){
 |-noDate         | noDate          |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit       | noCredit        |      Yes | Include this flag to remove credit                                                         |
 |-noNav          | noNav           |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
-|-noReq          | noRequest       |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
+|-noReq          | noRequest       |      Yes | Include this flag to remove request panel. Default to `false`                             |
 |-indent         | indent          |      Yes | Include this flag to specify space per indentation. Default to 3                           |
 |      -v        | version         |      Yes | To show pertty-swag current version                                                        |
 |-collapsePath   | collapse.path   |      Yes | Collapse path by default. `true` or `false`. Default to `false`                            |
