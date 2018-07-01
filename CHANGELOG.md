@@ -1,6 +1,10 @@
 # Change Log
 
 ### version 0.1.149 [July 1, 2018]
+- Fix `additionalProperties` interpretation
+- Api now can take either object to path to input file
+
+### version 0.1.149 [July 1, 2018]
 - Improve search functionalities
 - Click on tags default to toggle on/off
 
