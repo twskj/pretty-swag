@@ -11,7 +11,6 @@ function format(tokens, indent_num) {
     result = "";
 
     var level = 0;
-    var foundKey = false;
     var indent;
     var newline = "\n";
     var tmpLines;
@@ -222,12 +221,23 @@ function resolveNested(schema, def) {
         //anyOf = > 0
         //oneOf = ==1
         if ("additionalProperties" in schema && schema.type === "object") {
+
             if (!schema.properties) {
-                schema.properties = schema.additionalProperties.properties;
+                schema.properties = {};
+            }
+            let additionalProperties = {};
+            let key = schema.additionalProperties["__pretty-swag-name__"] ? schema.additionalProperties["__pretty-swag-name__"] : "additionalProperty_1";
+
+            if (schema.additionalProperties.type === "object") {
+                additionalProperties[key] = {
+                    type: "object"
+                    , properties: schema.additionalProperties.properties
+                };
             }
             else {
-                Object.assign(schema.properties, schema.additionalProperties.properties);
+                additionalProperties["additionalProperties_1"] = schema.additionalProperties;
             }
+            Object.assign(schema.properties, additionalProperties);
         }
         if (composition_type) {
 
@@ -334,12 +344,46 @@ function isEmail(text) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(text);
 }
 
+function addAnnotation(schema) {
+
+    var keys = Object.keys(schema.definitions);
+    for (var i = 0; i < keys.length; i++) {
+        schema.definitions[keys[i]]["__pretty-swag-name__"] = keys[i];
+    }
+}
+
 function parse(src, dst, config, callback) {
+
+    if (typeof src === "object") {
+        addAnnotation(src);
+        parseV2(src, dst, config, callback);
+    }
+    else {
+        const fs = require('fs');
+        fs.readFile(src, { encoding: "utf8" }, function (err, data) {
+            if (err) {
+                return callback(err);
+            }
+            try {
+                data = JSON.parse(data);
+                addAnnotation(data);
+                parseV2(data, dst, config, callback);
+            }
+            catch (err) {
+                return callback(err);
+            }
+        });
+    }
+}
+
+function parseV2(obj, dst, config, callback) {
+
     var $RefParser = require('json-schema-ref-parser');
-    $RefParser.dereference(src, function (err, input) {
+    
+    $RefParser.dereference(obj, function (err, input) {
 
         if (err) {
-            callback(err);
+            return callback(err);
         }
 
         try {
