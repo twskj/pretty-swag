@@ -32,7 +32,7 @@
     "esprima": "^4.0.0",
     "highlight.js": "^9.10.0",
     "json-schema-ref-parser": "^3.1.2",
-    "livedoc": "^0.1.95",
+    "livedoc": "^0.1.96",
     "marked": "^0.3.9",
     "pluralize": "^3.1.0"
   }

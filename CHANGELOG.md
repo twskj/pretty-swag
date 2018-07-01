@@ -1,5 +1,9 @@
 # Change Log
 
+### version 0.1.149 [Jun 27, 2018]
+- Improve search functionalities
+- Click on tags default to toggle on/off
+
 ### version 0.1.148 [Jun 27, 2018]
 - Fix display file upload as text input
 
