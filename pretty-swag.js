@@ -111,9 +111,11 @@ function computeSchema(schema, def, context) {
             if (context.items) {
                 if (context.items.enum) {
                     if (context.items.type === "string") {
+                        let sep = context.items.enum.length < 4 ?  ",":",\n";
+                        
                         return "[" + context.items.enum.map(function (x) {
                             return '"' + x + '"';
-                        }).join(",") + "]";
+                        }).join(sep) + "]";
                     }
                     else {
                         return "[" + context.items.enum + "]";
