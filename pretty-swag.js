@@ -122,7 +122,7 @@ function computeSchema(schema, def, context) {
                     }
                 }
                 else {
-                    return "[" + context.items.type + "]";
+                    return '["' + context.items.type + '"]';
                 }
             }
             else {
