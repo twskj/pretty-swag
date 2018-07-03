@@ -111,9 +111,11 @@ function computeSchema(schema, def, context) {
             if (context.items) {
                 if (context.items.enum) {
                     if (context.items.type === "string") {
+                        let sep = context.items.enum.length < 4 ? "," : ",\n";
+
                         return "[" + context.items.enum.map(function (x) {
                             return '"' + x + '"';
-                        }).join(",") + "]";
+                        }).join(sep) + "]";
                     }
                     else {
                         return "[" + context.items.enum + "]";
@@ -292,8 +294,15 @@ function resolveNested(schema, def) {
                     }
                     else {
                         comment = schema.properties[prop].description ? "/*" + escapeComment(schema.properties[prop].description) + "*/" : "";
-                        if (schema.properties[prop]["type"]) {
-                            keyval.push('"' + prop + '":"' + schema.properties[prop]["type"] + '"' + comment);
+                        if (schema.properties[prop].type) {
+                            let vartype;
+                            if (schema.properties[prop].format && schema.properties[prop].type !== "string") {
+                                vartype = schema.properties[prop].format;
+                            }
+                            else {
+                                vartype = schema.properties[prop].type;
+                            }
+                            keyval.push('"' + prop + '":"' + vartype + '"' + comment);
                         }
                         else {
                             keyval.push('"' + prop + '":""' + comment);
@@ -379,7 +388,6 @@ function parse(src, dst, config, callback) {
 function parseV2(obj, dst, config, callback) {
 
     var $RefParser = require('json-schema-ref-parser');
-    
     $RefParser.dereference(obj, function (err, input) {
 
         if (err) {

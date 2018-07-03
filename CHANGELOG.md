@@ -1,6 +1,10 @@
 # Change Log
 
-### version 0.1.149 [July 1, 2018]
+### version 0.1.151 [July 2, 2018]
+- Limit array inline syntax to 3
+- Render specific variable type e.g. int64, int32 if available
+
+### version 0.1.150 [July 1, 2018]
 - Fix `additionalProperties` interpretation
 - Api now can take either object to path to input file
 
