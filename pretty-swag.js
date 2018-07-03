@@ -388,7 +388,6 @@ function parse(src, dst, config, callback) {
 function parseV2(obj, dst, config, callback) {
 
     var $RefParser = require('json-schema-ref-parser');
-
     $RefParser.dereference(obj, function (err, input) {
 
         if (err) {
