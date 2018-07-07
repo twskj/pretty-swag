@@ -228,7 +228,7 @@ function resolveNested(schema, def) {
                 schema.properties = {};
             }
             let additionalProperties = {};
-            let key = schema.additionalProperties["__pretty-swag-name__"] ? schema.additionalProperties["__pretty-swag-name__"] : "additionalProperty_1";
+            let key = schema.additionalProperties["__pretty-swag-name__"] ? schema.additionalProperties["__pretty-swag-name__"]+"_1" : "additionalProperty_1";
 
             if (schema.additionalProperties.type === "object") {
                 additionalProperties[key] = {
