@@ -105,8 +105,12 @@ function format(tokens, indent_num) {
     return result;
 }
 
-function computeSchema(schema, def, context) {
+function computeSchema(schema, def, context, required) {
+    if (!required) {
+        required = [];
+    }
     if (typeof schema === "string") {
+        required.push(context.required ? true : false);
         if (schema === "array") {
             if (context.items) {
                 if (context.items.enum) {
@@ -133,7 +137,7 @@ function computeSchema(schema, def, context) {
             return schema;
         }
     }
-    var src = "a=" + resolveNested(schema, def);
+    var src = "a=" + resolveNested(schema, def, required);
     var tokens = esprima.tokenize(src, { comment: true });
     tmp = format(tokens, indent_num);
     return unEscapeComment(tmp);
@@ -196,7 +200,7 @@ function unEscapeComment(str) {
     return str.replace(/END-COMMENT-TOKEN/g, "*/");
 }
 
-function resolveNested(schema, def) {
+function resolveNested(schema, def, required) {
     var comment = "";
     try {
         var composition_type;
@@ -228,7 +232,7 @@ function resolveNested(schema, def) {
                 schema.properties = {};
             }
             let additionalProperties = {};
-            let key = schema.additionalProperties["__pretty-swag-name__"] ? schema.additionalProperties["__pretty-swag-name__"]+"_1" : "additionalProperty_1";
+            let key = schema.additionalProperties["__pretty-swag-name__"] ? schema.additionalProperties["__pretty-swag-name__"] + "_1" : "additionalProperty_1";
 
             if (schema.additionalProperties.type === "object") {
                 additionalProperties[key] = {
@@ -247,7 +251,7 @@ function resolveNested(schema, def) {
             var arr = schema[composition_type] || [];
 
             for (var i = 0; i < arr.length; i++) {
-                objs.push(resolveNested(arr[i], def));
+                objs.push(resolveNested(arr[i], def, required));
             }
 
             if ("properties" in schema) {
@@ -255,7 +259,7 @@ function resolveNested(schema, def) {
                 // clone without the composition part
                 var tmp = JSON.parse(JSON.stringify(schema))
                 delete tmp[composition_type];
-                objs.push(resolveNested(tmp));
+                objs.push(resolveNested(tmp, def, required));
             }
 
             if (objs.length == 1) {
@@ -268,21 +272,31 @@ function resolveNested(schema, def) {
             if (schema.type === "array") {
                 var resolvedItems = [];
                 comment = schema.description ? "/*" + escapeComment(schema.description) + "*/" : "";
+                required.push(false);
                 if (Array.isArray(schema.items)) {
                     for (var item in schema.items) {
-                        resolvedItems.push(resolveNested(schema.items[item], def));
+                        resolvedItems.push(resolveNested(schema.items[item], def, required));
                     }
                 }
                 else {
-                    resolvedItems.push(resolveNested(schema.items, def));
+                    if(schema.items.type !== "object"){
+                        required.push(false);
+                    }
+                    resolvedItems.push(resolveNested(schema.items, def, required));
                 }
-
+                required.push(false);
                 return "[" + comment + resolvedItems.join(",") + "]";
             }
             else if (schema.type === "object" || "properties" in schema) {
                 var keyval = [];
+                required.push(false); //open bracket
                 for (var prop in schema.properties) {
-
+                    if (Array.isArray(schema.required)) {
+                        required.push(schema.required.indexOf(prop) !== -1);
+                    }
+                    else {
+                        required.push(false);
+                    }
                     if (schema.properties[prop].type === "array"
                         || schema.properties[prop].type === "object"
                         || "properties" in schema.properties[prop]
@@ -290,7 +304,13 @@ function resolveNested(schema, def) {
                         || "anyOf" in schema.properties[prop]
                         || "oneOf" in schema.properties[prop]
                     ) {
-                        keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def));
+                        let tmp_required = [];
+                        keyval.push('"' + prop + '":' + resolveNested(schema.properties[prop], def, tmp_required));
+                        if (tmp_required.length > 0) {
+                            for (let i = 1; i < tmp_required.length; i++) {
+                                required.push(tmp_required[i]);
+                            }
+                        }
                     }
                     else {
                         comment = schema.properties[prop].description ? "/*" + escapeComment(schema.properties[prop].description) + "*/" : "";
@@ -310,6 +330,7 @@ function resolveNested(schema, def) {
                     }
                 }
                 comment = schema.description ? comment = "/*" + escapeComment(schema.description) + "*/" : "";
+                required.push(false); //close bracket
                 return "{" + comment + joinObjectVals(keyval) + "}";
             }
             else {
@@ -522,10 +543,10 @@ function parseV2(obj, dst, config, callback) {
                         path_param.desc = input_path_param.description;
                         path_param.required = input_path_param.required;
                         if (input_path_param.schema) {
-                            path_param.schema = computeSchema(input_path_param.schema, input.definitions);
+                            path_param.schema = computeSchema(input_path_param.schema, input.definitions, []);
                         }
                         else if (input_path_param.type) {
-                            path_param.schema = computeSchema(input_path_param.type, input.definitions, input_path_param);
+                            path_param.schema = computeSchema(input_path_param.type, input.definitions, input_path_param, []);
                         }
                         if (path_param.name && path_param.location) {
                             path_params.push(path_param);
@@ -608,10 +629,10 @@ function parseV2(obj, dst, config, callback) {
                             param.value = parameter.default || "";
                             param.type = parameter.type || "text";
                             if (parameter.schema) {
-                                param.schema = computeSchema(parameter.schema, input.definitions);
+                                param.schema = computeSchema(parameter.schema, input.definitions, parameter, []);
                             }
                             else if (parameter.type) {
-                                param.schema = computeSchema(parameter.type, input.definitions, parameter);
+                                param.schema = computeSchema(parameter.type, input.definitions, parameter, []);
                             }
                         }
                     }
