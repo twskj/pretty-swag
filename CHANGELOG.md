@@ -1,5 +1,9 @@
 # Change Log
 
+### version 0.1.151 [July 15, 2018]
+- Syntax Highlight
+- Support schema level required fields
+
 ### version 0.1.151 [July 2, 2018]
 - Limit array inline syntax to 3
 - Render specific variable type e.g. int64, int32 if available

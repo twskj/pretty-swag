@@ -543,10 +543,10 @@ function parseV2(obj, dst, config, callback) {
                         path_param.desc = input_path_param.description;
                         path_param.required = input_path_param.required;
                         if (input_path_param.schema) {
-                            path_param.schema = computeSchema(input_path_param.schema, input.definitions, []);
+                            path_param.schema = computeSchema(input_path_param.schema, input.definitions, path_param.schemaRequired);
                         }
                         else if (input_path_param.type) {
-                            path_param.schema = computeSchema(input_path_param.type, input.definitions, input_path_param, []);
+                            path_param.schema = computeSchema(input_path_param.type, input.definitions, input_path_param, path_param.schemaRequired);
                         }
                         if (path_param.name && path_param.location) {
                             path_params.push(path_param);
@@ -629,10 +629,10 @@ function parseV2(obj, dst, config, callback) {
                             param.value = parameter.default || "";
                             param.type = parameter.type || "text";
                             if (parameter.schema) {
-                                param.schema = computeSchema(parameter.schema, input.definitions, parameter, []);
+                                param.schema = computeSchema(parameter.schema, input.definitions, parameter, param.schemaRequired);
                             }
                             else if (parameter.type) {
-                                param.schema = computeSchema(parameter.type, input.definitions, parameter, []);
+                                param.schema = computeSchema(parameter.type, input.definitions, parameter, param.schemaRequired);
                             }
                         }
                     }
