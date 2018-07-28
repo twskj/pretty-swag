@@ -395,7 +395,13 @@ function parse(src, dst, config, callback) {
                 return callback(err);
             }
             try {
+                try{
                 data = JSON.parse(data);
+                }
+                catch(err){
+                    let yaml = require('js-yaml');
+                    data = yaml.safeLoad(data);
+                }
                 addAnnotation(data);
                 parseV2(data, dst, config, callback);
             }

@@ -1,6 +1,9 @@
 # Change Log
 
-### version 0.1.151 [July 15, 2018]
+### version 0.1.153 [July 27, 2018]
+- Fix YAML bug introduce in 0.1.150
+
+### version 0.1.152 [July 15, 2018]
 - Syntax Highlight
 - Support schema level required fields
 

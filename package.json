@@ -1,6 +1,6 @@
 {
   "name": "pretty-swag",
-  "version": "0.1.152",
+  "version": "0.1.153",
   "description": "A Document Generator for Swagger (OpenAPI) Specification",
   "main": "pretty-swag.js",
   "bin": {
@@ -31,6 +31,7 @@
   "dependencies": {
     "esprima": "^4.0.0",
     "highlight.js": "^9.10.0",
+    "js-yaml": "^3.12.0",
     "json-schema-ref-parser": "^3.1.2",
     "livedoc": "^0.1.98",
     "marked": "^0.3.9",
