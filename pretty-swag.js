@@ -2,6 +2,7 @@ var esprima = require('esprima');
 var livedoc = require('livedoc');
 var marked = require('marked');
 var pluralize = require('pluralize');
+var $RefParser = require('json-schema-ref-parser');
 
 var indent_num = 3;
 
@@ -279,7 +280,7 @@ function resolveNested(schema, def, required) {
                     }
                 }
                 else {
-                    if(schema.items.type !== "object"){
+                    if (schema.items.type !== "object") {
                         required.push(false);
                     }
                     resolvedItems.push(resolveNested(schema.items, def, required));
@@ -389,19 +390,11 @@ function parse(src, dst, config, callback) {
         parseV2(src, dst, config, callback);
     }
     else {
-        const fs = require('fs');
-        fs.readFile(src, { encoding: "utf8" }, function (err, data) {
+        $RefParser.parse(src, function (err, data) {
             if (err) {
                 return callback(err);
             }
             try {
-                try{
-                data = JSON.parse(data);
-                }
-                catch(err){
-                    let yaml = require('js-yaml');
-                    data = yaml.safeLoad(data);
-                }
                 addAnnotation(data);
                 parseV2(data, dst, config, callback);
             }
@@ -414,7 +407,6 @@ function parse(src, dst, config, callback) {
 
 function parseV2(obj, dst, config, callback) {
 
-    var $RefParser = require('json-schema-ref-parser');
     $RefParser.dereference(obj, function (err, input) {
 
         if (err) {

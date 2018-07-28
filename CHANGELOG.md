@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.1.154 [July 27, 2018]
+- remove js-yaml
+
 ### version 0.1.153 [July 27, 2018]
 - Fix YAML bug introduce in 0.1.150
 
