@@ -10,12 +10,14 @@
 - [ ] @Schema, when Ctrl + Click on  brace, expand/collapse all keys (for that level)
 - [X] Implement --version for console
 - [X] missing a comma on a row that has comment
-- [ ] Ctrl + click at tag to toggle on/off from search bar
+- [X] Ctrl + click at tag to toggle on/off from search bar
 - [ ] Shift + click at tag to exclude
 - [X] change #merge to Object.assign() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-- [ ] Make available tags clickable too?
+- [X] Make available tags clickable too?
 - [ ] Radio button color should follow method's color
 - [X] Schema Table could have its content overflow. should it be limited to fixed and scroll? or maybe a larger content box? --> it will eventually have a longer content
 - [ ] Foldable block comment?
 - [X] Resizable Table's columns
 - [ ] Align Schema Comment
+- [ ] Pre-fill tryout panel with example. Maybe choose from drop down
+- [ ] Parse V3

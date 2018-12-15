@@ -491,9 +491,12 @@ function parseV2(obj, dst, config, callback) {
             }
             result.host = input.host || "";
             result.basePath = (input.basePath || "").replace(/\/$/, "");
-            var baseUrl = result.host + result.basePath;
-            if (baseUrl !== "") {
-                result.metadata["Base URL"] = baseUrl;
+
+            if (!config.noBaseUrl) {
+                var baseUrl = (result.host + result.basePath).trim();
+                if (baseUrl) {
+                    result.metadata["Base URL"] = baseUrl;
+                }
             }
             result.appConfig.showNav = !config.noNav;
             if (config.theme) {

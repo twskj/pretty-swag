@@ -1,5 +1,11 @@
 # Change Log
 
+### version 0.2.0 [Dec 15, 2018]
+- display base URL by default
+- move charset next to <head>
+- update dependencies: marked
+- start doing prpper sem ver
+
 ### version 0.1.154 [July 27, 2018]
 - remove js-yaml
 

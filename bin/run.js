@@ -28,22 +28,22 @@ else if (process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1)
     process.exit(0);
 }
 
-function printVersion(){
+function printVersion() {
 
-    try{
-        var content = fs.readFileSync(Path.join(__dirname,'..', 'package.json'),'utf8');
+    try {
+        var content = fs.readFileSync(Path.join(__dirname, '..', 'package.json'), 'utf8');
         var obj = JSON.parse(content);
-        if(obj.version){
-            console.log('pretty-swag version "'+obj.version+'"');
+        if (obj.version) {
+            console.log('pretty-swag version "' + obj.version + '"');
         }
     }
-    catch(err){
+    catch (err) {
         console.log("cannot read version data");
     }
 }
 
 
-function firstNonUndefineVal(){
+function firstNonUndefineVal() {
     for (i = 0; i < arguments.length; i++) {
         if (arguments[i] !== undefined) {
             return arguments[i];
@@ -67,6 +67,7 @@ function printHelp() {
     console.log("-noFooter Use this flag to remove footer");
     console.log("-noNav Use this flag to remove navigation bar");
     console.log("-noReq Use this flag to suppress request section");
+    console.log("-noBaseUrl Use this flag to suppress displaying baseUrl");
     console.log("-home.url <url> address of `home` on navigation bar");
     console.log("-home.text <text> Text that will be used for home url. default to `Home`");
     console.log("-home.location <L,RL,RR> Location of home link on navigation bar. default to `RR`");
@@ -87,29 +88,30 @@ var noDate = "-noDate" in argv ? true : undefined;
 var noCredit = "-noCredit" in argv ? true : undefined;
 var noNav = "-noNav" in argv ? true : "-hideNav" in argv ? true : undefined;
 var noRequest = "-noReq" in argv ? true : undefined;
+var noBaseUrl = "-noBaseUrl" in argv ? true : undefined;
 var home_url = argv["-home.url"];
 var home_location = argv["-home.location"];
 var home_text = argv["-home.text"];
 
 var indent_num = parseInt(argv["-indent"]) || 3;
 var collapse;
-if("-collapsePath" in argv){
-    if(!collapse){
+if ("-collapsePath" in argv) {
+    if (!collapse) {
         collapse = {};
     }
     collapse.path = (!argv["-collapsePath"] || argv["-collapsePath"] === "true");
 }
 
-if("-collapseMethod" in argv){
-    if(!collapse){
+if ("-collapseMethod" in argv) {
+    if (!collapse) {
         collapse = {};
     }
 
     collapse.method = (!argv["-collapseMethod"] || argv["-collapseMethod"] === "true");
 }
 
-if("-collapseTool" in argv){
-    if(!collapse){
+if ("-collapseTool" in argv) {
+    if (!collapse) {
         collapse = {};
     }
     collapse.tool = (argv["-collapseTool"] === "true");
@@ -136,36 +138,36 @@ if (!config.input) {
 
 config.format = format || config.format || "singleFile";
 
-if(markdown){
+if (markdown) {
     config.markdown = argv["-m"].toLowerCase() !== "false";
 }
-else{
+else {
     config.markdown = config.markdown || false;
 }
 
 config.theme = theme || config.theme || "blue";
-config.fixedNav = firstNonUndefineVal(fixedNav,config.fixedNav,false);
+config.fixedNav = firstNonUndefineVal(fixedNav, config.fixedNav, false);
 config.output = outputFile || config["output"] || "doc.html";
-config.autoTags = firstNonUndefineVal(autoTags,config["autoTags"],true);
-config.noDate = firstNonUndefineVal(noDate,config["noDate"],false);
-config.noCredit = firstNonUndefineVal(noCredit,config["noCredit"],false);
-config.noNav = firstNonUndefineVal(noNav,config["noNav"],config["hideNav"],false);
-config.noRequest = firstNonUndefineVal(noRequest,config["noRequest"],false);
+config.autoTags = firstNonUndefineVal(autoTags, config["autoTags"], true);
+config.noDate = firstNonUndefineVal(noDate, config["noDate"], false);
+config.noCredit = firstNonUndefineVal(noCredit, config["noCredit"], false);
+config.noNav = firstNonUndefineVal(noNav, config["noNav"], config["hideNav"], false);
+config.noRequest = firstNonUndefineVal(noRequest, config["noRequest"], false);
+config.noBaseUrl = firstNonUndefineVal(noBaseUrl, config["noBaseUrl"], false);
 config.indent_num = indent_num || config["indent"];
-config.collapse = firstNonUndefineVal(collapse,config.collapse,{path:false,method:false,tool:true});
+config.collapse = firstNonUndefineVal(collapse, config.collapse, { path: false, method: false, tool: true });
 
-if(home_url || home_location || home_text)
-{
-    if(config.home){
+if (home_url || home_location || home_text) {
+    if (config.home) {
         config.home.URL = home_url || config.home.URL;
         config.home.location = home_location || config.home.location || "RR";
         config.home.text = home_text || config.home.text || "Home";
     }
-    else{
+    else {
         config.home = {
             URL: home_url
-            ,location: home_location || "RR"
-            ,text: home_text || "Home"
+            , location: home_location || "RR"
+            , text: home_text || "Home"
         };
     }
 }
@@ -176,7 +178,7 @@ console.log("Format: ", config.format);
 console.log("MarkDown: ", config.markdown ? "Enable" : "Disable");
 console.log("Nav Bar: ", config.noNav ? "Hide" : config.fixedNav ? "Fixed" : "Normal");
 console.log("Auto tags: ", config.autoTags ? "Enable" : "Disable");
-console.log("Initial Collapse [Path: " + config.collapse.path + ", Method: "+ config.collapse.method + ", Tool :" + config.collapse.tool+"]");
+console.log("Initial Collapse [Path: " + config.collapse.path + ", Method: " + config.collapse.method + ", Tool :" + config.collapse.tool + "]");
 
 if (typeof config.theme === "object") {
     console.log("Theme: " + JSON.stringify(config.theme, null, 2));
@@ -184,18 +186,21 @@ if (typeof config.theme === "object") {
 else {
     console.log("Theme: " + config.theme);
 }
-if(noDate){
+if (noDate) {
     console.log("No Date");
 }
-if(noCredit){
+if (noCredit) {
     console.log("No Credit");
 }
-if(noRequest){
+if (noRequest) {
     console.log("No Request Panel");
 }
+if (noBaseUrl) {
+    console.log("No base URL");
+}
 
-if(config.home){
-    console.log("Home: "+JSON.stringify(config.home));
+if (config.home) {
+    console.log("Home: " + JSON.stringify(config.home));
 }
 prettySwag.run(config.input, config.output, config, function (err, msg) {
 

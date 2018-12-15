@@ -106,14 +106,15 @@ prettySwag.run(input,null,config,function(err,data){
 |-noDate         | noDate          |      Yes | Include this flag to remove generated date                                                 |
 |-noCredit       | noCredit        |      Yes | Include this flag to remove credit                                                         |
 |-noNav          | noNav           |      Yes | Include this flag to remove navigation bar. Default to `false`                             |
-|-noReq          | noRequest       |      Yes | Include this flag to remove request panel. Default to `false`                             |
+|-noReq          | noRequest       |      Yes | Include this flag to remove request panel. Default to `false`                              |
+|-noBaseURL      | noBaseURL       |      Yes | Include this flag to suppress baseURL. Default to `false`                                  |
 |-indent         | indent          |      Yes | Include this flag to specify space per indentation. Default to 3                           |
 |      -v        | version         |      Yes | To show pertty-swag current version                                                        |
 |-collapsePath   | collapse.path   |      Yes | Collapse path by default. `true` or `false`. Default to `false`                            |
 |-collapseMethod | collapse.method |      Yes | Collapse method by default. `true` or `false`. Default to `false`                          |
 |-collapseTool   | collapse.tool   |      Yes | Collapse tool by default. `true` or `false`. Default to `true`                             |
 |-home.url       | home.url        |      Yes | A home URL. Leave it blank to suppress the display                                         |
-|-home.location   | home.location   |      Yes | A location on navigation bar. Either L (Left) RL (Right before Expand) RR(Right most)      |
+|-home.location  | home.location   |      Yes | A location on navigation bar. Either L (Left) RL (Right before Expand) RR(Right most)      |
 |-home.text      | home.text       |      Yes | A text on navigation bar. Default to `Home`                                                |
 
 
