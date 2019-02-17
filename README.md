@@ -237,3 +237,8 @@ Valid keys are:
 ## License
 
 The contents of this repository are covered under the [MIT License](LICENSE)
+
+## Support on Beerpay
+Like the project? buy me some :beers:!
+
+[![Beerpay](https://beerpay.io/twskj/pretty-swag/badge.svg?style=beer-square)](https://beerpay.io/twskj/pretty-swag)  [![Beerpay](https://beerpay.io/twskj/pretty-swag/make-wish.svg?style=flat-square)](https://beerpay.io/twskj/pretty-swag?focus=wish)
