@@ -1,6 +1,6 @@
 {
   "name": "pretty-swag",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Document Generator for Swagger (OpenAPI) Specification",
   "main": "pretty-swag.js",
   "bin": {
@@ -22,7 +22,7 @@
     "live",
     "document"
   ],
-  "author": "TJ",
+  "author": "twskj",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/twskj/pretty-swag/issues"
@@ -32,7 +32,7 @@
     "esprima": "^4.0.0",
     "highlight.js": "^9.10.0",
     "json-schema-ref-parser": "^3.1.2",
-    "livedoc": "^0.1.99",
+    "livedoc": "^0.1.100",
     "marked": "^0.5.2",
     "pluralize": "^3.1.0"
   }

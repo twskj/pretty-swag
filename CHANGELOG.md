@@ -1,5 +1,8 @@
 # Change Log
 
+### version 0.2.0 [Feb 17, 2019]
+- Stretch console to right most
+
 ### version 0.2.0 [Dec 15, 2018]
 - display base URL by default
 - move charset next to <head>
