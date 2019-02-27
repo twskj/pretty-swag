@@ -1,6 +1,8 @@
 # Change Log
+### version 0.2.2 [Feb 26, 2019]
+- Update highlight.js
 
-### version 0.2.0 [Feb 17, 2019]
+### version 0.2.1 [Feb 17, 2019]
 - Stretch console to right most
 
 ### version 0.2.0 [Dec 15, 2018]
