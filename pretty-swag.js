@@ -394,13 +394,14 @@ function addAnnotationV3(schema) {
 function parse(src, dst, config, callback) {
 
     if (typeof src === "object") {
-        if (src.swagger) {
+        if (src.swagger && src.swagger.startsWith("2")) {
             addAnnotationV2(src);
             parseV2(src, dst, config, callback);
-        }
-        else {
+        } else if (src.openapi && src.openapi.startsWith("3")) {
             addAnnotationV3(src);
             parseV3(src, dst, config, callback);
+        } else {
+            return callback("Undefined API scpecification version in source");
         }
     }
     else {
@@ -409,13 +410,14 @@ function parse(src, dst, config, callback) {
                 return callback(err);
             }
             try {
-                if (src.swagger) {
+                if (data.swagger && data.swagger.startsWith("2")) {
                     addAnnotationV2(data);
                     parseV2(data, dst, config, callback);
-                }
-                else {
+                } else if (data.openapi && data.openapi.startsWith("3")) {
                     addAnnotationV3(data);
                     parseV3(data, dst, config, callback);
+                } else {
+                    return callback("Undefined API scpecification version in source");
                 }
             }
             catch (err) {
@@ -923,7 +925,7 @@ function parseV3(obj, dst, config, callback) {
                         var path_param = livedoc.initParam();
                         var input_path_param = path_scope_params[i];
                         if ("$ref" in input_path_param) {
-                            input_path_param = input.parameters[input_path_param["$ref"].substr(24)]; //remove "#/components/parameters/" portion
+                            input_path_param = input.components.schemas[input_path_param["$ref"].substr(24)]; //remove "#/components/parameters/" portion
                         }
                         path_param.name = input_path_param.name;
                         path_param.location = input_path_param.in;
@@ -1022,7 +1024,8 @@ function parseV3(obj, dst, config, callback) {
                             var param = livedoc.initParam();
                             method.params.push(param);
                             var singleContent = input_method.requestBody.content[media];
-                            param.type = media;
+                            param.desc = media;
+                            param.required = input_method.requestBody.required || false;
                             param.location = "body";
                             if (singleContent.schema) {
                                 param.schema = computeSchema(singleContent.schema, input.components.schemas, singleContent, param.schemaRequired);
@@ -1030,57 +1033,24 @@ function parseV3(obj, dst, config, callback) {
                         }
                     }
 
-//                    for (var code in input_method.responses) {
-//                        var res = livedoc.initResponse();
-//                        method.responses.push(res);
-//                        var response = input_method.responses[code];
-//                        res.code = code;
-//                        var contents = response;
-//                        for (var media in response) {
-//                            var res = livedoc.initResonse();
-//                            method.responses.push(res);
-//                            res.code = media;
-//                            if (response[media].schema) {
-//                                res.schema = computeSchema(response[media].schema, input.definitions);
-//                            }
-//                            if (response[media].examples && Object.keys(response[media].examples).length > 0) {
-//                                hasCodeSection = true;
-//                                // add example section
-//                                var allExamples = "";
-//                                for (var res_type in response[media].examples) {
-//                                    var isJson = false;
-//                                    allExamples += "*" + res_type + "*\n```";
-//                                    lowered = res_type.toLowerCase();
-//                                    if (lowered.includes("html")) {
-//                                        allExamples += 'html\n';
-//                                    }
-//                                    else if (lowered.includes("xml")) {
-//                                        allExamples += 'xml\n';
-//                                    }
-//                                    else if (lowered.includes("json")) {
-//                                        allExamples += 'json\n';
-//                                        isJson = true;
-//                                    }
-//                                    else {
-//                                        allExamples += "\n";
-//                                    }
-//                                    if (isJson && typeof response.examples[res_type] === 'string') {
-//                                        allExamples += response.examples[res_type];
-//                                    }
-//                                    else {
-//                                        allExamples += JSON.stringify(response.examples[res_type], null, indent_num);
-//                                    }
-//                                    allExamples += "\n```\n";
-//                                }
-//                                method.examples[code] = marked(allExamples.trim());
-//                            }
-//                        }
-//
-//                        res.desc = response.description ? (config.markdown ? marked(response.description) : response.description) : "";
-//                        if (response.schema) {
-//                            res.schema = computeSchema(response.schema, input.definitions);
-//                        }
-//                    }
+                    for (var code in input_method.responses) {
+                        var response = input_method.responses[code];
+                        var description = response.description;
+                        if (response.content) {
+                            for (var mediaResponse in response.content) {
+                                var res = livedoc.initResponse();
+                                method.responses.push(res);
+                                res.code = code;
+                                res.desc = description + " as <b>\"" + mediaResponse + "\"</b>";
+                                res.schema = computeSchema(response.content[mediaResponse].schema, input.components.schemas);
+                            }
+                        } else {
+                            var res = livedoc.initResponse();
+                            method.responses.push(res);
+                            res.code = code;
+                            res.desc = description;
+                        }
+                    }
                 }
             }
             var conf = {
