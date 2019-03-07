@@ -375,7 +375,7 @@ function isEmail(text) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(text);
 }
 
-function addAnnotation(schema) {
+function addAnnotationV2(schema) {
 
     var keys = Object.keys(schema.definitions);
     for (var i = 0; i < keys.length; i++) {
@@ -383,11 +383,26 @@ function addAnnotation(schema) {
     }
 }
 
+function addAnnotationV3(schema) {
+
+    var keys = Object.keys(schema.components.schemas);
+    for (var i = 0; i < keys.length; i++) {
+        schema.components.schemas[keys[i]]["__pretty-swag-name__"] = keys[i];
+    }
+}
+
 function parse(src, dst, config, callback) {
 
     if (typeof src === "object") {
-        addAnnotation(src);
-        parseV2(src, dst, config, callback);
+        if (src.swagger && src.swagger.startsWith("2")) {
+            addAnnotationV2(src);
+            parseV2(src, dst, config, callback);
+        } else if (src.openapi && src.openapi.startsWith("3")) {
+            addAnnotationV3(src);
+            parseV3(src, dst, config, callback);
+        } else {
+            return callback("Undefined API scpecification version in source");
+        }
     }
     else {
         $RefParser.parse(src, function (err, data) {
@@ -395,8 +410,15 @@ function parse(src, dst, config, callback) {
                 return callback(err);
             }
             try {
-                addAnnotation(data);
-                parseV2(data, dst, config, callback);
+                if (data.swagger && data.swagger.startsWith("2")) {
+                    addAnnotationV2(data);
+                    parseV2(data, dst, config, callback);
+                } else if (data.openapi && data.openapi.startsWith("3")) {
+                    addAnnotationV3(data);
+                    parseV3(data, dst, config, callback);
+                } else {
+                    return callback("Undefined API scpecification version in source");
+                }
             }
             catch (err) {
                 return callback(err);
@@ -682,6 +704,351 @@ function parseV2(obj, dst, config, callback) {
                         res.desc = response.description ? (config.markdown ? marked(response.description) : response.description) : "";
                         if (response.schema) {
                             res.schema = computeSchema(response.schema, input.definitions);
+                        }
+                    }
+                }
+            }
+            var conf = {
+                mode: config.format
+                , pathParamLeftToken: "{"
+                , pathParamRightToken: "}"
+                , formDataToken: "formData"
+                , allowHtml: config.markdown
+                , syntaxHighlight: hasCodeSection
+                , customCSS: config.customCSS
+            };
+
+            var footer = "";
+            if (!config.noDate) {
+                footer = ' __GENERATED_DATE__';
+            }
+            if (!config.noCredit) {
+                footer = footer + ' by <a href="https://github.com/twskj/pretty-swag">pretty-swag</a>'
+            }
+            if (footer) {
+                conf.footer = "Generated" + footer;
+            }
+            else {
+                conf.noFooter = true;
+            }
+            if (config.format === "offline") {
+                conf.outputFilename = dst;
+            }
+            try {
+                if (typeof result.bgColor === "object") {
+                    conf.mainColor = result.bgColor.default
+                }
+                else {
+                    conf.mainColor = result.bgColor;
+                }
+            }
+            catch (err) {
+                conf.mainColor = 'blue';
+            }
+
+            if (config.home) {
+                conf.home = config.home;
+            }
+
+            livedoc.generateHTML(JSON.stringify(result, null, indent_num), conf, function (err, data) {
+                if (dst === null) {
+                    return callback(err, data);
+                }
+                else if (conf.mode === "offline") {
+                    return callback(err);
+                }
+                else {
+                    const fs = require('fs');
+                    return fs.writeFile(dst, data, 'utf8', function (err) {
+                        if (err) {
+                            return callback(err);
+                        }
+                        return callback(null);
+                    });
+                }
+            });
+        }
+        catch (err) {
+            callback(err);
+        }
+    });
+
+}
+
+function parseV3(obj, dst, config, callback) {
+
+    $RefParser.dereference(obj, function (err, input) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        try {
+            var marked_opt = {
+                renderer: new marked.Renderer(),
+                gfm: true,
+                tables: true,
+                breaks: false,
+                pedantic: false,
+                sanitize: true,
+                smartLists: true,
+                smartypants: false
+            };
+
+            var hasCodeSection = false;
+            marked_opt.renderer.code = function (code, language) {
+                hasCodeSection = true;
+                if (language) {
+                    return '<pre class="hljs"><code class="' + language + '">' + require('highlight.js').highlight(language, code, true).value + '</code></pre>';
+                }
+                else {
+                    return '<pre class="hljs"><code>' + require('highlight.js').highlightAuto(code).value + '</code></pre>';
+                }
+            };
+            marked.setOptions(marked_opt);
+            indent_num = config.indent_num || indent_num;
+
+            var result = livedoc.initContainer();
+            result.name = input.info.title;
+            result.summary = config.markdown ? marked(input.info.description || "") : input.info.description || "";
+            if (input.info.version) {
+                result.metadata["Version"] = input.info.version;
+            }
+            if (input.info.contact) {
+                if (input.info.contact.email && input.info.contact.url) {
+                    result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.email + '">' + input.info.contact.email + '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.url + '</a>';
+                }
+                else if (input.info.contact.email) {
+                    result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.email + '">' + input.info.contact.name ? input.info.contact.name : input.info.contact.email + '</a>';
+                }
+                else if (input.info.contact.url) {
+                    if (isEmail(input.info.contact.name)) {
+                        result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.name + '">' + input.info.contact.name + '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.url + '</a>';
+                    }
+                    else {
+                        result.metadata["Contact"] = '<a href="' + input.info.contact.url + '" target="_blank">' + input.info.contact.name ? input.info.contact.name : input.info.contact.url + '</a>';
+                    }
+                }
+                else if (input.info.contact.name) {
+
+                    if (input.info.contact.name.toLowerCase().startsWith("http")) {
+                        result.metadata["Contact"] = '<a href="' + input.info.contact.name + '" target="_blank">' + input.info.contact.name + '</a>';
+                    }
+                    else if (isEmail(input.info.contact.name)) {
+                        result.metadata["Contact"] = '<a href="mailto:' + input.info.contact.name + '">' + input.info.contact.name + '</a>';
+                    }
+                    else {
+                        result.metadata["Contact"] = input.info.contact.name;
+                    }
+                }
+            }
+            if (input.info.license) {
+
+                if (input.info.license.url) {
+                    result.metadata["License"] = '<a href="' + input.info.license.url + '" target="_blank">' + input.info.license.name + '</a>';
+                }
+                else {
+                    result.metadata["License"] = input.info.license.name;
+                }
+            }
+            if (input.info.termsOfService) {
+                if (input.info.termsOfService.toUpperCase().startsWith("HTTP")) {
+                    result.metadata["Terms of service"] = '<a href="' + input.info.termsOfService + '" target="_blank">' + input.info.termsOfService + '</a>';
+                }
+                else {
+                    result.metadata["Terms of service"] = input.info.termsOfService;
+                }
+            }
+            if (input.servers) {
+                if (input.servers[0].variables) {
+                    var expand = require('expand-template')();
+                    var url = input.servers[0].url;
+                    var placeholderValues = {};
+                    for (var variable in input.servers[0].variables) {
+                        placeholderValues[variable] = input.servers[0].variables[variable].default;
+                    }
+                    result.host = expand(url, placeholderValues);
+                } else {
+                    result.host = input.servers[0].url;
+                }
+            } else {
+                result.host = "";
+            }
+            result.basePath = "";
+
+            if (!config.noBaseUrl) {
+                var baseUrl = (result.host + result.basePath).trim();
+                if (baseUrl) {
+                    result.metadata["Base URL"] = baseUrl;
+                }
+            }
+            result.appConfig.showNav = !config.noNav;
+            if (config.theme) {
+                if (config.theme === "default") {
+                    result.bgColor = {
+                        default: "blue"
+                        , GET: "blue"
+                        , HEAD: "cyan"
+                        , POST: "teal"
+                        , PUT: "deep-purple"
+                        , DELETE: "red"
+                        , CONNECT: "purple"
+                        , OPTIONS: "light-blue"
+                        , TRACE: "blue-grey"
+                        , PATCH: "deep-purple"
+                    };
+                }
+                else if (typeof config.theme === "string") {
+                    result.appConfig.bgColor = { default: config.theme };
+                }
+                else {
+                    //custom
+                    result.appConfig.bgColor = config.theme;
+                }
+            }
+            result.appConfig.fixedNav = config.fixedNav;
+            result.appConfig.showDevPlayground = !config.noRequest;
+
+            if (!config.collapse) {
+                config.collapse = {};
+            }
+            for (var path in input.paths) {
+
+                var api = livedoc.initApi();
+                result.apis.push(api);
+                api.path = path;
+                api.showMe = !config.collapse.path;
+                var path_params = [];
+                if ("parameters" in input.paths[path]) {
+                    var path_scope_params = input.paths[path]["parameters"]; //array
+                    for (var i = 0; i < path_scope_params.length; i++) {
+                        var path_param = livedoc.initParam();
+                        var input_path_param = path_scope_params[i];
+                        if ("$ref" in input_path_param) {
+                            input_path_param = input.components.schemas[input_path_param["$ref"].substr(24)]; //remove "#/components/parameters/" portion
+                        }
+                        path_param.name = input_path_param.name;
+                        path_param.location = input_path_param.in;
+                        path_param.desc = input_path_param.description;
+                        path_param.required = input_path_param.required;
+                        if (input_path_param.schema) {
+                            path_param.schema = computeSchema(input_path_param.schema, input.definitions, path_param.schemaRequired);
+                        }
+                        if (path_param.name && path_param.location == "path") {
+                            path_params.push(path_param);
+                        }
+                    }
+                }
+                for (var method_name in input.paths[path]) {
+
+                    if (method_name === "parameters") {
+                        continue;
+                    }
+                    var method = livedoc.initMethod();
+                    api.methods.push(method);
+                    var input_method = input.paths[path][method_name];
+                    method.name = method_name.toUpperCase();
+                    method.tags = input_method.tags || [];
+                    method.showMe = !config.collapse.method;
+                    if (config.collapse.tool) {
+                        method.showTool = !config.collapse.tool;
+                    }
+                    else {
+                        method.showTool = false;
+                    }
+                    if (config.autoTags == undefined) {
+                        config.autoTags = true;
+                    }
+                    if (config.autoTags) {
+                        //tmp_tags is a place holder for token that will not be added to tags
+                        var tmp_tags = method.tags.map(function (x) { return pluralize.singular(x.replace(/[ -_]/g, '').toLowerCase()); });
+
+                        method.tags.push(method.name);
+                        var segments = path.split("/");
+                        segmentLoop:
+                        for (var i = 0; i < segments.length; i++) {
+                            var seg = segments[i].trim();
+                            if (!seg || (seg.startsWith("{") && seg.endsWith("}"))) {
+                                continue;
+                            }
+
+                            var normed_seg = seg.trim();
+                            var singular = pluralize.singular(normed_seg);
+                            normed_seg = pluralize.singular(normed_seg.toLowerCase().replace(/[ -_]/g, ''))
+                            //don't add placeholder and plural when already have a singular in
+                            //var singular = pluralize.singular(normed_seg);
+                            if (tmp_tags.indexOf(normed_seg) > -1) {
+                                continue;
+                            }
+
+                            for (var j = 0; j < method.tags.length; j++) {
+                                var longerTag = method.tags[j].toLowerCase();
+
+                                if (longerTag.startsWith(singular) || longerTag.startsWith(normed_seg)) {
+                                    continue segmentLoop;
+                                }
+
+                            }
+                            method.tags.push(singular);
+                            tmp_tags.push(normed_seg);
+                        }
+                    }
+                    method.tags = replace(' ', '-', method.tags);
+                    method.tags.sort(sortTags);
+                    input_method.summary = input_method.summary || "";
+                    input_method.description = input_method.description || "";
+                    method.summary = config.markdown ? marked(input_method.summary) : input_method.summary;
+                    method.desc = config.markdown ? marked(input_method.description) : input_method.description;
+
+                    if (path_params.length > 0) {
+                        method.params = method.params.concat(path_params);
+                    }
+                    if (input_method.parameters) {
+                        for (i = 0; i < input_method.parameters.length; i++) {
+                            var param = livedoc.initParam();
+                            method.params.push(param);
+                            var parameter = input_method.parameters[i];
+                            param.name = parameter.name;
+                            param.location = parameter.in;
+                            param.desc = parameter.description ? (config.markdown ? marked(parameter.description) : parameter.description) : "";
+                            param.required = parameter.required;
+                            param.value = parameter.example || "";
+                            param.type = parameter.schema.type || "text";
+                            if (parameter.schema) {
+                                param.schema = computeSchema(parameter.schema, input.components.schemas, parameter, param.schemaRequired);
+                            }
+                        }
+                    }
+                    if (input_method.requestBody) {
+                        for (var media in input_method.requestBody.content) {
+                            var param = livedoc.initParam();
+                            method.params.push(param);
+                            var singleContent = input_method.requestBody.content[media];
+                            param.desc = media;
+                            param.required = input_method.requestBody.required || false;
+                            param.location = "body";
+                            if (singleContent.schema) {
+                                param.schema = computeSchema(singleContent.schema, input.components.schemas, singleContent, param.schemaRequired);
+                            }
+                        }
+                    }
+
+                    for (var code in input_method.responses) {
+                        var response = input_method.responses[code];
+                        var description = response.description;
+                        if (response.content) {
+                            for (var mediaResponse in response.content) {
+                                var res = livedoc.initResponse();
+                                method.responses.push(res);
+                                res.code = code;
+                                res.desc = description + " as <b>\"" + mediaResponse + "\"</b>";
+                                res.schema = computeSchema(response.content[mediaResponse].schema, input.components.schemas);
+                            }
+                        } else {
+                            var res = livedoc.initResponse();
+                            method.responses.push(res);
+                            res.code = code;
+                            res.desc = description;
                         }
                     }
                 }
