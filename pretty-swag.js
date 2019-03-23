@@ -622,6 +622,15 @@ function parseV2(obj, dst, config, callback) {
                     if (path_params.length > 0) {
                         method.params = method.params.concat(path_params);
                     }
+                    if (input.schemes.length === 1) {
+                        if (input.schemes[0].toLowerCase() === "https") {
+                            method.request.schemes.shift(); // remove http
+                            method.request.choosen.scheme = "https";
+                        }
+                        else {
+                            method.request.schemes.pop(); // remove https
+                        }
+                    }
                     if (input_method.parameters) {
                         for (i = 0; i < input_method.parameters.length; i++) {
                             var param = livedoc.initParam();

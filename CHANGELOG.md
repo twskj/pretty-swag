@@ -1,4 +1,7 @@
 # Change Log
+### version 0.2.2 [Feb 23, 2019]
+- Only show avaiable schemes in "Try This Operation" Panel
+
 ### version 0.2.2 [Feb 26, 2019]
 - Update highlight.js
 
