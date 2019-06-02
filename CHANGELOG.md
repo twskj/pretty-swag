@@ -1,4 +1,8 @@
 # Change Log
+
+### version 0.2.3 [Jun 2, 2019]
+- Update `marked` and `json-ref-parser` to fix potential securities concerns
+
 ### version 0.2.3 [Mar 23, 2019]
 - Only show avaiable schemes in "Try This Operation" Panel
 
