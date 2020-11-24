@@ -30,7 +30,7 @@
   "homepage": "https://github.com/twskj/pretty-swag#readme",
   "dependencies": {
     "esprima": "^4.0.0",
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^10.1.2",
     "json-schema-ref-parser": "^6.1.0",
     "livedoc": "^0.1.100",
     "marked": "^0.8.2",
